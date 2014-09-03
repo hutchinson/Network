@@ -13,6 +13,8 @@
 		B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */; };
 		B0B88B8319B7A9B2008A1B0E /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
 		B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
+		B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */; };
+		B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketListener.cpp; sourceTree = "<group>"; };
 		B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketListener.h; sourceTree = "<group>"; };
 		B0B88B8219B7A9B2008A1B0E /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = "../thirdparty/ZeroMQ-4.0.4/build/lib/libzmq.a"; sourceTree = "<group>"; };
+		B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZmqQueueNames.cpp; sourceTree = "<group>"; };
+		B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZmqQueueNames.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			children = (
 				B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */,
 				B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */,
+				B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */,
+				B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */,
 				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */,
+				B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +249,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib";
 			};
@@ -253,6 +262,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib";
 			};
