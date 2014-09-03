@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B0B88B7319B7A387008A1B0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B7219B7A387008A1B0E /* main.cpp */; };
+		B0B88B7D19B7A899008A1B0E /* libPacketController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B5E19B7A197008A1B0E /* libPacketController.a */; };
+		B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */; };
+		B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */; };
+		B0B88B8319B7A9B2008A1B0E /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
+		B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,9 @@
 		B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ZeroMQ-4.0.4.xcodeproj"; path = "../thirdparty/ZeroMQ-4.0.4/ZeroMQ-4.0.4.xcodeproj"; sourceTree = "<group>"; };
 		B0B88B7019B7A387008A1B0E /* PacketControllerDriver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PacketControllerDriver; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B88B7219B7A387008A1B0E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketListener.cpp; sourceTree = "<group>"; };
+		B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketListener.h; sourceTree = "<group>"; };
+		B0B88B8219B7A9B2008A1B0E /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = "../thirdparty/ZeroMQ-4.0.4/build/lib/libzmq.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8319B7A9B2008A1B0E /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */,
+				B0B88B7D19B7A899008A1B0E /* libPacketController.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +82,7 @@
 				B0B88B7119B7A387008A1B0E /* PacketControllerDriver */,
 				B0B88B5F19B7A197008A1B0E /* Products */,
 				B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */,
+				B0B88B8219B7A9B2008A1B0E /* libzmq.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +98,8 @@
 		B0B88B6319B7A1C4008A1B0E /* PacketController */ = {
 			isa = PBXGroup;
 			children = (
+				B0B88B7F19B7A8C9008A1B0E /* PacketListener.h */,
+				B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -112,6 +126,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,12 +237,24 @@
 		B0B88B5519B7A0EB008A1B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib";
 			};
 			name = Debug;
 		};
 		B0B88B5619B7A0EB008A1B0E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib";
 			};
 			name = Release;
 		};
@@ -263,6 +291,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutchid1/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -298,6 +330,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutchid1/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -336,6 +372,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutchid1/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -370,6 +410,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutchid1/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -404,6 +448,7 @@
 				B0B88B7819B7A387008A1B0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
