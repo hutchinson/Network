@@ -10,7 +10,12 @@ int main(int argc, const char * argv[])
   
   std::cout << "PacketControllerDriver" << std::endl;
   
-  packetListner.startListening();
+  packetListner.startListening("en1");
+  
+  char stop;
+  std::cout << "Stop listening? (y/n) ";
+  while(stop != 'y')
+    std::cin >> stop;
   
   return EXIT_SUCCESS;
 }

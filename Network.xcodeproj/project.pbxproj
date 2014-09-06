@@ -15,6 +15,10 @@
 		B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
 		B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */; };
 		B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */; };
+		B0B88B8B19BB7646008A1B0E /* IDGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */; };
+		B0B88B8C19BB7646008A1B0E /* IDGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B8A19BB7646008A1B0E /* IDGenerator.h */; };
+		B0B88B9119BB97A6008A1B0E /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
+		B0B88B9219BB97D5008A1B0E /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,9 @@
 		B0B88B8219B7A9B2008A1B0E /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = "../thirdparty/ZeroMQ-4.0.4/build/lib/libzmq.a"; sourceTree = "<group>"; };
 		B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZmqQueueNames.cpp; sourceTree = "<group>"; };
 		B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZmqQueueNames.h; sourceTree = "<group>"; };
+		B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IDGenerator.cpp; sourceTree = "<group>"; };
+		B0B88B8A19BB7646008A1B0E /* IDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDGenerator.h; sourceTree = "<group>"; };
+		B0B88B9019BB97A6008A1B0E /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B9119BB97A6008A1B0E /* libpcap.dylib in Frameworks */,
 				B0B88B8319B7A9B2008A1B0E /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,8 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */,
 				B0B88B7D19B7A899008A1B0E /* libPacketController.a in Frameworks */,
+				B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */,
+				B0B88B9219BB97D5008A1B0E /* libpcap.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +91,7 @@
 		B0B88B5019B7A0EB008A1B0E = {
 			isa = PBXGroup;
 			children = (
+				B0B88B9019BB97A6008A1B0E /* libpcap.dylib */,
 				B0B88B6319B7A1C4008A1B0E /* PacketController */,
 				B0B88B7119B7A387008A1B0E /* PacketControllerDriver */,
 				B0B88B5F19B7A197008A1B0E /* Products */,
@@ -106,6 +116,8 @@
 				B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */,
 				B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */,
 				B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */,
+				B0B88B8A19BB7646008A1B0E /* IDGenerator.h */,
+				B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -132,6 +144,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B8C19BB7646008A1B0E /* IDGenerator.h in Headers */,
 				B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */,
 				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
 			);
@@ -214,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */,
+				B0B88B8B19BB7646008A1B0E /* IDGenerator.cpp in Sources */,
 				B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
