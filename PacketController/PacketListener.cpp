@@ -102,6 +102,9 @@ namespace netviz
       return;
     }
 
+    // Determine the link layer headers we'll get from this device.
+    int dataLinkType = pcap_datalink(handle);
+
     zmq::socket_t newPacketQueuePublisher(this->_context, ZMQ_PUB);
     newPacketQueuePublisher.bind(netviz::NEW_PACKET_QUEUE());
 
@@ -125,9 +128,10 @@ namespace netviz
       if(packetData)
       {
         // did get packet -> then publish
-        size_t rawSize = sizeof(struct pcap_pkthdr) + header.caplen;
+        size_t rawSize = sizeof(int) + sizeof(struct pcap_pkthdr) + header.caplen;
         netviz::RawPacketBuffer rawPacketBuffer(rawSize);
 
+        rawPacketBuffer.setLinkLayerHeaderType(dataLinkType);
         rawPacketBuffer.setPcapHeader(&header);
         rawPacketBuffer.setPacketData(packetData, header.caplen);
 

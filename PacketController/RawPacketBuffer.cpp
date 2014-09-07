@@ -28,25 +28,38 @@ namespace netviz
     return this->_buffer;
   }
 
+  const int *RawPacketBuffer::getLinkLayerHeaderType() const
+  {
+    return reinterpret_cast<const int*>(this->_buffer);
+  }
+
   const struct pcap_pkthdr *RawPacketBuffer::getPcapHeader() const
   {
-    return reinterpret_cast<const struct pcap_pkthdr*>(this->_buffer);
+    struct pcap_pkthdr *packetHeader = \
+      reinterpret_cast<struct pcap_pkthdr*>((this->_buffer + sizeof(int)));
+    return packetHeader;
   }
 
   const u_char *RawPacketBuffer::getPacketData() const
   {
-    u_char *packetData = this->_buffer + sizeof(struct pcap_pkthdr);
+    u_char *packetData = (this->_buffer + sizeof(int) + sizeof(struct pcap_pkthdr));
     return packetData;
+  }
+
+  void RawPacketBuffer::setLinkLayerHeaderType(int linkLayerHeaderType)
+  {
+    int *linkLayerType = reinterpret_cast<int*>(this->_buffer);
+    *linkLayerType = linkLayerHeaderType;
   }
 
   void RawPacketBuffer::setPcapHeader(const struct pcap_pkthdr *header)
   {
-    memcpy(this->_buffer, header, sizeof(struct pcap_pkthdr));
+    memcpy((this->_buffer + sizeof(int)), header, sizeof(struct pcap_pkthdr));
   }
 
   void RawPacketBuffer::setPacketData(const u_char *data, size_t length)
   {
-    u_char *packetData = this->_buffer + sizeof(struct pcap_pkthdr);
+    u_char *packetData = this->_buffer + sizeof(int) + sizeof(struct pcap_pkthdr);
     memcpy(packetData, data, length);
   }
 }
