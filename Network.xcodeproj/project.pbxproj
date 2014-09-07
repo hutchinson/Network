@@ -23,6 +23,8 @@
 		B0B88BA819BC9491008A1B0E /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88BA619BC9491008A1B0E /* Logger.cpp */; };
 		B0B88BA919BC9491008A1B0E /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88BA719BC9491008A1B0E /* Logger.h */; };
 		B0B88BAC19BC96C1008A1B0E /* libLogging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9C19BC9409008A1B0E /* libLogging.a */; };
+		B0B88BAF19BCA7F8008A1B0E /* PacketDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88BAD19BCA7F8008A1B0E /* PacketDecoder.cpp */; };
+		B0B88BB019BCA7F8008A1B0E /* PacketDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88BAE19BCA7F8008A1B0E /* PacketDecoder.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		B0B88B9C19BC9409008A1B0E /* libLogging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLogging.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B88BA619BC9491008A1B0E /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B0B88BA719BC9491008A1B0E /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		B0B88BAD19BCA7F8008A1B0E /* PacketDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketDecoder.cpp; sourceTree = "<group>"; };
+		B0B88BAE19BCA7F8008A1B0E /* PacketDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketDecoder.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 				B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */,
 				B0B88B9419BC7154008A1B0E /* RawPacketBuffer.h */,
 				B0B88B9319BC7154008A1B0E /* RawPacketBuffer.cpp */,
+				B0B88BAE19BCA7F8008A1B0E /* PacketDecoder.h */,
+				B0B88BAD19BCA7F8008A1B0E /* PacketDecoder.cpp */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 				B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */,
 				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
 				B0B88B9619BC7154008A1B0E /* RawPacketBuffer.h in Headers */,
+				B0B88BB019BCA7F8008A1B0E /* PacketDecoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B88B9519BC7154008A1B0E /* RawPacketBuffer.cpp in Sources */,
+				B0B88BAF19BCA7F8008A1B0E /* PacketDecoder.cpp in Sources */,
 				B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */,
 				B0B88B8B19BB7646008A1B0E /* IDGenerator.cpp in Sources */,
 				B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */,

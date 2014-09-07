@@ -1,5 +1,6 @@
 #include "RawPacketBuffer.h"
 
+#include <cassert>
 #include <cstring>
 #include <iostream>
 
@@ -61,5 +62,11 @@ namespace netviz
   {
     u_char *packetData = this->_buffer + sizeof(int) + sizeof(struct pcap_pkthdr);
     memcpy(packetData, data, length);
+  }
+
+  void RawPacketBuffer::setFromRawBuffer(const void *data, size_t length)
+  {
+    assert(length == this->_bufferSize);
+    memcpy(this->_buffer, data, length);
   }
 }

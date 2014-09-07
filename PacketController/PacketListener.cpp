@@ -139,10 +139,9 @@ namespace netviz
         memcpy(newPacketMessage.data(), rawPacketBuffer.getBuffer(), rawPacketBuffer.getBufferSize());
         newPacketQueuePublisher.send(newPacketMessage);
 
-        std::stringstream ss;
-        ss << "Got message, captured " << header.caplen << " bytes";
-
-        netviz::LOG_DEBUG(ss.str());
+//        std::stringstream ss;
+//        ss << "Got message, captured " << header.caplen << " bytes" << " zmq message size to send: " << rawSize;
+//        netviz::LOG_DEBUG(ss.str());
       }
 
       // Check zmq control queue.

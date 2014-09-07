@@ -25,6 +25,8 @@ namespace netviz
     void setLinkLayerHeaderType(int linkLayerHeaderType);
     void setPcapHeader(const struct pcap_pkthdr *header);
     void setPacketData(const u_char *data, size_t length);
+
+    void setFromRawBuffer(const void *data, size_t length);
   private:
     RawPacketBuffer(const RawPacketBuffer &rhs);
     const RawPacketBuffer &operator=(RawPacketBuffer &rhs);
