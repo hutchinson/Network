@@ -1,6 +1,9 @@
 #include "PacketListener.h"
 #include "ZmqQueueNames.h"
 #include "IDGenerator.h"
+#include "RawPacketBuffer.h"
+
+#include "Logging/Logger.h"
 
 #include <cstring>
 #include <sstream>
@@ -86,21 +89,6 @@ namespace netviz
   
   void PacketListener::listenerThread(const std::string &listenOn, int controlQueueId)
   {
-    // We want to subscribe to a PACKET_LISTENER_CONTROL_QUEUE and publish
-    // to the NEW_PACKET_QUEUE when we get a new packet.
-    //
-    // 1). Set up pcap listening
-    // 2). SUB to control queue.
-    // 3). PUB to new packet queue
-    //
-    // Enter event loop.
-    // while(shouldStillListen)
-    //    pcap_dispatch(one packet, 200ms timeout)
-    //    did get packet -> then publish
-    //
-    //    check control queue for stop command
-    //    did get stop command
-    //    set shouldStillListen == false.
     pcap_t *handle;
     int usePromiscuousMode = 1;
     int readTimeoutMilliseconds = 200;
@@ -113,37 +101,53 @@ namespace netviz
       this->_listenerReady.set_value(false);
       return;
     }
-    
+
+    zmq::socket_t newPacketQueuePublisher(this->_context, ZMQ_PUB);
+    newPacketQueuePublisher.bind(netviz::NEW_PACKET_QUEUE());
+
     zmq::socket_t controlQueueSubscription(this->_context, ZMQ_SUB);
     std::string queueName = PacketListener::generateControlQueueName(controlQueueId);
     controlQueueSubscription.connect(queueName.c_str());
-    
+
     // Subscribe to everything.
     controlQueueSubscription.setsockopt(ZMQ_SUBSCRIBE, NULL, 0);
 
     // Tell our calling thread all went well.
     this->_listenerReady.set_value(true);
-    
+
     bool keepGoing = true;
     while(keepGoing)
     {
       // Check pcap
       struct pcap_pkthdr header;
       const u_char *packetData = pcap_next(handle, &header);
-      
+
       if(packetData)
       {
         // did get packet -> then publish
-        std::cout << "Got message, captured " << header.caplen << " bytes" << std::endl;
+        size_t rawSize = sizeof(struct pcap_pkthdr) + header.caplen;
+        netviz::RawPacketBuffer rawPacketBuffer(rawSize);
+
+        rawPacketBuffer.setPcapHeader(&header);
+        rawPacketBuffer.setPacketData(packetData, header.caplen);
+
+        zmq::message_t newPacketMessage(rawPacketBuffer.getBufferSize());
+        memcpy(newPacketMessage.data(), rawPacketBuffer.getBuffer(), rawPacketBuffer.getBufferSize());
+        newPacketQueuePublisher.send(newPacketMessage);
+
+        std::stringstream ss;
+        ss << "Got message, captured " << header.caplen << " bytes";
+
+        netviz::LOG_DEBUG(ss.str());
       }
-      
+
       // Check zmq control queue.
       zmq::message_t controlMessage;
       bool gotMessage = controlQueueSubscription.recv(&controlMessage, ZMQ_DONTWAIT);
       if(gotMessage)
       {
         std::string command(reinterpret_cast<const char*>(controlMessage.data()));
-        
+
         // did we get stop command?
         if(command == "STOP")
           keepGoing = false;

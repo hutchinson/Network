@@ -13,7 +13,7 @@ int main(int argc, const char * argv[])
   packetListner.startListening("en1");
   
   char stop;
-  std::cout << "Stop listening? (y/n) ";
+  std::cout << "Stop listening? (y/n) \n";
   while(stop != 'y')
     std::cin >> stop;
   

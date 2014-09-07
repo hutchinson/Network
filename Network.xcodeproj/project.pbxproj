@@ -17,8 +17,12 @@
 		B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B8619B7B792008A1B0E /* ZmqQueueNames.h */; };
 		B0B88B8B19BB7646008A1B0E /* IDGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */; };
 		B0B88B8C19BB7646008A1B0E /* IDGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B8A19BB7646008A1B0E /* IDGenerator.h */; };
-		B0B88B9119BB97A6008A1B0E /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
 		B0B88B9219BB97D5008A1B0E /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
+		B0B88B9519BC7154008A1B0E /* RawPacketBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B9319BC7154008A1B0E /* RawPacketBuffer.cpp */; };
+		B0B88B9619BC7154008A1B0E /* RawPacketBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88B9419BC7154008A1B0E /* RawPacketBuffer.h */; };
+		B0B88BA819BC9491008A1B0E /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88BA619BC9491008A1B0E /* Logger.cpp */; };
+		B0B88BA919BC9491008A1B0E /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B88BA719BC9491008A1B0E /* Logger.h */; };
+		B0B88BAC19BC96C1008A1B0E /* libLogging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9C19BC9409008A1B0E /* libLogging.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = B0B88B5D19B7A197008A1B0E;
 			remoteInfo = PacketController;
+		};
+		B0B88BAA19BC96BB008A1B0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0B88B9B19BC9409008A1B0E;
+			remoteInfo = Logging;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -63,6 +74,11 @@
 		B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IDGenerator.cpp; sourceTree = "<group>"; };
 		B0B88B8A19BB7646008A1B0E /* IDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDGenerator.h; sourceTree = "<group>"; };
 		B0B88B9019BB97A6008A1B0E /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
+		B0B88B9319BC7154008A1B0E /* RawPacketBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RawPacketBuffer.cpp; sourceTree = "<group>"; };
+		B0B88B9419BC7154008A1B0E /* RawPacketBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPacketBuffer.h; sourceTree = "<group>"; };
+		B0B88B9C19BC9409008A1B0E /* libLogging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLogging.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B88BA619BC9491008A1B0E /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		B0B88BA719BC9491008A1B0E /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B88B9119BB97A6008A1B0E /* libpcap.dylib in Frameworks */,
+				B0B88BAC19BC96C1008A1B0E /* libLogging.a in Frameworks */,
 				B0B88B8319B7A9B2008A1B0E /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,18 +101,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0B88B9919BC9409008A1B0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B0B88B5019B7A0EB008A1B0E = {
 			isa = PBXGroup;
 			children = (
-				B0B88B9019BB97A6008A1B0E /* libpcap.dylib */,
+				B0B88BA519BC9491008A1B0E /* Logging */,
 				B0B88B6319B7A1C4008A1B0E /* PacketController */,
 				B0B88B7119B7A387008A1B0E /* PacketControllerDriver */,
 				B0B88B5F19B7A197008A1B0E /* Products */,
 				B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */,
 				B0B88B8219B7A9B2008A1B0E /* libzmq.a */,
+				B0B88B9019BB97A6008A1B0E /* libpcap.dylib */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +129,7 @@
 			children = (
 				B0B88B5E19B7A197008A1B0E /* libPacketController.a */,
 				B0B88B7019B7A387008A1B0E /* PacketControllerDriver */,
+				B0B88B9C19BC9409008A1B0E /* libLogging.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +143,8 @@
 				B0B88B8519B7B792008A1B0E /* ZmqQueueNames.cpp */,
 				B0B88B8A19BB7646008A1B0E /* IDGenerator.h */,
 				B0B88B8919BB7646008A1B0E /* IDGenerator.cpp */,
+				B0B88B9419BC7154008A1B0E /* RawPacketBuffer.h */,
+				B0B88B9319BC7154008A1B0E /* RawPacketBuffer.cpp */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -137,6 +164,15 @@
 			path = PacketControllerDriver;
 			sourceTree = "<group>";
 		};
+		B0B88BA519BC9491008A1B0E /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				B0B88BA719BC9491008A1B0E /* Logger.h */,
+				B0B88BA619BC9491008A1B0E /* Logger.cpp */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -147,6 +183,15 @@
 				B0B88B8C19BB7646008A1B0E /* IDGenerator.h in Headers */,
 				B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */,
 				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
+				B0B88B9619BC7154008A1B0E /* RawPacketBuffer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B88B9A19BC9409008A1B0E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B88BA919BC9491008A1B0E /* Logger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +209,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B0B88BAB19BC96BB008A1B0E /* PBXTargetDependency */,
 				B0B88B6B19B7A368008A1B0E /* PBXTargetDependency */,
 			);
 			name = PacketController;
@@ -188,6 +234,23 @@
 			productName = PacketControllerDriver;
 			productReference = B0B88B7019B7A387008A1B0E /* PacketControllerDriver */;
 			productType = "com.apple.product-type.tool";
+		};
+		B0B88B9B19BC9409008A1B0E /* Logging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0B88B9F19BC9409008A1B0E /* Build configuration list for PBXNativeTarget "Logging" */;
+			buildPhases = (
+				B0B88B9819BC9409008A1B0E /* Sources */,
+				B0B88B9919BC9409008A1B0E /* Frameworks */,
+				B0B88B9A19BC9409008A1B0E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Logging;
+			productName = Logging;
+			productReference = B0B88B9C19BC9409008A1B0E /* libLogging.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -217,6 +280,7 @@
 			targets = (
 				B0B88B5D19B7A197008A1B0E /* PacketController */,
 				B0B88B6F19B7A387008A1B0E /* PacketControllerDriver */,
+				B0B88B9B19BC9409008A1B0E /* Logging */,
 			);
 		};
 /* End PBXProject section */
@@ -226,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B88B9519BC7154008A1B0E /* RawPacketBuffer.cpp in Sources */,
 				B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */,
 				B0B88B8B19BB7646008A1B0E /* IDGenerator.cpp in Sources */,
 				B0B88B8719B7B792008A1B0E /* ZmqQueueNames.cpp in Sources */,
@@ -237,6 +302,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B88B7319B7A387008A1B0E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B88B9819BC9409008A1B0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B88BA819BC9491008A1B0E /* Logger.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,12 +326,20 @@
 			target = B0B88B5D19B7A197008A1B0E /* PacketController */;
 			targetProxy = B0B88B7919B7A390008A1B0E /* PBXContainerItemProxy */;
 		};
+		B0B88BAB19BC96BB008A1B0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0B88B9B19BC9409008A1B0E /* Logging */;
+			targetProxy = B0B88BAA19BC96BB008A1B0E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B0B88B5519B7A0EB008A1B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_PEDANTIC = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -272,6 +353,9 @@
 		B0B88B5619B7A0EB008A1B0E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
+				GCC_WARN_PEDANTIC = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -444,6 +528,80 @@
 			};
 			name = Release;
 		};
+		B0B88B9D19BC9409008A1B0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B0B88B9E19BC9409008A1B0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -473,6 +631,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B0B88B9F19BC9409008A1B0E /* Build configuration list for PBXNativeTarget "Logging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0B88B9D19BC9409008A1B0E /* Debug */,
+				B0B88B9E19BC9409008A1B0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

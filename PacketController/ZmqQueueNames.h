@@ -6,11 +6,12 @@
 // set via a settings file the logic can be easily changed to reflect the
 // change.
 ////////////////////////////////////////////////////////////////////////////////
-
-const char *NEW_PACKET_QUEUE()
+namespace netviz
 {
-  return "inproc://new_packet_queue";  
+  const char *NEW_PACKET_QUEUE()
+  {
+    return "inproc://new_packet_queue";
+  }
 }
-
 
 #endif
