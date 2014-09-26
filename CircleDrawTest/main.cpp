@@ -18,17 +18,17 @@ void createCircles(std::vector<Circle> &circles)
 {
   circles.push_back(
   {
-    100.0f,
-    500.0f, 500.0f,
+    0.5f,
+    0.5f, 0.5f,
     1.0f, 0.0f, 0.0f
   } );
 
-//  circles.push_back(
-//  {
-//    100.0f,
-//    350.0f, 350.0f,
-//    0.0f, 0.0f, 1.0f
-//  } );
+  circles.push_back(
+  {
+    0.25f,
+    0.35f, 0.35f,
+    0.0f, 0.0f, 1.0f
+  } );
 }
 
 void drawCircles(GLuint shaderProgram, std::vector<Circle> &circles)
@@ -137,8 +137,8 @@ int main(int argc, const char * argv[])
        void main()
        {
          float rr = radius * radius;
-//         vec2 resolution = vec2(800.0, 800.0);
-         vec2 position = gl_FragCoord.xy;//resolution;
+         vec2 resolution = vec2(800.0, 800.0);
+         vec2 position = gl_FragCoord.xy / resolution;
          
          float xPos = position.x;
          float yPos = position.y;
@@ -146,9 +146,11 @@ int main(int argc, const char * argv[])
          float x = (xPos - circlePos.x) * (xPos - circlePos.x);
          float y = (yPos - circlePos.y) * (yPos - circlePos.y);
          
+         float step = (smoothstep(0.0, rr, (x + y)) / radius);
+         
          if( (x + y) < rr )
          {
-           outColor = vec4(circleColor, 1.0f);
+           outColor = vec4(circleColor, 0.0f) + (step * vec4(1.0f, 1.0f, 1.0f, 0.0f));
          }
          else
          {
@@ -194,7 +196,7 @@ int main(int argc, const char * argv[])
   while(!glfwWindowShouldClose(window))
   {
     // Do drawing
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     drawCircles(shaderProgram, circles);
