@@ -18,27 +18,41 @@ void createCircles(std::vector<Circle> &circles)
 {
   circles.push_back(
   {
-    0.5f,
+    0.1f,
     0.5f, 0.5f,
     1.0f, 0.0f, 0.0f
   } );
 
   circles.push_back(
   {
-    0.25f,
-    0.35f, 0.35f,
+    0.1f,
+    0.8f, 0.8f,
     0.0f, 0.0f, 1.0f
+  } );
+  
+  circles.push_back(
+  {
+    0.1f,
+    0.2f, 0.6f,
+    0.0f, 1.0f, 0.0f
+  } );
+  
+  circles.push_back(
+  {
+    0.1f,
+    0.8f, 0.4f,
+    0.0f, 1.0f, 0.0f
   } );
 }
 
 void drawCircles(GLuint shaderProgram, std::vector<Circle> &circles)
 {
   glUseProgram(shaderProgram);
-
+  
   GLint radius = glGetUniformLocation(shaderProgram, "radius");
   GLint circlePos = glGetUniformLocation(shaderProgram, "circlePos");
   GLint circleColor = glGetUniformLocation(shaderProgram, "circleColor");
-  
+
   for(std::vector<Circle>::iterator circle = circles.begin();
       circle != circles.end();
       ++circle)
@@ -133,28 +147,29 @@ int main(int argc, const char * argv[])
        uniform vec3 circleColor;
        
        out vec4 outColor;
-       
+  
        void main()
        {
+         vec4 backgroundColor = vec4(1.0f, 1.0f, 1.0f, 0.0f);
+         
          float rr = radius * radius;
          vec2 resolution = vec2(800.0, 800.0);
          vec2 position = gl_FragCoord.xy / resolution;
          
-         float xPos = position.x;
-         float yPos = position.y;
+         float x = (position.x - circlePos.x) * (position.x - circlePos.x);
+         float y = (position.y - circlePos.y) * (position.y - circlePos.y);
          
-         float x = (xPos - circlePos.x) * (xPos - circlePos.x);
-         float y = (yPos - circlePos.y) * (yPos - circlePos.y);
+         float edge = radius / 100;
          
-         float step = (smoothstep(0.0, rr, (x + y)) / radius);
+         float step = smoothstep(rr, rr - edge , (x + y));
          
-         if( (x + y) < rr )
+         if( sqrt((x + y)) < sqrt(rr) )
          {
-           outColor = vec4(circleColor, 0.0f) + (step * vec4(1.0f, 1.0f, 1.0f, 0.0f));
+           outColor = vec4(circleColor, step);
          }
          else
          {
-           outColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+           discard;
          }
        }
   );
@@ -192,6 +207,9 @@ int main(int argc, const char * argv[])
   GLint vertexPositionAttr = glGetAttribLocation(shaderProgram, "position");
   glEnableVertexAttribArray(vertexPositionAttr);
   glVertexAttribPointer(vertexPositionAttr, 2, GL_FLOAT, GL_FALSE, 0, 0);
+  
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   
   while(!glfwWindowShouldClose(window))
   {
