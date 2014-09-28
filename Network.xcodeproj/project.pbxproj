@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B07C2E8819D89966007D4939 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF801019D3506400C27161 /* OpenGL.framework */; };
+		B07C2E8919D89966007D4939 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800E19D3504500C27161 /* Cocoa.framework */; };
+		B07C2E8A19D89966007D4939 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800C19D3503800C27161 /* IOKit.framework */; };
+		B07C2E8B19D89966007D4939 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800A19D3502B00C27161 /* CoreVideo.framework */; };
+		B07C2E8C19D89966007D4939 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800819D3502200C27161 /* CoreGraphics.framework */; };
+		B07C2E8D19D89966007D4939 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800619D3501400C27161 /* CoreFoundation.framework */; };
+		B07C2E8E19D89966007D4939 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800419D34FF500C27161 /* libglfw3.a */; };
+		B07C2E9619D899B1007D4939 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B07C2E9519D899B1007D4939 /* main.cpp */; };
 		B0B88B7319B7A387008A1B0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B7219B7A387008A1B0E /* main.cpp */; };
 		B0B88B7D19B7A899008A1B0E /* libPacketController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B5E19B7A197008A1B0E /* libPacketController.a */; };
 		B0B88B8019B7A8C9008A1B0E /* PacketListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B88B7E19B7A8C9008A1B0E /* PacketListener.cpp */; };
@@ -60,6 +68,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B07C2E8F19D89966007D4939 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		B0B88B6E19B7A387008A1B0E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,6 +99,8 @@
 
 /* Begin PBXFileReference section */
 		B07C2E7419D4A33E007D4939 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../usr/local/Cellar/glew/1.11.0/lib/libGLEW.a; sourceTree = "<group>"; };
+		B07C2E9319D89966007D4939 /* CircleDrawTest copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CircleDrawTest copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B07C2E9519D899B1007D4939 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = TextureDrawTest/main.cpp; sourceTree = SOURCE_ROOT; };
 		B0B88B5E19B7A197008A1B0E /* libPacketController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPacketController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ZeroMQ-4.0.4.xcodeproj"; path = "../thirdparty/ZeroMQ-4.0.4/ZeroMQ-4.0.4.xcodeproj"; sourceTree = "<group>"; };
 		B0B88B7019B7A387008A1B0E /* PacketControllerDriver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PacketControllerDriver; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +132,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B07C2E8719D89966007D4939 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B07C2E8819D89966007D4939 /* OpenGL.framework in Frameworks */,
+				B07C2E8919D89966007D4939 /* Cocoa.framework in Frameworks */,
+				B07C2E8A19D89966007D4939 /* IOKit.framework in Frameworks */,
+				B07C2E8B19D89966007D4939 /* CoreVideo.framework in Frameworks */,
+				B07C2E8C19D89966007D4939 /* CoreGraphics.framework in Frameworks */,
+				B07C2E8D19D89966007D4939 /* CoreFoundation.framework in Frameworks */,
+				B07C2E8E19D89966007D4939 /* libglfw3.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0B88B5B19B7A197008A1B0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,12 +189,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B07C2E9419D89983007D4939 /* TextureDrawTest */ = {
+			isa = PBXGroup;
+			children = (
+				B07C2E9519D899B1007D4939 /* main.cpp */,
+			);
+			name = TextureDrawTest;
+			path = CircleDrawTest;
+			sourceTree = "<group>";
+		};
 		B0B88B5019B7A0EB008A1B0E = {
 			isa = PBXGroup;
 			children = (
 				B0B88BA519BC9491008A1B0E /* Logging */,
 				B0B88B6319B7A1C4008A1B0E /* PacketController */,
 				B0B88B7119B7A387008A1B0E /* PacketControllerDriver */,
+				B07C2E9419D89983007D4939 /* TextureDrawTest */,
 				B0CF7FFE19D34DFB00C27161 /* CircleDrawTest */,
 				B0B88B5F19B7A197008A1B0E /* Products */,
 				B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */,
@@ -185,6 +228,7 @@
 				B0B88B7019B7A387008A1B0E /* PacketControllerDriver */,
 				B0B88B9C19BC9409008A1B0E /* libLogging.a */,
 				B0CF7FFD19D34DFB00C27161 /* CircleDrawTest */,
+				B07C2E9319D89966007D4939 /* CircleDrawTest copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,6 +308,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B07C2E8419D89966007D4939 /* TextureDrawTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B07C2E9019D89966007D4939 /* Build configuration list for PBXNativeTarget "TextureDrawTest" */;
+			buildPhases = (
+				B07C2E8519D89966007D4939 /* Sources */,
+				B07C2E8719D89966007D4939 /* Frameworks */,
+				B07C2E8F19D89966007D4939 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TextureDrawTest;
+			productName = CircleDrawTest;
+			productReference = B07C2E9319D89966007D4939 /* CircleDrawTest copy */;
+			productType = "com.apple.product-type.tool";
+		};
 		B0B88B5D19B7A197008A1B0E /* PacketController */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0B88B6019B7A197008A1B0E /* Build configuration list for PBXNativeTarget "PacketController" */;
@@ -370,11 +431,20 @@
 				B0B88B6F19B7A387008A1B0E /* PacketControllerDriver */,
 				B0B88B9B19BC9409008A1B0E /* Logging */,
 				B0CF7FFC19D34DFB00C27161 /* CircleDrawTest */,
+				B07C2E8419D89966007D4939 /* TextureDrawTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B07C2E8519D89966007D4939 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B07C2E9619D899B1007D4939 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0B88B5A19B7A197008A1B0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +502,108 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B07C2E9119D89966007D4939 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib",
+					/usr/local/lib,
+					/usr/local/Cellar/glfw3/3.0.4/lib,
+					/usr/local/Cellar/glew/1.11.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "CircleDrawTest copy";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B07C2E9219D89966007D4939 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/lib",
+					/usr/local/lib,
+					/usr/local/Cellar/glfw3/3.0.4/lib,
+					/usr/local/Cellar/glew/1.11.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "CircleDrawTest copy";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		B0B88B5519B7A0EB008A1B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -805,6 +977,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B07C2E9019D89966007D4939 /* Build configuration list for PBXNativeTarget "TextureDrawTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B07C2E9119D89966007D4939 /* Debug */,
+				B07C2E9219D89966007D4939 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B0B88B5419B7A0EB008A1B0E /* Build configuration list for PBXProject "Network" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
