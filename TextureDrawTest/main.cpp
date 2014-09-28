@@ -91,7 +91,7 @@ int main(int argc, const char * argv[])
          
          vec2 coord = position / resolution;
 
-         outColor = vec4(0.0f, coord.y, 0.0f, 1.0f);
+         outColor = vec4(0.0f, coord.y, 0.0f, 1 - coord.y);
        }
   );
 
@@ -112,7 +112,16 @@ int main(int argc, const char * argv[])
          if(coord.x < 0.5)
            outColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
          else
-           outColor = texture(texFramebuffer, coord);
+         {
+           vec4 texColor = texture(texFramebuffer, coord);
+           if(texColor.a > 0.5)
+             outColor = texColor;
+           else
+           {
+             outColor = vec4(0.0f, 0.0f, 1.0f, 1.0f);
+           }
+         }
+
        }
   );
   
