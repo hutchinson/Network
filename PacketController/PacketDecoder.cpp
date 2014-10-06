@@ -1,12 +1,13 @@
 #include "PacketDecoder.h"
-#include "RawPacketBuffer.h"
 #include "ZmqQueueNames.h"
 #include "IDGenerator.h"
+#include "PacketFormat.h"
 
 #include "Logging/Logger.h"
 
 #include <iostream>
 #include <sstream>
+#include <pcap.h>
 
 namespace netviz
 {
@@ -113,9 +114,10 @@ namespace netviz
         rawPacketBuffer.setFromRawBuffer(newPacketMessage.data(), zmqMessageSize);
 
         // Process
+        decodePacket(rawPacketBuffer);
         std::stringstream ss;
         ss << "Got new packet link layer header was: "
-           << *rawPacketBuffer.getLinkLayerHeaderType()
+           << rawPacketBuffer.getLinkLayerHeaderType()
            << " captured "
            << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
            << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes";
@@ -134,5 +136,28 @@ namespace netviz
           keepGoing = false;
       }
     }
+  }
+  
+  void PacketDecoder::decodePacket(const RawPacketBuffer &packet)
+  {
+    // Only deal with ethernet packets for the minute.
+    if(packet.getLinkLayerHeaderType() != DLT_EN10MB)
+      return;
+
+    // Take a look at the ethernet header.
+    const EthernetHeader *ethernetHeader = reinterpret_cast<const EthernetHeader*>(packet.getPacketData());
+ 
+    std::stringstream ss;
+    ss << "Destination: ";
+    for(int i = 0; i < ETHERNET_MAC_ADDRESS_LEN; ++i)
+      ss << std::hex << ethernetHeader->destinationHost[i];
+    ss << "\n";
+    
+    ss << "Source: ";
+    for(int i = 0; i < ETHERNET_MAC_ADDRESS_LEN; ++i)
+      ss << std::hex << ethernetHeader->sourceHost[i];
+    ss << "\n";
+    
+    LOG_DEBUG(ss.str());
   }
 }

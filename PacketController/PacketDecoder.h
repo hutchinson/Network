@@ -9,6 +9,8 @@
 
 #include <zmq.hpp>
 
+#include "RawPacketBuffer.h"
+
 namespace netviz
 {
   class PacketDecoder
@@ -27,6 +29,8 @@ namespace netviz
     static std::string generateControlQueueName(int controlQueueId);
 
     void decoderThread(int controlQueueId);
+    
+    void decodePacket(const RawPacketBuffer &packet /*, zmq input queue to send to */);
 
     std::mutex _objectMutex;
 

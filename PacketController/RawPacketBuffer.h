@@ -18,7 +18,7 @@ namespace netviz
     const u_char *getBuffer() const;
 
     // Indivdual components of raw packet.
-    const int *getLinkLayerHeaderType() const;
+    int getLinkLayerHeaderType() const;
     const struct pcap_pkthdr *getPcapHeader() const;
     const u_char *getPacketData() const;
 

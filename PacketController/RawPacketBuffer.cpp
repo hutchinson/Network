@@ -29,9 +29,9 @@ namespace netviz
     return this->_buffer;
   }
 
-  const int *RawPacketBuffer::getLinkLayerHeaderType() const
+  int RawPacketBuffer::getLinkLayerHeaderType() const
   {
-    return reinterpret_cast<const int*>(this->_buffer);
+    return *(reinterpret_cast<const int*>(this->_buffer));
   }
 
   const struct pcap_pkthdr *RawPacketBuffer::getPcapHeader() const
