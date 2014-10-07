@@ -148,16 +148,7 @@ namespace netviz
     const EthernetHeader *ethernetHeader = reinterpret_cast<const EthernetHeader*>(packet.getPacketData());
  
     std::stringstream ss;
-    ss << "Destination: ";
-    for(int i = 0; i < ETHERNET_MAC_ADDRESS_LEN; ++i)
-      ss << std::hex << ethernetHeader->destinationHost[i];
-    ss << "\n";
-    
-    ss << "Source: ";
-    for(int i = 0; i < ETHERNET_MAC_ADDRESS_LEN; ++i)
-      ss << std::hex << ethernetHeader->sourceHost[i];
-    ss << "\n";
-    
+    printEthernetHeader(ethernetHeader, ss);
     LOG_DEBUG(ss.str());
   }
 }
