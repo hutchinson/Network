@@ -59,6 +59,7 @@
 		B0CF800D19D3503800C27161 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800C19D3503800C27161 /* IOKit.framework */; };
 		B0CF800F19D3504500C27161 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800E19D3504500C27161 /* Cocoa.framework */; };
 		B0CF801119D3506400C27161 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF801019D3506400C27161 /* OpenGL.framework */; };
+		B0EABF1C19E5DB4D00043E09 /* ethertype.h in Headers */ = {isa = PBXBuildFile; fileRef = B0EABF1B19E5DB4D00043E09 /* ethertype.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -190,6 +191,7 @@
 		B0CF800C19D3503800C27161 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		B0CF800E19D3504500C27161 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B0CF801019D3506400C27161 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B0EABF1B19E5DB4D00043E09 /* ethertype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ethertype.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +363,7 @@
 				B0B88BAE19BCA7F8008A1B0E /* PacketDecoder.h */,
 				B0B88BAD19BCA7F8008A1B0E /* PacketDecoder.cpp */,
 				B038B32219E3367B00DB14AE /* PacketFormat.h */,
+				B0EABF1B19E5DB4D00043E09 /* ethertype.h */,
 			);
 			path = PacketController;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				B0B88B8819B7B792008A1B0E /* ZmqQueueNames.h in Headers */,
 				B0B88B8119B7A8C9008A1B0E /* PacketListener.h in Headers */,
 				B0B88B9619BC7154008A1B0E /* RawPacketBuffer.h in Headers */,
+				B0EABF1C19E5DB4D00043E09 /* ethertype.h in Headers */,
 				B0B88BB019BCA7F8008A1B0E /* PacketDecoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1352,6 +1356,7 @@
 				B038B2F019DF0A8A00DB14AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B038B30F19E0399B00DB14AE /* Build configuration list for PBXNativeTarget "Model" */ = {
 			isa = XCConfigurationList;
@@ -1360,6 +1365,7 @@
 				B038B31119E0399B00DB14AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B07C2E9019D89966007D4939 /* Build configuration list for PBXNativeTarget "TextureDrawTest" */ = {
 			isa = XCConfigurationList;

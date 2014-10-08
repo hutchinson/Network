@@ -10,6 +10,7 @@
 #include <zmq.hpp>
 
 #include "RawPacketBuffer.h"
+#include "PacketFormat.h"
 
 namespace netviz
 {
@@ -30,7 +31,7 @@ namespace netviz
 
     void decoderThread(int controlQueueId);
     
-    void decodePacket(const RawPacketBuffer &packet /*, zmq input queue to send to */);
+    void decodePacket(const RawPacketBuffer &packet, BasicPacketInfo &bpi /*, zmq input queue to send to */);
 
     std::mutex _objectMutex;
 

@@ -1,13 +1,14 @@
 #include "PacketDecoder.h"
 #include "ZmqQueueNames.h"
 #include "IDGenerator.h"
-#include "PacketFormat.h"
 
 #include "Logging/Logger.h"
 
 #include <iostream>
 #include <sstream>
 #include <pcap.h>
+
+#include "ethertype.h"
 
 namespace netviz
 {
@@ -114,13 +115,19 @@ namespace netviz
         rawPacketBuffer.setFromRawBuffer(newPacketMessage.data(), zmqMessageSize);
 
         // Process
-        decodePacket(rawPacketBuffer);
+        BasicPacketInfo basicPacketInfo;
+        decodePacket(rawPacketBuffer, basicPacketInfo);
         std::stringstream ss;
+        ss << "Source : " << basicPacketInfo.sourceMacAddress;
+        ss << " --> " << basicPacketInfo.destinationMacAddress;
+        ss << " | Type: 0x" << std::setfill('0')
+        << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
+        
         ss << "Got new packet link layer header was: "
            << rawPacketBuffer.getLinkLayerHeaderType()
            << " captured "
            << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
-           << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes";
+           << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
         LOG_DEBUG(ss.str());
       }
 
@@ -138,17 +145,24 @@ namespace netviz
     }
   }
   
-  void PacketDecoder::decodePacket(const RawPacketBuffer &packet)
+  void PacketDecoder::decodePacket(const RawPacketBuffer &packet, BasicPacketInfo &bpi)
   {
     // Only deal with ethernet packets for the minute.
     if(packet.getLinkLayerHeaderType() != DLT_EN10MB)
       return;
 
     // Take a look at the ethernet header.
-    const EthernetHeader *ethernetHeader = reinterpret_cast<const EthernetHeader*>(packet.getPacketData());
- 
-    std::stringstream ss;
-    printEthernetHeader(ethernetHeader, ss);
-    LOG_DEBUG(ss.str());
+    const EthernetHeader *ethernetHeader =\
+      reinterpret_cast<const EthernetHeader*>(packet.getPacketData());
+    fillPacketInfoEthernet(ethernetHeader, bpi);
+    
+    // For now, only continue on for IPv4
+    if(bpi.ethernetFrameType != ETHERTYPE_IP)
+      return;
+    
+    const IPv4Header *ipv4Header =\
+      reinterpret_cast<const IPv4Header*>( packet.getPacketData() + sizeof(EthernetHeader) );
+
+    fillPacketInfoIPv4(ipv4Header, bpi);
   }
 }
