@@ -117,18 +117,22 @@ namespace netviz
         // Process
         BasicPacketInfo basicPacketInfo;
         decodePacket(rawPacketBuffer, basicPacketInfo);
-        std::stringstream ss;
-        ss << "Source : " << basicPacketInfo.sourceMacAddress;
-        ss << " --> " << basicPacketInfo.destinationMacAddress;
-        ss << " | Type: 0x" << std::setfill('0')
-        << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
-        
-        ss << "Got new packet link layer header was: "
-           << rawPacketBuffer.getLinkLayerHeaderType()
-           << " captured "
-           << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
-           << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
-        LOG_DEBUG(ss.str());
+        if(basicPacketInfo.isIPv4)
+        {
+          std::stringstream ss;
+          ss << "Source : " << basicPacketInfo.sourceIPAddress;
+          ss << " --> " << basicPacketInfo.destinationIPAddress;
+          ss << " | Type: 0x" << std::setfill('0')
+          << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
+          
+          ss << "Got new packet link layer header was: "
+             << rawPacketBuffer.getLinkLayerHeaderType()
+             << " captured "
+             << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
+             << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
+            
+          LOG_DEBUG(ss.str());
+        }
       }
 
       // Check zmq control queue.
@@ -159,10 +163,11 @@ namespace netviz
     // For now, only continue on for IPv4
     if(bpi.ethernetFrameType != ETHERTYPE_IP)
       return;
-    
+
+    bpi.isIPv4 = 0xFF;
+
     const IPv4Header *ipv4Header =\
       reinterpret_cast<const IPv4Header*>( packet.getPacketData() + sizeof(EthernetHeader) );
-
     fillPacketInfoIPv4(ipv4Header, bpi);
   }
 }

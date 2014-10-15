@@ -53,6 +53,9 @@ namespace netviz
     uint16_t ethernetFrameType;
     char destinationMacAddress[18];
     char sourceMacAddress[18];
+    uint8_t isIPv4;
+    char destinationIPAddress[16];
+    char sourceIPAddress[16];
   };
   
   ////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +63,30 @@ namespace netviz
   ////////////////////////////////////////////////////////////////////////////////
   inline void fillPacketInfoIPv4(const IPv4Header *ipv4Header, BasicPacketInfo &bpi)
   {
+    // Weirdly, the IP packet header's source and destination addresses are
+    // already little endian
+    in_addr_t sourceIP = ipv4Header->ip_src.s_addr; /* = ntohl(ipv4Header->ip_src.s_addr); */
+    in_addr_t destIP = ipv4Header->ip_dst.s_addr; /* ntohl(ipv4Header->ip_dst.s_addr); */
+
+    std::stringstream ss;
+    ss << (0x000000FF & sourceIP) << "."
+       << ((0x0000FF00 & sourceIP) >> 8) << "."
+       << ((0x00FF0000 & sourceIP) >> 16) << "."
+       << ((0xFF000000 & sourceIP) >> 24);
+
+    std::string sourceIPStr = ss.str();
+    memcpy(bpi.sourceIPAddress, sourceIPStr.c_str(), sourceIPStr.length());
+
+    ss.clear();
+    ss.str("");
+
+    ss << (0x000000FF & destIP) << "."
+    << ((0x0000FF00 & destIP) >> 8) << "."
+    << ((0x00FF0000 & destIP) >> 16) << "."
+    << ((0xFF000000 & destIP) >> 24);
     
+    std::string destIPStr = ss.str();
+    memcpy(bpi.destinationIPAddress, destIPStr.c_str(), destIPStr.length());
   }
   
   inline void fillPacketInfoEthernet(const EthernetHeader *ethernetHeader, BasicPacketInfo &bpi)
