@@ -64,7 +64,7 @@ namespace netviz
   inline void fillPacketInfoIPv4(const IPv4Header *ipv4Header, BasicPacketInfo &bpi)
   {
     // Weirdly, the IP packet header's source and destination addresses are
-    // already little endian
+    // already little endian, hmm should probably check this...
     in_addr_t sourceIP = ipv4Header->ip_src.s_addr; /* = ntohl(ipv4Header->ip_src.s_addr); */
     in_addr_t destIP = ipv4Header->ip_dst.s_addr; /* ntohl(ipv4Header->ip_dst.s_addr); */
 

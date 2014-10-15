@@ -13,12 +13,12 @@
 namespace netviz
 {
   PacketDecoder::PacketDecoder(zmq::context_t &context)
-  : _context(context),
-    _objectMutex(),
-    _controlQueueId(-1),
-    _decoderReady(),
-    _decoding(false),
-    _decoderThread()
+  : _objectMutex()
+  , _context(context)
+  , _controlQueueId(-1)
+  , _decoderReady()
+  , _decoding(false)
+  , _decoderThread()
   {
 
   }
@@ -91,6 +91,9 @@ namespace netviz
     int readTimeoutMilliseconds = 200;
     newPacketQueueSubscription.setsockopt(ZMQ_RCVTIMEO, &readTimeoutMilliseconds, sizeof(int));
 
+    zmq::socket_t modelInputQueuePublishder(this->_context, ZMQ_PUB);
+    modelInputQueuePublishder.bind(netviz::MODEL_PACKET_INPUT_QUEUE());
+    
     zmq::socket_t controlQueueSubscription(this->_context, ZMQ_SUB);
     std::string queueName = PacketDecoder::generateControlQueueName(controlQueueId);
     controlQueueSubscription.connect(queueName.c_str());
@@ -117,22 +120,29 @@ namespace netviz
         // Process
         BasicPacketInfo basicPacketInfo;
         decodePacket(rawPacketBuffer, basicPacketInfo);
-        if(basicPacketInfo.isIPv4)
-        {
-          std::stringstream ss;
-          ss << "Source : " << basicPacketInfo.sourceIPAddress;
-          ss << " --> " << basicPacketInfo.destinationIPAddress;
-          ss << " | Type: 0x" << std::setfill('0')
-          << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
-          
-          ss << "Got new packet link layer header was: "
-             << rawPacketBuffer.getLinkLayerHeaderType()
-             << " captured "
-             << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
-             << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
-            
-          LOG_DEBUG(ss.str());
-        }
+        
+        // Send onto the model input queue.
+        // did get packet -> then publish
+        zmq::message_t decodedPacketMessage( sizeof(BasicPacketInfo) );
+        memcpy(decodedPacketMessage.data(), &basicPacketInfo, sizeof(BasicPacketInfo) );
+        modelInputQueuePublishder.send(decodedPacketMessage);
+        
+//        if(basicPacketInfo.isIPv4)
+//        {
+//          std::stringstream ss;
+//          ss << "Source : " << basicPacketInfo.sourceIPAddress;
+//          ss << " --> " << basicPacketInfo.destinationIPAddress;
+//          ss << " | Type: 0x" << std::setfill('0')
+//          << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
+//          
+//          ss << "Got new packet link layer header was: "
+//             << rawPacketBuffer.getLinkLayerHeaderType()
+//             << " captured "
+//             << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
+//             << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
+//            
+//          LOG_DEBUG(ss.str());
+//        }
       }
 
       // Check zmq control queue.

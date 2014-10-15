@@ -6,4 +6,9 @@ namespace netviz
   {
     return "inproc://new_packet_queue";
   }
+
+  const char *MODEL_PACKET_INPUT_QUEUE()
+  {
+    return "inproc://model_packet_input_queue";   
+  }
 }

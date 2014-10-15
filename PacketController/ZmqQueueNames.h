@@ -9,6 +9,7 @@
 namespace netviz
 {
   const char *NEW_PACKET_QUEUE();
+  const char *MODEL_PACKET_INPUT_QUEUE();
 }
 
 #endif

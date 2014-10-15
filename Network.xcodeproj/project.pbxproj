@@ -16,8 +16,6 @@
 		B038B2FF19E021A300DB14AE /* GLWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B2FD19E021A300DB14AE /* GLWidget.cpp */; };
 		B038B30019E021D500DB14AE /* GLWidget.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B038B2FE19E021A300DB14AE /* GLWidget.qt.h */; };
 		B038B30219E022AF00DB14AE /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30119E022AF00DB14AE /* QtOpenGL.framework */; };
-		B038B31419E03A3500DB14AE /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31219E03A3500DB14AE /* Network.cpp */; };
-		B038B31519E03A3500DB14AE /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B31319E03A3500DB14AE /* Network.h */; };
 		B038B31819E046D000DB14AE /* Host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31619E046D000DB14AE /* Host.cpp */; };
 		B038B31919E046D000DB14AE /* Host.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B31719E046D000DB14AE /* Host.h */; };
 		B038B31C19E0471500DB14AE /* Packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31A19E0471500DB14AE /* Packet.cpp */; };
@@ -59,6 +57,11 @@
 		B0CF800D19D3503800C27161 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800C19D3503800C27161 /* IOKit.framework */; };
 		B0CF800F19D3504500C27161 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800E19D3504500C27161 /* Cocoa.framework */; };
 		B0CF801119D3506400C27161 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF801019D3506400C27161 /* OpenGL.framework */; };
+		B0E575A319EF10E600F516C1 /* ModelInputQueueProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0E575A119EF10E600F516C1 /* ModelInputQueueProcessor.cpp */; };
+		B0E575A419EF10E600F516C1 /* ModelInputQueueProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E575A219EF10E600F516C1 /* ModelInputQueueProcessor.h */; };
+		B0E575A719EF161500F516C1 /* libModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30719E0399B00DB14AE /* libModel.a */; };
+		B0E575AA19EF180B00F516C1 /* NetworkModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0E575A819EF180B00F516C1 /* NetworkModel.cpp */; };
+		B0E575AB19EF180B00F516C1 /* NetworkModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E575A919EF180B00F516C1 /* NetworkModel.h */; };
 		B0EABF1C19E5DB4D00043E09 /* ethertype.h in Headers */ = {isa = PBXBuildFile; fileRef = B0EABF1B19E5DB4D00043E09 /* ethertype.h */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +100,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = B0B88B9B19BC9409008A1B0E;
 			remoteInfo = Logging;
+		};
+		B0E575A519EF160400F516C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B038B30619E0399B00DB14AE;
+			remoteInfo = Model;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -151,8 +161,6 @@
 		B038B2FE19E021A300DB14AE /* GLWidget.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWidget.qt.h; sourceTree = "<group>"; };
 		B038B30119E022AF00DB14AE /* QtOpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtOpenGL.framework; path = ../../Qt/5.3/clang_64/lib/QtOpenGL.framework; sourceTree = "<group>"; };
 		B038B30719E0399B00DB14AE /* libModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B038B31219E03A3500DB14AE /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
-		B038B31319E03A3500DB14AE /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		B038B31619E046D000DB14AE /* Host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Host.cpp; sourceTree = "<group>"; };
 		B038B31719E046D000DB14AE /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		B038B31A19E0471500DB14AE /* Packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packet.cpp; sourceTree = "<group>"; };
@@ -191,6 +199,10 @@
 		B0CF800C19D3503800C27161 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		B0CF800E19D3504500C27161 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B0CF801019D3506400C27161 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B0E575A119EF10E600F516C1 /* ModelInputQueueProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelInputQueueProcessor.cpp; sourceTree = "<group>"; };
+		B0E575A219EF10E600F516C1 /* ModelInputQueueProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelInputQueueProcessor.h; sourceTree = "<group>"; };
+		B0E575A819EF180B00F516C1 /* NetworkModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkModel.cpp; sourceTree = "<group>"; };
+		B0E575A919EF180B00F516C1 /* NetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModel.h; sourceTree = "<group>"; };
 		B0EABF1B19E5DB4D00043E09 /* ethertype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ethertype.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B88B7D19B7A899008A1B0E /* libPacketController.a in Frameworks */,
+				B0E575A719EF161500F516C1 /* libModel.a in Frameworks */,
 				B0B88B8419B7A9D8008A1B0E /* libzmq.a in Frameworks */,
 				B0B88B9219BB97D5008A1B0E /* libpcap.dylib in Frameworks */,
 			);
@@ -285,14 +298,16 @@
 		B038B30819E0399B00DB14AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B038B31319E03A3500DB14AE /* Network.h */,
-				B038B31219E03A3500DB14AE /* Network.cpp */,
 				B038B31719E046D000DB14AE /* Host.h */,
 				B038B31619E046D000DB14AE /* Host.cpp */,
 				B038B31B19E0471500DB14AE /* Packet.h */,
 				B038B31A19E0471500DB14AE /* Packet.cpp */,
 				B038B31F19E0474F00DB14AE /* Pathway.h */,
 				B038B31E19E0474F00DB14AE /* Pathway.cpp */,
+				B0E575A219EF10E600F516C1 /* ModelInputQueueProcessor.h */,
+				B0E575A119EF10E600F516C1 /* ModelInputQueueProcessor.cpp */,
+				B0E575A919EF180B00F516C1 /* NetworkModel.h */,
+				B0E575A819EF180B00F516C1 /* NetworkModel.cpp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,9 +423,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B038B31919E046D000DB14AE /* Host.h in Headers */,
+				B0E575AB19EF180B00F516C1 /* NetworkModel.h in Headers */,
 				B038B32119E0474F00DB14AE /* Pathway.h in Headers */,
+				B0E575A419EF10E600F516C1 /* ModelInputQueueProcessor.h in Headers */,
 				B038B31D19E0471500DB14AE /* Packet.h in Headers */,
-				B038B31519E03A3500DB14AE /* Network.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +538,7 @@
 			);
 			dependencies = (
 				B0B88B7A19B7A390008A1B0E /* PBXTargetDependency */,
+				B0E575A619EF160400F516C1 /* PBXTargetDependency */,
 			);
 			name = PacketControllerDriver;
 			productName = PacketControllerDriver;
@@ -627,8 +644,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E575AA19EF180B00F516C1 /* NetworkModel.cpp in Sources */,
 				B038B31C19E0471500DB14AE /* Packet.cpp in Sources */,
-				B038B31419E03A3500DB14AE /* Network.cpp in Sources */,
+				B0E575A319EF10E600F516C1 /* ModelInputQueueProcessor.cpp in Sources */,
 				B038B32019E0474F00DB14AE /* Pathway.cpp in Sources */,
 				B038B31819E046D000DB14AE /* Host.cpp in Sources */,
 			);
@@ -695,6 +713,11 @@
 			isa = PBXTargetDependency;
 			target = B0B88B9B19BC9409008A1B0E /* Logging */;
 			targetProxy = B0B88BAA19BC96BB008A1B0E /* PBXContainerItemProxy */;
+		};
+		B0E575A619EF160400F516C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B038B30619E0399B00DB14AE /* Model */;
+			targetProxy = B0E575A519EF160400F516C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
