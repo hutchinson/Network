@@ -8,20 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B038B2EE19DF0A8A00DB14AE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B2ED19DF0A8A00DB14AE /* main.cpp */; };
-		B038B2F319E0176B00DB14AE /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F219E0176A00DB14AE /* QtCore.framework */; };
-		B038B2F519E0178000DB14AE /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F419E0178000DB14AE /* QtGui.framework */; };
-		B038B2F719E0192C00DB14AE /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
 		B038B2FA19E01AAB00DB14AE /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B2F819E01AAB00DB14AE /* Window.cpp */; };
 		B038B2FC19E01DF400DB14AE /* Window.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B038B2F919E01AAB00DB14AE /* Window.qt.h */; };
 		B038B2FF19E021A300DB14AE /* GLWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B2FD19E021A300DB14AE /* GLWidget.cpp */; };
 		B038B30019E021D500DB14AE /* GLWidget.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B038B2FE19E021A300DB14AE /* GLWidget.qt.h */; };
-		B038B30219E022AF00DB14AE /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30119E022AF00DB14AE /* QtOpenGL.framework */; };
 		B038B31819E046D000DB14AE /* Host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31619E046D000DB14AE /* Host.cpp */; };
 		B038B31919E046D000DB14AE /* Host.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B31719E046D000DB14AE /* Host.h */; };
 		B038B31C19E0471500DB14AE /* Packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31A19E0471500DB14AE /* Packet.cpp */; };
 		B038B31D19E0471500DB14AE /* Packet.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B31B19E0471500DB14AE /* Packet.h */; };
-		B038B32019E0474F00DB14AE /* Pathway.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B038B31E19E0474F00DB14AE /* Pathway.cpp */; };
-		B038B32119E0474F00DB14AE /* Pathway.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B31F19E0474F00DB14AE /* Pathway.h */; };
 		B038B32319E3367B00DB14AE /* PacketFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B038B32219E3367B00DB14AE /* PacketFormat.h */; };
 		B07C2E8819D89966007D4939 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF801019D3506400C27161 /* OpenGL.framework */; };
 		B07C2E8919D89966007D4939 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CF800E19D3504500C27161 /* Cocoa.framework */; };
@@ -63,6 +57,10 @@
 		B0E575AA19EF180B00F516C1 /* NetworkModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0E575A819EF180B00F516C1 /* NetworkModel.cpp */; };
 		B0E575AB19EF180B00F516C1 /* NetworkModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E575A919EF180B00F516C1 /* NetworkModel.h */; };
 		B0EABF1C19E5DB4D00043E09 /* ethertype.h in Headers */ = {isa = PBXBuildFile; fileRef = B0EABF1B19E5DB4D00043E09 /* ethertype.h */; };
+		B80F84A61A003DA300D69883 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F219E0176A00DB14AE /* QtCore.framework */; };
+		B80F84A71A003DA300D69883 /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30119E022AF00DB14AE /* QtOpenGL.framework */; };
+		B80F84A81A003DBE00D69883 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F419E0178000DB14AE /* QtGui.framework */; };
+		B80F84A91A003DD800D69883 /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -75,7 +73,7 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/moc_$(INPUT_FILE_BASE).cpp",
 			);
-			script = "/Users/hutchid1/Qt/5.3/clang_64/bin/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILES_DIR}/moc_${INPUT_FILE_BASE}.cpp";
+			script = "/Users/hutch/Qt/5.3/clang_64/bin/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILES_DIR}/moc_${INPUT_FILE_BASE}.cpp";
 		};
 /* End PBXBuildRule section */
 
@@ -165,8 +163,6 @@
 		B038B31719E046D000DB14AE /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		B038B31A19E0471500DB14AE /* Packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packet.cpp; sourceTree = "<group>"; };
 		B038B31B19E0471500DB14AE /* Packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Packet.h; sourceTree = "<group>"; };
-		B038B31E19E0474F00DB14AE /* Pathway.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pathway.cpp; sourceTree = "<group>"; };
-		B038B31F19E0474F00DB14AE /* Pathway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pathway.h; sourceTree = "<group>"; };
 		B038B32219E3367B00DB14AE /* PacketFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketFormat.h; sourceTree = "<group>"; };
 		B07C2E7419D4A33E007D4939 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../usr/local/Cellar/glew/1.11.0/lib/libGLEW.a; sourceTree = "<group>"; };
 		B07C2E9319D89966007D4939 /* CircleDrawTest copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CircleDrawTest copy"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,10 +207,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B038B30219E022AF00DB14AE /* QtOpenGL.framework in Frameworks */,
-				B038B2F719E0192C00DB14AE /* QtWidgets.framework in Frameworks */,
-				B038B2F519E0178000DB14AE /* QtGui.framework in Frameworks */,
-				B038B2F319E0176B00DB14AE /* QtCore.framework in Frameworks */,
+				B80F84A91A003DD800D69883 /* QtWidgets.framework in Frameworks */,
+				B80F84A81A003DBE00D69883 /* QtGui.framework in Frameworks */,
+				B80F84A61A003DA300D69883 /* QtCore.framework in Frameworks */,
+				B80F84A71A003DA300D69883 /* QtOpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,12 +298,10 @@
 				B038B31619E046D000DB14AE /* Host.cpp */,
 				B038B31B19E0471500DB14AE /* Packet.h */,
 				B038B31A19E0471500DB14AE /* Packet.cpp */,
-				B038B31F19E0474F00DB14AE /* Pathway.h */,
-				B038B31E19E0474F00DB14AE /* Pathway.cpp */,
-				B0E575A219EF10E600F516C1 /* ModelInputQueueProcessor.h */,
-				B0E575A119EF10E600F516C1 /* ModelInputQueueProcessor.cpp */,
 				B0E575A919EF180B00F516C1 /* NetworkModel.h */,
 				B0E575A819EF180B00F516C1 /* NetworkModel.cpp */,
+				B0E575A219EF10E600F516C1 /* ModelInputQueueProcessor.h */,
+				B0E575A119EF10E600F516C1 /* ModelInputQueueProcessor.cpp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,7 +418,6 @@
 			files = (
 				B038B31919E046D000DB14AE /* Host.h in Headers */,
 				B0E575AB19EF180B00F516C1 /* NetworkModel.h in Headers */,
-				B038B32119E0474F00DB14AE /* Pathway.h in Headers */,
 				B0E575A419EF10E600F516C1 /* ModelInputQueueProcessor.h in Headers */,
 				B038B31D19E0471500DB14AE /* Packet.h in Headers */,
 			);
@@ -647,7 +640,6 @@
 				B0E575AA19EF180B00F516C1 /* NetworkModel.cpp in Sources */,
 				B038B31C19E0471500DB14AE /* Packet.cpp in Sources */,
 				B0E575A319EF10E600F516C1 /* ModelInputQueueProcessor.cpp in Sources */,
-				B038B32019E0474F00DB14AE /* Pathway.cpp in Sources */,
 				B038B31819E046D000DB14AE /* Host.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,7 +735,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/hutchid1/Qt/5.3/clang_64/lib,
+					/Users/hutch/Qt/5.3/clang_64/lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -759,6 +751,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/",
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtGui.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtCore.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtOpenGL.framework/Headers",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -790,7 +792,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/hutchid1/Qt/5.3/clang_64/lib,
+					/Users/hutch/Qt/5.3/clang_64/lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -799,6 +801,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/",
+					"$(PROJECT_DIR)/../thirdparty/ZeroMQ-4.0.4/build/include/",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtGui.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtCore.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers",
+					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtOpenGL.framework/Headers",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -119,8 +119,10 @@ namespace netviz
         memcpy(&bpi, packetInfoMessage.data(), sizeof(BasicPacketInfo) );
         if(bpi.isIPv4)
         {
-          HostSP newHost(new Host(bpi.sourceIPAddress));
-          _model.addHost(newHost);
+          HostSP sourceHost(new Host(bpi.sourceIPAddress));
+          HostSP destHost(new Host(bpi.destinationIPAddress));
+          
+          _model.newCommunication(sourceHost, destHost);
         }
       }
 

@@ -14,6 +14,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <mutex>
 
 namespace netviz
 {
@@ -22,15 +23,20 @@ namespace netviz
   public:
     NetworkModel();
 
-    void addHost(HostSP host);
+    void newCommunication(HostSP from, HostSP to);
 
   private:
     NetworkModel(const NetworkModel &rhs);
     NetworkModel &operator=(const NetworkModel &rhs);
 
+    bool _recordHost(HostSP host);
+
     // TODO: when netviz::Host is fleshed out we can probably just use a set
     // here.
-    std::map<std::string, HostSP> _hosts;
+    typedef std::map<std::string, HostSP> HostMap;
+    HostMap _hosts;
+    
+    std::mutex _objectMutex;
   };
 }
 
