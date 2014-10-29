@@ -11,6 +11,7 @@
 
 #include <QMainWindow>
 
+class QAction;
 class QComboBox;
 class QPushButton;
 
@@ -23,12 +24,20 @@ public:
 
 protected:
   void closeEvent(QCloseEvent *event);
+
+private slots:
+  void startListening();
+  void stopListening();
   
 private:
+  void _createActions();
   void _createToolBar();
   void _readSettings();
 
   void _populateAvailableInterfaces();
+  
+  QAction *_startListeningAction;
+  QAction *_stopListeningAction;
 
   QToolBar *_interfaceSelectToolBar;
   QComboBox *_interfaceComboBox;
