@@ -7,7 +7,7 @@
 
 #include <cstring>
 #include <sstream>
-#include <pcap.h>
+#include <pcap/pcap.h>
 
 namespace netviz
 {
