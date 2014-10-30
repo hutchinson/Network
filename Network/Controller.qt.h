@@ -13,6 +13,7 @@
 #include <string>
 
 #include <QObject>
+#include <QString>
 
 #include <zmq.hpp>
 
@@ -38,6 +39,7 @@ public:
 
 signals:
   void listeningStatusChanged();
+  void newHostAdded(netviz::HostSP host);
   
 private:
   Controller(const Controller &rhs);
@@ -48,6 +50,7 @@ private:
   
   bool _listening;
 
+  netviz::NewHostListenerSP _newHostListner;
   netviz::NetworkModelSP _model;
   
   netviz::PacketDecoderSP _packetDecoder;

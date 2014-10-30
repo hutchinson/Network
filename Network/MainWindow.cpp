@@ -31,6 +31,7 @@ MainWindow::MainWindow(zmq::context_t &context)
 , _controller()
 , _networkView(NULL)
 , _zmqContext(context)
+, _hostsSeen(0)
 {
   // Create and setCentralWidget()
   _createActions();
@@ -55,12 +56,26 @@ void MainWindow::listeningStatusChanged()
   bool isListening = _controller->isListening();
   if(isListening)
   {
-    statusBar()->showMessage(tr("Listening to network."));
+    QString message("Listening to network");
+    message += " | Hosts seen " + QString::number(_hostsSeen);
+    if(_lastHost)
+    {
+      message += " | Last Seen Host ";
+      message += _lastHost->hostIP().c_str();
+    }
+
+    statusBar()->showMessage(message);
   }
   else
   {
     statusBar()->showMessage(tr("Not Listening."));
   }
+}
+
+void MainWindow::hostAdded(netviz::HostSP newHost)
+{
+  ++_hostsSeen;
+  _lastHost = newHost;
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

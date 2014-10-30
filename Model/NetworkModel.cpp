@@ -21,11 +21,28 @@ namespace netviz {
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
 
-    if(_recordHost(from))
-      std::cout << "New host: " << from->hostIP() << std::endl;
-    
-    if(_recordHost(to))
-      std::cout << "New host: " << to->hostIP() << std::endl;
+    _recordHost(from);
+    _recordHost(to);
+  }
+  
+  void NetworkModel::addNewHostListener(NewHostListenerSP listener)
+  {
+    std::lock_guard<std::mutex> lock(_objectMutex);
+    _newHostListeners.push_back(listener);
+  }
+
+  void NetworkModel::removeNewHostListener(NewHostListenerSP listener)
+  {
+    std::lock_guard<std::mutex> lock(_objectMutex);
+
+    for(std::vector<NewHostListenerSP>::iterator it = _newHostListeners.begin();
+        it != _newHostListeners.end();)
+    {
+      if((*it) == listener)
+        it = _newHostListeners.erase(it);
+      else
+        ++it;
+    }
   }
 
   // Record the new host we've just been told about
@@ -36,7 +53,8 @@ namespace netviz {
     if(foundHost != _hosts.end())
       return false;
     _hosts[host->hostIP()] = host;
+
+    _emitNewHostAdded(host);
     return true;
   }
-  
 }

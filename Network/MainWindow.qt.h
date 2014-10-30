@@ -30,6 +30,7 @@ public:
 
 public slots:
   void listeningStatusChanged();
+  void hostAdded(netviz::HostSP newHost);
   
 protected:
   void closeEvent(QCloseEvent *event);
@@ -59,6 +60,10 @@ private:
   NetworkView *_networkView;
   
   zmq::context_t &_zmqContext;
+  
+  // Temporary
+  int _hostsSeen;
+  netviz::HostSP _lastHost;
 };
 
 
