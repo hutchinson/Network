@@ -68,11 +68,9 @@ void MainWindow::_createToolBar()
   _populateAvailableInterfaces();
 
   _startListeningButton = new QPushButton( tr("Start Listening"), _interfaceSelectToolBar );
-  _startListeningButton->addAction(_startListeningAction);
   connect(_startListeningButton, SIGNAL(released()), _startListeningAction, SLOT(trigger()));
   
   _stopListeningButton = new QPushButton( tr("Stop Listening"), _interfaceSelectToolBar );
-  _stopListeningButton->addAction(_stopListeningAction);
   connect(_stopListeningButton, SIGNAL(released()), _stopListeningAction, SLOT(trigger()));
   
   _interfaceSelectToolBar->addWidget(_interfaceComboBox);
