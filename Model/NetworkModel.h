@@ -38,6 +38,8 @@ namespace netviz
     
     std::mutex _objectMutex;
   };
+  
+  typedef std::shared_ptr<NetworkModel> NetworkModelSP;
 }
 
 #endif /* defined(__Network__NetworkModel__) */

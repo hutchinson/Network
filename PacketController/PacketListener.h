@@ -6,6 +6,7 @@
 #include <mutex>
 #include <future>
 #include <thread>
+#include <memory>
 
 #include <zmq.hpp>
 
@@ -35,6 +36,7 @@ namespace netviz
 
     std::thread _listenerThread;
   };
+  typedef std::shared_ptr<PacketListener> PacketListenerSP;
 }
 
 #endif

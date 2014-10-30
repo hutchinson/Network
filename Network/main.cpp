@@ -9,15 +9,19 @@
 #include "GlobalThings.h"
 #include "MainWindow.qt.h"
 
+#include <zmq.hpp>
 #include <QApplication>
 
 int main(int argc, char **argv)
 {
+  zmq::context_t zmqContext;
+
   QApplication app(argc, argv);
   app.setOrganizationDomain(qApp->tr(ORG_NAME));
   app.setApplicationName(qApp->tr("Network"));
-  MainWindow mainWindow;
 
+  MainWindow mainWindow(zmqContext);
   mainWindow.show();
+
   app.exec();
 }

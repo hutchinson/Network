@@ -6,6 +6,7 @@
 #include <mutex>
 #include <future>
 #include <thread>
+#include <memory>
 
 #include <zmq.hpp>
 
@@ -42,6 +43,7 @@ namespace netviz
     bool _decoding;
     std::thread _decoderThread;
   };
+  typedef std::shared_ptr<PacketDecoder> PacketDecoderSP;
 }
 
 #endif

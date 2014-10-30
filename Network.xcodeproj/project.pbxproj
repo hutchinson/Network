@@ -64,6 +64,13 @@
 		B880FBCA1A0180140066BE90 /* MainWindow.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B8AB226F1A017B0A0022C5DC /* MainWindow.qt.h */; };
 		B880FBCD1A0186730066BE90 /* PcapHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBCB1A0186730066BE90 /* PcapHelpers.cpp */; };
 		B880FBCE1A01884E0066BE90 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
+		B880FBD11A02D9E00066BE90 /* NetworkView.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD01A02D9D80066BE90 /* NetworkView.qt.h */; };
+		B880FBD31A02D9F10066BE90 /* NetworkView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD21A02D9F10066BE90 /* NetworkView.cpp */; };
+		B880FBD61A02DD170066BE90 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD41A02DD170066BE90 /* Controller.cpp */; };
+		B880FBD71A02E07C0066BE90 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
+		B880FBD81A02E4D30066BE90 /* libModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30719E0399B00DB14AE /* libModel.a */; };
+		B880FBD91A02E4D30066BE90 /* libPacketController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B5E19B7A197008A1B0E /* libPacketController.a */; };
+		B880FBDA1A02E6C30066BE90 /* Controller.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD51A02DD170066BE90 /* Controller.qt.h */; };
 		B8AB22621A0179A00022C5DC /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
 		B8AB22631A0179A00022C5DC /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F419E0178000DB14AE /* QtGui.framework */; };
 		B8AB22641A0179A00022C5DC /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F219E0176A00DB14AE /* QtCore.framework */; };
@@ -232,6 +239,10 @@
 		B880FBCB1A0186730066BE90 /* PcapHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PcapHelpers.cpp; sourceTree = "<group>"; };
 		B880FBCC1A0186730066BE90 /* PcapHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcapHelpers.h; sourceTree = "<group>"; };
 		B880FBCF1A018E9C0066BE90 /* GlobalThings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalThings.h; sourceTree = "<group>"; };
+		B880FBD01A02D9D80066BE90 /* NetworkView.qt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkView.qt.h; sourceTree = "<group>"; };
+		B880FBD21A02D9F10066BE90 /* NetworkView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkView.cpp; sourceTree = "<group>"; };
+		B880FBD41A02DD170066BE90 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		B880FBD51A02DD170066BE90 /* Controller.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.qt.h; sourceTree = "<group>"; };
 		B8AB226B1A0179A00022C5DC /* Network */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Network; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8AB226D1A017A100022C5DC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B8AB226F1A017B0A0022C5DC /* MainWindow.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.qt.h; sourceTree = "<group>"; };
@@ -316,6 +327,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B880FBD81A02E4D30066BE90 /* libModel.a in Frameworks */,
+				B880FBD91A02E4D30066BE90 /* libPacketController.a in Frameworks */,
+				B880FBD71A02E07C0066BE90 /* libzmq.a in Frameworks */,
 				B880FBCE1A01884E0066BE90 /* libpcap.dylib in Frameworks */,
 				B8AB22621A0179A00022C5DC /* QtWidgets.framework in Frameworks */,
 				B8AB22631A0179A00022C5DC /* QtGui.framework in Frameworks */,
@@ -468,6 +482,10 @@
 				B880FBCC1A0186730066BE90 /* PcapHelpers.h */,
 				B880FBCB1A0186730066BE90 /* PcapHelpers.cpp */,
 				B880FBCF1A018E9C0066BE90 /* GlobalThings.h */,
+				B880FBD01A02D9D80066BE90 /* NetworkView.qt.h */,
+				B880FBD21A02D9F10066BE90 /* NetworkView.cpp */,
+				B880FBD51A02DD170066BE90 /* Controller.qt.h */,
+				B880FBD41A02DD170066BE90 /* Controller.cpp */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -774,9 +792,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B880FBDA1A02E6C30066BE90 /* Controller.qt.h in Sources */,
+				B880FBD11A02D9E00066BE90 /* NetworkView.qt.h in Sources */,
+				B880FBD31A02D9F10066BE90 /* NetworkView.cpp in Sources */,
 				B880FBCA1A0180140066BE90 /* MainWindow.qt.h in Sources */,
 				B8AB22711A017B490022C5DC /* MainWindow.cpp in Sources */,
 				B8AB226E1A017A100022C5DC /* main.cpp in Sources */,
+				B880FBD61A02DD170066BE90 /* Controller.cpp in Sources */,
 				B880FBCD1A0186730066BE90 /* PcapHelpers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1528,6 +1550,10 @@
 					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers",
 					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtOpenGL.framework/Headers",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutch/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1577,6 +1603,10 @@
 					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtCore.framework/Headers",
 					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers",
 					"$(PROJECT_DIR)/../thirdparty/Qt/5.3/clang_64/lib/QtOpenGL.framework/Headers",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hutch/projects/thirdparty/ZeroMQ-4.0.4/build/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -14,6 +14,7 @@
 #include <mutex>
 #include <future>
 #include <thread>
+#include <memory>
 
 #include <zmq.hpp>
 
@@ -49,6 +50,8 @@ namespace netviz
     
     NetworkModel &_model;
   };
+
+  typedef std::shared_ptr<ModelInputQueueProcessor> ModelInputQueueProcessorSP;
 }
 
 #endif
