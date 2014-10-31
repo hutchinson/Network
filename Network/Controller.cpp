@@ -37,9 +37,6 @@ Controller::Controller(zmq::context_t &context, MainWindow *mainWindow)
 , _packetListner()
 , _modelInputQueueProcessor()
 {
-  // TODO: Move this out.
-  qRegisterMetaType<netviz::HostSP>("netviz::HostSP");
-
   connect(this, SIGNAL(listeningStatusChanged()), _mainWindow, SLOT(listeningStatusChanged()));
   connect(this, SIGNAL(newHostAdded(netviz::HostSP)), _mainWindow, SLOT(hostAdded(netviz::HostSP)));
 }

@@ -14,7 +14,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QMetaType>
 
 #include <zmq.hpp>
 
@@ -24,8 +23,6 @@
 #include "Model/NetworkModel.h"
 
 class MainWindow;
-
-Q_DECLARE_METATYPE(netviz::HostSP);
 
 class Controller : public QObject
 {

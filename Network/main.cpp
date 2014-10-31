@@ -6,6 +6,8 @@
 //
 //
 
+#include "MetaTypeExtensions.h"
+
 #include "GlobalThings.h"
 #include "MainWindow.qt.h"
 
@@ -14,6 +16,8 @@
 
 int main(int argc, char **argv)
 {
+  declareQtMetaTypeExtensions();
+
   zmq::context_t zmqContext;
 
   QApplication app(argc, argv);

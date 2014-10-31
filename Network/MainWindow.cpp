@@ -56,12 +56,13 @@ void MainWindow::listeningStatusChanged()
   bool isListening = _controller->isListening();
   if(isListening)
   {
-    QString message("Listening to network");
-    message += " | Hosts seen " + QString::number(_hostsSeen);
+    QString message(tr("Listening to network"));
+    message += tr(" | ");
+    message += tr("%1 unique hosts").arg(_hostsSeen);
     if(_lastHost)
     {
-      message += " | Last Seen Host ";
-      message += _lastHost->hostIP().c_str();
+      message += tr(" | ");
+      message += tr("Newest host %1").arg(_lastHost->hostIP().c_str());
     }
 
     statusBar()->showMessage(message);
