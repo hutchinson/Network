@@ -14,6 +14,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QMetaType>
 
 #include <zmq.hpp>
 
@@ -23,6 +24,8 @@
 #include "Model/NetworkModel.h"
 
 class MainWindow;
+
+Q_DECLARE_METATYPE(netviz::HostSP);
 
 class Controller : public QObject
 {
@@ -36,6 +39,11 @@ public:
 
   void startListening(const std::string &interface);
   void stopListening();
+
+  void signalNewHostAdded(netviz::HostSP host)
+  {
+    emit(newHostAdded(host));
+  }
 
 signals:
   void listeningStatusChanged();

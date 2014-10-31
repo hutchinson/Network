@@ -76,6 +76,7 @@ void MainWindow::hostAdded(netviz::HostSP newHost)
 {
   ++_hostsSeen;
   _lastHost = newHost;
+  listeningStatusChanged();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
