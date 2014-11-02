@@ -15,9 +15,13 @@
 
 #include <QMainWindow>
 
+#define ANIMATION_FPS 30
+#define FPS_MILLISECONS 1000 / ANIMATION_FPS
+
 class QAction;
 class QComboBox;
 class QPushButton;
+class QTimer;
 
 class NetworkView;
 
@@ -54,6 +58,8 @@ private:
   QComboBox *_interfaceComboBox;
   QPushButton *_startListeningButton;
   QPushButton *_stopListeningButton;
+  
+  QTimer *_animationTimer;
 
   ControllerSP _controller;
 

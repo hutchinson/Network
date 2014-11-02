@@ -18,6 +18,7 @@
 #include <QAction>
 #include <QSettings>
 #include <QStatusBar>
+#include <QTimer>
 
 #include <iostream>
 
@@ -49,6 +50,10 @@ MainWindow::MainWindow(zmq::context_t &context)
 
   setUnifiedTitleAndToolBarOnMac(true);
 //  showMaximized();
+  
+  QTimer *_animationTimer = new QTimer(this);
+  connect(_animationTimer, SIGNAL(timeout()), _networkView, SLOT(animate()));
+  _animationTimer->start( FPS_MILLISECONS );
 }
 
 void MainWindow::listeningStatusChanged()
@@ -75,6 +80,9 @@ void MainWindow::listeningStatusChanged()
 
 void MainWindow::hostAdded(netviz::HostSP newHost)
 {
+  // Add to a quadrant in the view!
+  _networkView->newHostAdded(newHost);
+
   ++_hostsSeen;
   _lastHost = newHost;
   listeningStatusChanged();
@@ -83,6 +91,7 @@ void MainWindow::hostAdded(netviz::HostSP newHost)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
   _controller->stopListening();
+  _animationTimer->stop();
 }
 
 void MainWindow::startListening()
