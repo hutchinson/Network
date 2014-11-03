@@ -91,7 +91,7 @@ void MainWindow::hostAdded(netviz::HostSP newHost)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
   _controller->stopListening();
-  _animationTimer->stop();
+//  _animationTimer->stop();
 }
 
 void MainWindow::startListening()
