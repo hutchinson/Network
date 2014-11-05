@@ -106,13 +106,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		B0B88B6A19B7A368008A1B0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B0B88B6419B7A1DA008A1B0E /* ZeroMQ-4.0.4.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B0B88AA019B79CB0008A1B0E;
-			remoteInfo = "zmq-4.0.4";
-		};
 		B0B88B7919B7A390008A1B0E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
@@ -133,6 +126,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = B038B30619E0399B00DB14AE;
 			remoteInfo = Model;
+		};
+		B8BB59BE1A0AC7B100F09C1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0B88B5D19B7A197008A1B0E;
+			remoteInfo = PacketController;
+		};
+		B8BB59C01A0AC7B100F09C1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B038B30619E0399B00DB14AE;
+			remoteInfo = Model;
+		};
+		B8BB59C21A0AC7B100F09C1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B88B5119B7A0EB008A1B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0B88B9B19BC9409008A1B0E;
+			remoteInfo = Logging;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -598,7 +612,6 @@
 			);
 			dependencies = (
 				B0B88BAB19BC96BB008A1B0E /* PBXTargetDependency */,
-				B0B88B6B19B7A368008A1B0E /* PBXTargetDependency */,
 			);
 			name = PacketController;
 			productName = PacketController;
@@ -670,6 +683,9 @@
 				B880FBC91A017F2F0066BE90 /* PBXBuildRule */,
 			);
 			dependencies = (
+				B8BB59BF1A0AC7B100F09C1C /* PBXTargetDependency */,
+				B8BB59C11A0AC7B100F09C1C /* PBXTargetDependency */,
+				B8BB59C31A0AC7B100F09C1C /* PBXTargetDependency */,
 			);
 			name = Network;
 			productName = QtDrawTest;
@@ -715,12 +731,12 @@
 			targets = (
 				B8AB225A1A0179A00022C5DC /* Network */,
 				B0B88B5D19B7A197008A1B0E /* PacketController */,
-				B0B88B6F19B7A387008A1B0E /* PacketControllerDriver */,
+				B038B30619E0399B00DB14AE /* Model */,
 				B0B88B9B19BC9409008A1B0E /* Logging */,
+				B0B88B6F19B7A387008A1B0E /* PacketControllerDriver */,
 				B0CF7FFC19D34DFB00C27161 /* CircleDrawTest */,
 				B07C2E8419D89966007D4939 /* TextureDrawTest */,
 				B038B2EA19DF0A8900DB14AE /* QtDrawTest */,
-				B038B30619E0399B00DB14AE /* Model */,
 			);
 		};
 /* End PBXProject section */
@@ -812,11 +828,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B0B88B6B19B7A368008A1B0E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "zmq-4.0.4";
-			targetProxy = B0B88B6A19B7A368008A1B0E /* PBXContainerItemProxy */;
-		};
 		B0B88B7A19B7A390008A1B0E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B0B88B5D19B7A197008A1B0E /* PacketController */;
@@ -831,6 +842,21 @@
 			isa = PBXTargetDependency;
 			target = B038B30619E0399B00DB14AE /* Model */;
 			targetProxy = B0E575A519EF160400F516C1 /* PBXContainerItemProxy */;
+		};
+		B8BB59BF1A0AC7B100F09C1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0B88B5D19B7A197008A1B0E /* PacketController */;
+			targetProxy = B8BB59BE1A0AC7B100F09C1C /* PBXContainerItemProxy */;
+		};
+		B8BB59C11A0AC7B100F09C1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B038B30619E0399B00DB14AE /* Model */;
+			targetProxy = B8BB59C01A0AC7B100F09C1C /* PBXContainerItemProxy */;
+		};
+		B8BB59C31A0AC7B100F09C1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0B88B9B19BC9409008A1B0E /* Logging */;
+			targetProxy = B8BB59C21A0AC7B100F09C1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

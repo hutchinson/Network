@@ -57,7 +57,7 @@ namespace netviz
 
     // TODO: when netviz::Host is fleshed out we can probably just use a set
     // here.
-    typedef std::map<std::string, HostSP> HostMap;
+    typedef std::map<uint32_t, HostSP> HostMap;
     HostMap _hosts;
 
     std::vector<NewHostListenerSP> _newHostListeners;

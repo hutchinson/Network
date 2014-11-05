@@ -17,12 +17,15 @@ namespace netviz
   class Host
   {
   public:
-    Host(const std::string &hostIP)
-    : _ipString(hostIP) {}
+    Host(uint32_t ip, const std::string &hostIP)
+    : _ip(ip)
+    , _ipString(hostIP) {}
 
+    uint32_t ip() const { return _ip; }
     const std::string &hostIP() const { return _ipString; }
 
   private:
+    uint32_t _ip;
     std::string _ipString;
   };
   

@@ -16,7 +16,7 @@ namespace netviz {
   {
     
   }
-  
+
   void NetworkModel::newCommunication(HostSP from, HostSP to)
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
@@ -24,7 +24,7 @@ namespace netviz {
     _recordHost(from);
     _recordHost(to);
   }
-  
+
   void NetworkModel::addNewHostListener(NewHostListenerSP listener)
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
@@ -49,11 +49,11 @@ namespace netviz {
   // Return true if we've never seen it before.
   bool NetworkModel::_recordHost(HostSP host)
   {
-    HostMap::iterator foundHost = _hosts.find(host->hostIP());
+    HostMap::iterator foundHost = _hosts.find(host->ip());
     if(foundHost != _hosts.end())
-      return false;
-    _hosts[host->hostIP()] = host;
+       return false;
 
+    _hosts[host->ip()] = host;
     _emitNewHostAdded(host);
     return true;
   }

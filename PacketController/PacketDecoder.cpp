@@ -126,23 +126,6 @@ namespace netviz
         zmq::message_t decodedPacketMessage( sizeof(BasicPacketInfo) );
         memcpy(decodedPacketMessage.data(), &basicPacketInfo, sizeof(BasicPacketInfo) );
         modelInputQueuePublishder.send(decodedPacketMessage);
-        
-//        if(basicPacketInfo.isIPv4)
-//        {
-//          std::stringstream ss;
-//          ss << "Source : " << basicPacketInfo.sourceIPAddress;
-//          ss << " --> " << basicPacketInfo.destinationIPAddress;
-//          ss << " | Type: 0x" << std::setfill('0')
-//          << std::hex << basicPacketInfo.ethernetFrameType << "\n" << std::dec;
-//          
-//          ss << "Got new packet link layer header was: "
-//             << rawPacketBuffer.getLinkLayerHeaderType()
-//             << " captured "
-//             << rawPacketBuffer.getPcapHeader()->caplen << " bytes"
-//             << " data of wire " << rawPacketBuffer.getPcapHeader()->len <<  " bytes\n";
-//            
-//          LOG_DEBUG(ss.str());
-//        }
       }
 
       // Check zmq control queue.
@@ -161,6 +144,8 @@ namespace netviz
   
   void PacketDecoder::decodePacket(const RawPacketBuffer &packet, BasicPacketInfo &bpi)
   {
+    memset(&bpi, 0x00, sizeof(BasicPacketInfo));
+
     // Only deal with ethernet packets for the minute.
     if(packet.getLinkLayerHeaderType() != DLT_EN10MB)
       return;
@@ -173,7 +158,6 @@ namespace netviz
     // For now, only continue on for IPv4
     if(bpi.ethernetFrameType != ETHERTYPE_IP)
       return;
-
     bpi.isIPv4 = 0xFF;
 
     const IPv4Header *ipv4Header =\

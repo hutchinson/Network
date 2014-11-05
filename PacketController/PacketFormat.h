@@ -53,20 +53,37 @@ namespace netviz
     uint16_t ethernetFrameType;
     char destinationMacAddress[18];
     char sourceMacAddress[18];
+
     uint8_t isIPv4;
+
     char destinationIPAddress[16];
+    uint32_t destinationIP;
     char sourceIPAddress[16];
+    uint32_t sourceIP;
   };
   
   ////////////////////////////////////////////////////////////////////////////////
   // Functions
   ////////////////////////////////////////////////////////////////////////////////
+
+  // Return the nth (1, 2, 3, 4) octet from the IP address.
+  enum Octet { One = 0, Two = 1, Three = 2, Four = 3 };
+  inline uint32_t getIPv4Octet(Octet octet, uint32_t ip)
+  {
+    int shiftBy = octet * 8;
+    uint32_t mask = 0x000000FF << shiftBy;
+    uint32_t value = (mask & ip) >> shiftBy;
+    return value;
+  }
+
   inline void fillPacketInfoIPv4(const IPv4Header *ipv4Header, BasicPacketInfo &bpi)
   {
     // Weirdly, the IP packet header's source and destination addresses are
     // already little endian, hmm should probably check this...
     in_addr_t sourceIP = ipv4Header->ip_src.s_addr; /* = ntohl(ipv4Header->ip_src.s_addr); */
+    bpi.sourceIP = sourceIP;
     in_addr_t destIP = ipv4Header->ip_dst.s_addr; /* ntohl(ipv4Header->ip_dst.s_addr); */
+    bpi.destinationIP = destIP;
 
     std::stringstream ss;
     ss << (0x000000FF & sourceIP) << "."
@@ -91,8 +108,6 @@ namespace netviz
   
   inline void fillPacketInfoEthernet(const EthernetHeader *ethernetHeader, BasicPacketInfo &bpi)
   {
-    memset(&bpi, 0, sizeof(BasicPacketInfo));
-
     bpi.ethernetFrameType = ntohs(ethernetHeader->etherType);
     
     std::stringstream ss;

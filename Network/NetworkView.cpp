@@ -30,12 +30,9 @@ NetworkView::NetworkView(QWidget *parent)
 void NetworkView::newHostAdded(netviz::HostSP host)
 {
   // Figure out which quadrant to add it to
-  const std::string &ipString = host->hostIP();
-  std::string firstOctetStr = ipString.substr(0, ipString.find('.'));
+  uint32_t firstOctet = getIPv4Octet(netviz::One, host->ip());
 
-  int firstOctet = atoi(firstOctetStr.c_str());
-
-  if(firstOctet >= 0 && firstOctet < QUAD_BOUNDS_1)
+  if(firstOctet < QUAD_BOUNDS_1)
     _quadrants[TOP_LEFT]->newHost(host);
   else if(firstOctet >= QUAD_BOUNDS_1 && firstOctet < QUAD_BOUNDS_2)
     _quadrants[TOP_RIGHT]->newHost(host);
@@ -104,7 +101,7 @@ void Sector::drawSector(QPainter &painter)
     CellColumn::iterator column = columns.begin();
     while(column != columns.end())
     {
-      painter.fillRect((*column)->column() * CELL_WIDTH + 2, row * CELL_HEIGHT + 2, CELL_HEIGHT - 4, CELL_WIDTH - 4, Qt::red);
+      painter.fillRect( (1 + (*column)->column()) * CELL_WIDTH + 2, (1 + row) * CELL_HEIGHT + 2, CELL_HEIGHT - 4, CELL_WIDTH - 4, Qt::red);
       ++column;
     }
   }

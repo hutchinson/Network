@@ -12,6 +12,7 @@
 #include <QGLWidget>
 
 #include "Model/Host.h"
+#include "PacketController/PacketFormat.h"
 
 #include <iostream>
 #include <memory>
@@ -85,16 +86,11 @@ namespace
     {
       // Need to determine a row and column that this new host is going to live
       // in. 3rd octet will give us this information.
-      const std::string &ipStr = host->hostIP();
-      std::size_t oct1Pos = ipStr.find('.');
-      std::size_t oct2Pos = ipStr.find('.', oct1Pos + 1);
-      std::size_t oct3Pos = ipStr.find('.', oct2Pos + 1);
-      std::size_t oct4Pos = ipStr.find('.', oct3Pos + 1);
-      
-      std::string thirdOctetStr = ipStr.substr(oct3Pos + 1, oct4Pos - oct3Pos);
-      int thirdOctet = atoi(thirdOctetStr.c_str());
+      int thirdOctet = netviz::getIPv4Octet(netviz::Three, host->ip());
+      int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
+
       int row = (thirdOctet / 4) % 4;
-      int col = thirdOctet % 4;
+      int col = (fourthOctet / 4) % 4;
 
       CellColumn &columns = _cellRows[row];
       for(CellColumn::iterator it = columns.begin();
@@ -103,7 +99,7 @@ namespace
       {
         if((*it)->column() == col)
         {
-          std::cout << "Clash: Host " << (*it)->host()->hostIP() << " already stored here." << std::endl;
+          std::cout << "CLASH Error adding " << host->hostIP() << " " << (*it)->host()->hostIP() << " already stored here." << std::endl;
           break;
         }
       }
@@ -142,18 +138,11 @@ namespace
 
     void newHost(netviz::HostSP host)
     {
+      uint32_t secondOctet = getIPv4Octet(netviz::Two, host->ip());
       // Figure out which sector to add it to based on second octet
       std::cout << "Adding " << host->hostIP() << " to quadrant " << _name << std::endl;
 
-      const std::string &ipStr = host->hostIP();
-      std::size_t oct1Pos = ipStr.find('.');
-      std::size_t oct2Pos = ipStr.find('.', oct1Pos + 1);
-      std::size_t oct3Pos = ipStr.find('.', oct2Pos + 1);
-      
-      std::string secondOctetStr = ipStr.substr(oct1Pos + 1, oct3Pos - oct2Pos);
-      int secondOctet = atoi(secondOctetStr.c_str());
-
-      if(secondOctet >= 0 && secondOctet < QUAD_BOUNDS_1)
+      if(secondOctet < QUAD_BOUNDS_1)
         _sectors[TOP_LEFT]->newHost(host);
       else if(secondOctet >= QUAD_BOUNDS_1 && secondOctet < QUAD_BOUNDS_2)
         _sectors[TOP_RIGHT]->newHost(host);
