@@ -9,7 +9,11 @@
 #ifndef Network_NetworkView_qt_h
 #define Network_NetworkView_qt_h
 
+#include <QObject>
 #include <QGLWidget>
+#include <QBrush>
+#include <QPen>
+#include <QPropertyAnimation>
 
 #include "Model/Host.h"
 #include "PacketController/PacketFormat.h"
@@ -40,6 +44,63 @@
 #define QUAD_BOUNDS_3 192
 #define QUAD_BOUNDS_4 256
 
+class DrawState : public QObject
+{
+  Q_OBJECT
+  
+  Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
+  Q_PROPERTY(qreal scale READ scale WRITE setScale)
+  
+public:
+  DrawState(qreal opacity, qreal scale)
+  : _brush(Qt::SolidPattern)
+  , _pen(Qt::SolidLine)
+  {
+    _brush.setColor(Qt::red);
+    _pen.setColor(Qt::red);
+
+    setOpacity(0.0f);
+    setScale(0.0f);
+    
+    _opacityAnimation = new QPropertyAnimation(this, "opacity");
+    _opacityAnimation->setDuration(500);
+    _opacityAnimation->setStartValue(0.0f);
+    _opacityAnimation->setEndValue(1.0f);
+    _opacityAnimation->setEasingCurve(QEasingCurve::OutBounce);
+    _opacityAnimation->start();
+    
+    _scaleAnimation = new QPropertyAnimation(this, "scale");
+    _scaleAnimation->setDuration(750);
+    _scaleAnimation->setStartValue(0.0f);
+    _scaleAnimation->setEndValue(1.0f);
+    _scaleAnimation->setEasingCurve(QEasingCurve::OutBounce);
+    _scaleAnimation->start();
+  }
+  
+  void setOpacity(qreal opacity)
+  {
+    _opacity = opacity;
+  }
+
+  void setScale(qreal scale)
+  {
+    _scale = scale;
+  }
+  
+  qreal opacity() const { return _opacity; }
+  qreal scale() const { return _scale; }
+  
+  const QBrush &brush() const { return _brush; }
+  const QPen &pen() const { return _pen; }
+
+private:
+  qreal _opacity, _scale;
+  QPropertyAnimation *_opacityAnimation, *_scaleAnimation;
+  QBrush _brush;
+  QPen _pen;
+};
+typedef std::shared_ptr<DrawState> DrawStateSP;
+
 namespace
 {
   //////////////////////////////////////////////////////////////////////////////
@@ -51,13 +112,24 @@ namespace
   public:
     Cell(netviz::HostSP host, int column)
     : _host(host)
-    , _col(column) {}
+    , _drawState(new DrawState(0.0f, 0.0f))
+    , _col(column)
+    {}
 
     const netviz::HostSP host() const { return _host; }
     int column() const { return _col; }
 
+    qreal opacity() const { return _drawState->opacity(); }
+    qreal scale() const { return _drawState->scale(); }
+    
+    const QBrush &brush() const { return _drawState->brush(); }
+    const QPen &pen() const { return _drawState->pen(); }
   private:
+    Cell(const Cell &rhs);
+    Cell &operator=(const Cell &rhs);
+    
     netviz::HostSP _host;
+    DrawStateSP _drawState;
     int _col;
   };
   
@@ -100,7 +172,7 @@ namespace
         if((*it)->column() == col)
         {
           std::cout << "CLASH Error adding " << host->hostIP() << " " << (*it)->host()->hostIP() << " already stored here." << std::endl;
-          break;
+          return;
         }
       }
       

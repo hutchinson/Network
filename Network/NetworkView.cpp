@@ -56,10 +56,10 @@ void NetworkView::resizeGL(int width, int height)
 
 void NetworkView::paintEvent(QPaintEvent *event)
 {
-  QPainter painter;
+  QPainter painter(this);
 
-  painter.begin(this);
-  painter.setRenderHint(QPainter::Antialiasing);
+//  painter.begin(this);
+  painter.setRenderHint(QPainter::Antialiasing, true);
 
   // Draw background
   QBrush background( QColor(0, 0, 128) );
@@ -83,7 +83,7 @@ void NetworkView::paintEvent(QPaintEvent *event)
     _quadrants[i]->drawQuadrant(painter);
   }
 
-  painter.end();
+//  painter.end();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -101,11 +101,20 @@ void Sector::drawSector(QPainter &painter)
     CellColumn::iterator column = columns.begin();
     while(column != columns.end())
     {
-      painter.fillRect( (1 + (*column)->column()) * CELL_WIDTH + 2, (1 + row) * CELL_HEIGHT + 2, CELL_HEIGHT - 4, CELL_WIDTH - 4, Qt::red);
+      CellPtr cell = *column;
+
+      painter.setPen(cell->pen());
+      painter.setBrush(cell->brush());
+      painter.setOpacity(cell->opacity());
+
+      qreal padding = 2.0f;
+      qreal radius = ((CELL_HEIGHT - 4) * cell->scale()) / 2;
+      QPointF centre( cell->column() * CELL_WIDTH + radius + padding, row * CELL_HEIGHT + radius + padding);
+      painter.drawEllipse(centre, radius, radius);
       ++column;
     }
   }
-  
+  painter.setOpacity(1.0f);
   painter.restore();
 }
 
