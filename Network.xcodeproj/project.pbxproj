@@ -62,6 +62,7 @@
 		B80F84A81A003DBE00D69883 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F419E0178000DB14AE /* QtGui.framework */; };
 		B80F84A91A003DD800D69883 /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
 		B8244D881A037049001FD836 /* MetaTypeExtensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8244D871A037049001FD836 /* MetaTypeExtensions.cpp */; };
+		B83CBB0D1A0E6CD600BD652A /* libModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30719E0399B00DB14AE /* libModel.a */; };
 		B880FBCA1A0180140066BE90 /* MainWindow.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B8AB226F1A017B0A0022C5DC /* MainWindow.qt.h */; };
 		B880FBCD1A0186730066BE90 /* PcapHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBCB1A0186730066BE90 /* PcapHelpers.cpp */; };
 		B880FBCE1A01884E0066BE90 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B9019BB97A6008A1B0E /* libpcap.dylib */; };
@@ -69,7 +70,6 @@
 		B880FBD31A02D9F10066BE90 /* NetworkView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD21A02D9F10066BE90 /* NetworkView.cpp */; };
 		B880FBD61A02DD170066BE90 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD41A02DD170066BE90 /* Controller.cpp */; };
 		B880FBD71A02E07C0066BE90 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B8219B7A9B2008A1B0E /* libzmq.a */; };
-		B880FBD81A02E4D30066BE90 /* libModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30719E0399B00DB14AE /* libModel.a */; };
 		B880FBD91A02E4D30066BE90 /* libPacketController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B88B5E19B7A197008A1B0E /* libPacketController.a */; };
 		B880FBDA1A02E6C30066BE90 /* Controller.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B880FBD51A02DD170066BE90 /* Controller.qt.h */; };
 		B8AB22621A0179A00022C5DC /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
@@ -344,7 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B880FBD81A02E4D30066BE90 /* libModel.a in Frameworks */,
+				B83CBB0D1A0E6CD600BD652A /* libModel.a in Frameworks */,
 				B880FBD91A02E4D30066BE90 /* libPacketController.a in Frameworks */,
 				B880FBD71A02E07C0066BE90 /* libzmq.a in Frameworks */,
 				B880FBCE1A01884E0066BE90 /* libpcap.dylib in Frameworks */,

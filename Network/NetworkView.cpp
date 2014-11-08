@@ -16,6 +16,8 @@ NetworkView::NetworkView(QWidget *parent)
 , _currentWidth(width())
 , _currentHeight(height())
 {
+  QGLWidget::setFormat(QGLFormat(QGL::SampleBuffers));
+
   // Create the Quadrants
   _quadrants[TOP_LEFT] =
     QuadrantSP( new Quadrant("TOP_LEFT", 0, 0, INITIAL_QUADRANT_WIDTH,  INITIAL_QUADRANT_HEIGHT) );
@@ -56,10 +58,11 @@ void NetworkView::resizeGL(int width, int height)
 
 void NetworkView::paintEvent(QPaintEvent *event)
 {
-  QPainter painter(this);
+  QPainter painter;
 
-//  painter.begin(this);
-  painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.begin(this);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
   // Draw background
   QBrush background( QColor(0, 0, 128) );
