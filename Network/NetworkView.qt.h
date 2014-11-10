@@ -23,6 +23,8 @@
 #include <list>
 #include <vector>
 
+#include <assert.h>
+
 #define TOP_LEFT 0
 #define TOP_RIGHT 1
 #define BOTTOM_RIGHT 2
@@ -103,6 +105,68 @@ typedef std::shared_ptr<DrawState> DrawStateSP;
 
 namespace
 {
+  class Region;
+  typedef std::shared_ptr<Region> RegionSP;
+  
+  class Region
+  {
+  public:
+    Region(const std::string &name, int x0, int y0, int width, int height)
+    : _name(name)
+    , _x0(x0)
+    , _y0(y0)
+    , _width(width)
+    , _height(height)
+    , _subRegions() {}
+
+    virtual void addSubRegion(const RegionSP subRegion) { _subRegions.push_back(subRegion); }
+
+    virtual void draw(QPainter &painter)
+    {
+      painter.translate(_x0, _y0);
+      for(std::vector<RegionSP>::iterator region = _subRegions.begin();
+          region != _subRegions.end();
+          ++region)
+      {
+        (*region)->draw(painter);
+      }
+    }
+
+    bool operator<(const Region &rhs) const
+    {
+      if(_x0 == rhs._x0)
+        return _y0 < rhs._y0;
+      else
+        return _x0 < rhs._x0;
+    }
+
+  protected:
+    std::string _name;
+    int _x0, _y0, _width, _height;
+    std::vector<RegionSP> _subRegions;
+
+  private:
+    Region &operator=(const Region &rhs);
+    Region(const Region &rhs);
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
+  
+  // This class contains only one host within it.
+  class HostOnlyRegion : public Region
+  {
+  public:
+    HostOnlyRegion(const std::string &name, int x0, int y0, int width, int height, netviz::HostSP host)
+    : Region(name, x0, y0, width, height)
+    , _host(host)
+    , _drawState(new DrawState(0.0f, 0.0f)) {}
+    
+    virtual void addSubRegion(const RegionSP subRegion) { assert("Cannot add Region to HostOnlyRegion"); }
+  private:
+    netviz::HostSP _host;
+    DrawStateSP _drawState;
+  };
+  
   //////////////////////////////////////////////////////////////////////////////
   // The view is composed of (currently) 4 quadrants, each of which is composed
   // of 4 sectors and within each sector are a number of cells.
