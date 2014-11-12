@@ -110,9 +110,11 @@ namespace
     int _width, _height;
     HostMapSP _hosts;
 
-    void _determineCandidatePositionFor(const netviz::HostSP host, Box &box) const;
+    void _determineCandidatePositionFor(const netviz::HostSP host, Box &box, int initialWidth, int initialHeight) const;
     void _offsetBox(Box &box, uint32_t octet, int currentXOffset, int currentYOffset) const;
     void _resizeMap();
+    
+    void _scaleMapDimensionStrategy(int &width, int &height);
   };
   typedef std::shared_ptr<World> WorldSP;
 }

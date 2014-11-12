@@ -41,15 +41,15 @@ void World::_offsetBox(Box &box, uint32_t octet, int currentXOffset, int current
 
 // This function encapsulates the QuadrantBasedNetworkMapView host placement
 // logic.
-void World::_determineCandidatePositionFor(const netviz::HostSP host, Box &box) const
+void World::_determineCandidatePositionFor(const netviz::HostSP host, Box &box, int initialWidth, int initialHeight) const
 {
   box.x0 = 0;
   box.y0 = 0;
   box.width = CELL_WIDTH;
   box.height = CELL_HEIGHT;
 
-  int width = _width / 2;
-  int height = _height / 2;
+  int width = initialWidth / 2;
+  int height = initialHeight / 2;
 
   // Determine the top level quadrant to add it to.
   uint32_t currentOctet = getIPv4Octet(netviz::One, host->ip());
@@ -71,9 +71,56 @@ void World::_determineCandidatePositionFor(const netviz::HostSP host, Box &box) 
   box.y0 += CELL_HEIGHT * col;
 }
 
+void World::_scaleMapDimensionStrategy(int &width, int &height)
+{
+  // The idea here is we scale the two dimensions based on some scaling strategy
+  // be it, doubling, squaring, fibonacci sequence.
+  width *= 2;
+  height *= 2;
+}
+
 void World::_resizeMap()
 {
+  // increase the size of the map
+  // try place all the existing hosts into a new map
+  // if they all fit swap them out
+  // if any clash size up again.
+  int candidateMapWidth = _width;
+  int candidateMapHeight = _height;
 
+  const HostMapSP existingMap = _hosts;
+  bool collisionOccured = true;
+
+  while(collisionOccured)
+  {
+    _scaleMapDimensionStrategy(candidateMapWidth, candidateMapHeight);
+    HostMapSP candidateDistribution(new HostMap());
+
+    for(HostMap::const_iterator it = existingMap->begin();
+        it != existingMap->end();
+        ++it)
+    {
+      const netviz::HostSP host = it->second->host();
+      Box newHostPosition;
+      _determineCandidatePositionFor(host, newHostPosition, candidateMapWidth, candidateMapHeight);
+
+      // Try insert into our candidate distribution.
+      HostMap::iterator hostExists = candidateDistribution->find(newHostPosition);
+      if(hostExists != candidateDistribution->end())
+        // Throw away this attempt and start again.
+        break;
+
+      // If we got this far, means it's not in the map so add it.
+      candidateDistribution->insert(std::pair<Box, HostCellSP>(it->first, it->second));
+    }
+
+    // If we got this far it means we managed to resize the entire map with no
+    // clashes.
+    collisionOccured = false;
+    _hosts = candidateDistribution;
+    _width = candidateMapWidth;
+    _height = candidateMapHeight;
+  }
 }
 
 void World::addHost(netviz::HostSP host)
@@ -85,16 +132,13 @@ void World::addHost(netviz::HostSP host)
   do
   {
     // Determine the cadidate position based on the current world size.
-    _determineCandidatePositionFor(host, candidatePosition);
+    _determineCandidatePositionFor(host, candidatePosition, _width, _height);
     // Is that position already taken?
     it = _hosts->find(candidatePosition);
     resizeRequired = it != _hosts->end();
     if(resizeRequired)
-      // TODO
-      // _resizeMap
-      return;
+      _resizeMap();
   }while(resizeRequired);
-
 
   // Enter the host into the world at the candidate position.
   HostCellSP newHostCell(new HostCell(host));
