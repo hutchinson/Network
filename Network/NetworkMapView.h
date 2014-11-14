@@ -16,8 +16,8 @@
 #include <memory>
 #include <map>
 
-#define INITIAL_WORLD_WIDTH 500
-#define INITIAL_WORLD_HEIGHT 500
+#define INITIAL_WORLD_WIDTH 1000
+#define INITIAL_WORLD_HEIGHT 1000
 
 #define CELL_WIDTH 25
 #define CELL_HEIGHT 25

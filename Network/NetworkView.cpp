@@ -8,61 +8,91 @@
 
 #include "NetworkView.qt.h"
 
+#include <QGLWidget>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QRect>
+
+#define INITIAL_WORLD_WIDTH 1000
+#define INITIAL_WORLD_HEIGHT 1000
+
+#define QUAD_BOUNDS_1 64
+#define QUAD_BOUNDS_2 128
+#define QUAD_BOUNDS_3 192
+#define QUAD_BOUNDS_4 256
+
 
 NetworkView::NetworkView(QWidget *parent)
-: QGLWidget(parent)
-, _mapView(new QuadrantBaseNetworkMapView())
-, _currentWidth(width())
-, _currentHeight(height())
+: QGraphicsView(parent)
+, _scene(NULL)
+, _hostMap()
 {
-  QGLWidget::setFormat(QGLFormat(QGL::SampleBuffers));
+  _scene = new QGraphicsScene(0, 0, INITIAL_WORLD_WIDTH, INITIAL_WORLD_HEIGHT, this);
+  
+  QGLWidget *glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+  setViewport(glWidget);
+  setRenderHint( QPainter::Antialiasing );
+  setRenderHint( QPainter::HighQualityAntialiasing );
+  
+  setScene(_scene);
+  
+  QBrush backgroundBrush( QColor(128, 128, 128, 128) );
+  setBackgroundBrush(backgroundBrush);
+
+  show();
 }
 
 void NetworkView::newHostAdded(netviz::HostSP host)
 {
-  _mapView->newHost(host);
-  repaint();
+  QRect position;
+  _determineCandidatePositionFor(host, position, _scene->width(), _scene->height());
+  QGraphicsItem *item = new HostGraphicsItem(position); //_scene->addEllipse(position, QPen(Qt::red), QBrush(Qt::red));
+  _scene->addItem(item);
+  _hostMap.insert(std::pair<QGraphicsItem*, netviz::HostSP>(item, host));
 }
 
-void NetworkView::animate()
+void NetworkView::_offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const
 {
-  // Draw it.
-  repaint();
+  if(octet < QUAD_BOUNDS_1)
+    // TOP LEFT
+    box.moveTo(box.x(), box.y());
+  else if(octet >= QUAD_BOUNDS_1 && octet < QUAD_BOUNDS_2)
+    // TOP RIGHT
+    box.moveTo(box.x() + currentXOffset, box.y());
+  else if(octet >= QUAD_BOUNDS_2 && octet < QUAD_BOUNDS_3)
+    // BOTTOM RIGHT
+    box.moveTo(box.x() + currentXOffset, box.y() + currentYOffset);
+  else
+    // BOTTOM LEFT
+    box.moveTo(box.x(), box.y() + currentYOffset);
 }
 
-void NetworkView::resizeGL(int width, int height)
+void NetworkView::_determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const
 {
-  _currentWidth = width;
-  _currentHeight = height;
-}
+  where.setX(0);
+  where.setY(0);
+  where.setWidth(CELL_WIDTH);
+  where.setHeight(CELL_HEIGHT);
 
-void NetworkView::paintEvent(QPaintEvent *event)
-{
-  QPainter painter;
-
-  painter.begin(this);
-  painter.setRenderHint(QPainter::Antialiasing);
-  painter.setRenderHint(QPainter::HighQualityAntialiasing);
-
-  // Draw background
-  QBrush background( QColor(255, 255, 255) );
-  painter.fillRect(event->rect(), background);
-
-  // Translate to center (for now, we'll add panning later)
-  int windowMiddleX = _currentWidth / 2;
-  int windowMiddleY = _currentHeight / 2;
-
-  int mapMiddleX = _mapView->viewWidth() / 2;
-  int mapMiddleY = _mapView->viewHeight() / 2;
-
-  int offsetX = windowMiddleX - mapMiddleX;
-  int offsetY = windowMiddleY - mapMiddleY;
-
-  painter.translate(offsetX, offsetY);
+  qreal width = initialWidth / 2;
+  qreal height = initialHeight / 2;
   
-  _mapView->draw(painter, _currentWidth, _currentHeight);
+  // Determine the top level quadrant to add it to.
+  uint32_t currentOctet = getIPv4Octet(netviz::One, host->ip());
+  _offsetBox(where, currentOctet, width, height);
   
-  painter.end();
+  // Get a little smaller and go again.
+  width = width / 2;
+  height = height / 2;
+  currentOctet = getIPv4Octet(netviz::Two, host->ip());
+  _offsetBox(where, currentOctet, width, height);
+  
+  int thirdOctet = netviz::getIPv4Octet(netviz::Three, host->ip());
+  int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
+  
+  qreal row = (thirdOctet / 4) % 4;
+  qreal col = (fourthOctet / 4) % 4;
+
+  where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
 }
+
