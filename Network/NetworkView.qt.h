@@ -48,21 +48,21 @@ public:
     _pen.setColor(Qt::red);
     
     setOpacity(0.0f);
-    setScale(0.0f);
-
-    _opacityAnimation = new QPropertyAnimation(this, "opacity");
+    setScale(1.0f);
+    
+    QPropertyAnimation *_opacityAnimation = new QPropertyAnimation(this, "opacity");
     _opacityAnimation->setDuration(500);
     _opacityAnimation->setStartValue(0.0f);
     _opacityAnimation->setEndValue(1.0f);
     _opacityAnimation->setEasingCurve(QEasingCurve::OutBounce);
-    _opacityAnimation->start();
+    _opacityAnimation->start(QPropertyAnimation::DeleteWhenStopped);
     
-    _scaleAnimation = new QPropertyAnimation(this, "scale");
-    _scaleAnimation->setDuration(750);
-    _scaleAnimation->setStartValue(0.0f);
-    _scaleAnimation->setEndValue(1.0f);
-    _scaleAnimation->setEasingCurve(QEasingCurve::OutBounce);
-    _scaleAnimation->start();
+//    QPropertyAnimation *_scaleAnimation = new QPropertyAnimation(this, "scale");
+//    _scaleAnimation->setDuration(500);
+//    _scaleAnimation->setStartValue(0.0f);
+//    _scaleAnimation->setEndValue(1.0f);
+//    _scaleAnimation->setEasingCurve(QEasingCurve::OutBounce);
+//    _scaleAnimation->start(QPropertyAnimation::DeleteWhenStopped);
   }
   
   QRectF boundingRect() const
@@ -73,37 +73,26 @@ public:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
   {
     painter->save();
-  //  painter.translate(where.x0, where.y0);
     painter->setPen(_pen);
     painter->setBrush(_brush);
-    painter->setOpacity(_opacity);
+    painter->setOpacity(opacity());
     
+    painter->translate(_drawAt.center());
+
     qreal padding = 2.0f;
     QPointF centre((CELL_WIDTH / 2) - (padding * 2), (CELL_WIDTH / 2) - (padding * 2));
-    painter->drawEllipse(_drawAt);
+
+    QRect ellipseBounds(0, 0, CELL_WIDTH * scale(), CELL_HEIGHT * scale());
+
+    painter->drawEllipse(ellipseBounds);
     painter->restore();
   }
 
-  void setOpacity(qreal opacity)
-  {
-    _opacity = opacity;
-  }
-  
-  void setScale(qreal scale)
-  {
-    _scale = scale;
-  }
-  
-  qreal opacity() const { return _opacity; }
-  qreal scale() const { return _scale; }
-  
   const QBrush &brush() const { return _brush; }
   const QPen &pen() const { return _pen; }
 
 private:
   QRectF _drawAt;
-  qreal _opacity, _scale;
-  QPropertyAnimation *_opacityAnimation, *_scaleAnimation;
   QBrush _brush;
   QPen _pen;
 };

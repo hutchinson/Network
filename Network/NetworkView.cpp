@@ -13,8 +13,8 @@
 #include <QPainter>
 #include <QRect>
 
-#define INITIAL_WORLD_WIDTH 1000
-#define INITIAL_WORLD_HEIGHT 1000
+#define INITIAL_WORLD_WIDTH 500
+#define INITIAL_WORLD_HEIGHT 500
 
 #define QUAD_BOUNDS_1 64
 #define QUAD_BOUNDS_2 128
