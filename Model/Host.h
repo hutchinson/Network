@@ -26,7 +26,10 @@ namespace netviz
     uint32_t ip() const { return _ip; }
     const std::string &hostIP() const { return _ipString; }
 
+    const std::string &hostName() const { return _hostName; }
+
     static std::string hostNameFromIP(uint32_t ip);
+
   private:
     uint32_t _ip;
     std::string _ipString;

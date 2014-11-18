@@ -29,27 +29,34 @@ class HostGraphicsItem : public QGraphicsObject
   
 public:
   HostGraphicsItem(const QRectF &rect, netviz::HostSP host, QGraphicsItem *parent = 0);
-  
+
   QRectF boundingRect() const
   {
     return QRectF(0, 0, CELL_WIDTH, CELL_HEIGHT);
   }
 
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
+
   const QBrush &brush() const { return _brush; }
   const QPen &pen() const { return _pen; }
 
+  bool hasHover() const { return _hasHover; }
+
 protected:
-  bool sceneEvent(QEvent *event);
   virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+  virtual void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
 
 private:
   netviz::HostSP _host;
   QRectF _drawAt;
   QBrush _brush;
   QPen _pen;
+
+  bool _hasHover;
+  QPointF _mouseHoverPosition;
+
+  void _updateMouseHover(const QPointF &with);
 };
 
 
