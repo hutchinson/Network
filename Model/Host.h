@@ -19,14 +19,18 @@ namespace netviz
   public:
     Host(uint32_t ip, const std::string &hostIP)
     : _ip(ip)
-    , _ipString(hostIP) {}
+    , _ipString(hostIP)
+    , _hostName(Host::hostNameFromIP(ip))
+    {}
 
     uint32_t ip() const { return _ip; }
     const std::string &hostIP() const { return _ipString; }
 
+    static std::string hostNameFromIP(uint32_t ip);
   private:
     uint32_t _ip;
     std::string _ipString;
+    std::string _hostName;
   };
   
   typedef std::shared_ptr<Host> HostSP;
