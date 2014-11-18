@@ -50,11 +50,6 @@ MainWindow::MainWindow(zmq::context_t &context)
 
   setUnifiedTitleAndToolBarOnMac(true);
 //  showMaximized();
-
-  // TODO: Animation timer required anymore?
-//  QTimer *_animationTimer = new QTimer(this);
-//  connect(_animationTimer, SIGNAL(timeout()), _networkView, SLOT(animate()));
-//  _animationTimer->start( FPS_MILLISECONS );
 }
 
 void MainWindow::listeningStatusChanged()

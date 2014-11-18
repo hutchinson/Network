@@ -26,7 +26,6 @@
 
 class QRect;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 
 class NetworkView : public QGraphicsView
@@ -40,6 +39,7 @@ public:
 
   void _offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const;
   void _determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const;
+
 private:
   QGraphicsScene *_scene;
   std::map<QGraphicsItem*, netviz::HostSP> _hostMap;

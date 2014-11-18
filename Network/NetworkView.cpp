@@ -33,8 +33,11 @@ NetworkView::NetworkView(QWidget *parent)
   setViewport(glWidget);
   setRenderHint( QPainter::Antialiasing );
   setRenderHint( QPainter::HighQualityAntialiasing );
-  
+
   setScene(_scene);
+  setInteractive(true);
+  setMouseTracking(true);
+  viewport()->setMouseTracking(true);
   
   QBrush backgroundBrush( QColor(128, 128, 128, 128) );
   setBackgroundBrush(backgroundBrush);
@@ -46,7 +49,7 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 {
   QRect position;
   _determineCandidatePositionFor(host, position, _scene->width(), _scene->height());
-  QGraphicsItem *item = new HostGraphicsItem(position); //_scene->addEllipse(position, QPen(Qt::red), QBrush(Qt::red));
+  QGraphicsItem *item = new HostGraphicsItem(position, host);
   _scene->addItem(item);
   _hostMap.insert(std::pair<QGraphicsItem*, netviz::HostSP>(item, host));
 }
