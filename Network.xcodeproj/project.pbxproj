@@ -63,6 +63,8 @@
 		B80F84A91A003DD800D69883 /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B2F619E0192C00DB14AE /* QtWidgets.framework */; };
 		B8244D881A037049001FD836 /* MetaTypeExtensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8244D871A037049001FD836 /* MetaTypeExtensions.cpp */; };
 		B83CBB0D1A0E6CD600BD652A /* libModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30719E0399B00DB14AE /* libModel.a */; };
+		B85A40631A1D3D2200F4505D /* Grid.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B85A40611A1D3CC800F4505D /* Grid.qt.h */; };
+		B85A40651A1D3DD300F4505D /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85A40641A1D3DD300F4505D /* Grid.cpp */; };
 		B86305021A1A9D2200024355 /* HostGraphicsItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B86305011A1A9D2200024355 /* HostGraphicsItem.cpp */; };
 		B86305031A1A9D9C00024355 /* HostGraphicsItem.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B86305001A1A9CA800024355 /* HostGraphicsItem.qt.h */; };
 		B880FBCA1A0180140066BE90 /* MainWindow.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B8AB226F1A017B0A0022C5DC /* MainWindow.qt.h */; };
@@ -255,6 +257,8 @@
 		B0EABF1B19E5DB4D00043E09 /* ethertype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ethertype.h; sourceTree = "<group>"; };
 		B8244D861A036ED4001FD836 /* MetaTypeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaTypeExtensions.h; sourceTree = "<group>"; };
 		B8244D871A037049001FD836 /* MetaTypeExtensions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaTypeExtensions.cpp; sourceTree = "<group>"; };
+		B85A40611A1D3CC800F4505D /* Grid.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.qt.h; sourceTree = "<group>"; };
+		B85A40641A1D3DD300F4505D /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
 		B86305001A1A9CA800024355 /* HostGraphicsItem.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostGraphicsItem.qt.h; sourceTree = "<group>"; };
 		B86305011A1A9D2200024355 /* HostGraphicsItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostGraphicsItem.cpp; sourceTree = "<group>"; };
 		B880FBCB1A0186730066BE90 /* PcapHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PcapHelpers.cpp; sourceTree = "<group>"; };
@@ -511,6 +515,8 @@
 				B8244D871A037049001FD836 /* MetaTypeExtensions.cpp */,
 				B86305001A1A9CA800024355 /* HostGraphicsItem.qt.h */,
 				B86305011A1A9D2200024355 /* HostGraphicsItem.cpp */,
+				B85A40611A1D3CC800F4505D /* Grid.qt.h */,
+				B85A40641A1D3DD300F4505D /* Grid.cpp */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -819,6 +825,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85A40631A1D3D2200F4505D /* Grid.qt.h in Sources */,
 				B86305031A1A9D9C00024355 /* HostGraphicsItem.qt.h in Sources */,
 				B880FBDA1A02E6C30066BE90 /* Controller.qt.h in Sources */,
 				B880FBD11A02D9E00066BE90 /* NetworkView.qt.h in Sources */,
@@ -826,6 +833,7 @@
 				B880FBCA1A0180140066BE90 /* MainWindow.qt.h in Sources */,
 				B8AB22711A017B490022C5DC /* MainWindow.cpp in Sources */,
 				B8AB226E1A017A100022C5DC /* main.cpp in Sources */,
+				B85A40651A1D3DD300F4505D /* Grid.cpp in Sources */,
 				B880FBD61A02DD170066BE90 /* Controller.cpp in Sources */,
 				B8244D881A037049001FD836 /* MetaTypeExtensions.cpp in Sources */,
 				B880FBCD1A0186730066BE90 /* PcapHelpers.cpp in Sources */,

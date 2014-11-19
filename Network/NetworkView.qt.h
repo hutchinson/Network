@@ -15,6 +15,7 @@
 
 #include "Model/Host.h"
 #include "HostGraphicsItem.qt.h"
+#include "Grid.qt.h"
 #include "PacketController/PacketFormat.h"
 
 #include <iostream>
@@ -42,6 +43,7 @@ public:
 
 private:
   QGraphicsScene *_scene;
+  GridGraphicsItem *_grid;
   std::map<QGraphicsItem*, netviz::HostSP> _hostMap;
 };
 

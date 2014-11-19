@@ -25,6 +25,7 @@
 NetworkView::NetworkView(QWidget *parent)
 : QGraphicsView(parent)
 , _scene(NULL)
+, _grid(NULL)
 , _hostMap()
 {
   _scene = new QGraphicsScene(0, 0, INITIAL_WORLD_WIDTH, INITIAL_WORLD_HEIGHT, this);
@@ -42,6 +43,10 @@ NetworkView::NetworkView(QWidget *parent)
   QBrush backgroundBrush( QColor(128, 128, 128, 128) );
   setBackgroundBrush(backgroundBrush);
 
+  // Set up the grid.
+  _grid = new GridGraphicsItem( QRect(0, 0, INITIAL_WORLD_WIDTH, INITIAL_WORLD_HEIGHT));
+  _scene->addItem(_grid);
+
   show();
 }
 
@@ -49,7 +54,17 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 {
   QRect position;
   _determineCandidatePositionFor(host, position, _scene->width(), _scene->height());
-  QGraphicsItem *item = new HostGraphicsItem(position, host);
+  HostGraphicsItem *item = new HostGraphicsItem(position, host);
+  
+  // Check if there is already a host within this host position?
+  QRect exclusionSpace(position);
+  exclusionSpace.adjust(-25, -25, 25, 25);
+  QGraphicsItem *existingItem = _scene->itemAt(position.center(), QTransform());
+  if(existingItem)
+  {
+    std::cout << host->hostName() << " clash!" << std::endl;
+  }
+  
   _scene->addItem(item);
   _hostMap.insert(std::pair<QGraphicsItem*, netviz::HostSP>(item, host));
 }
