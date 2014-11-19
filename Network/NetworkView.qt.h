@@ -41,10 +41,13 @@ public:
   void _offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const;
   void _determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const;
 
+  bool _isSpaceOccupiedByHost(const QRect &position);
+  void _newMapSizeStrategy(int &newWidth, int &newHeight);
+  
 private:
   QGraphicsScene *_scene;
   GridGraphicsItem *_grid;
-  std::map<QGraphicsItem*, netviz::HostSP> _hostMap;
+  std::map<HostGraphicsItem*, netviz::HostSP> _hostMap;
 };
 
 #endif

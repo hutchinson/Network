@@ -40,6 +40,8 @@ NetworkView::NetworkView(QWidget *parent)
   setMouseTracking(true);
   viewport()->setMouseTracking(true);
   
+  setDragMode(QGraphicsView::ScrollHandDrag);
+
   QBrush backgroundBrush( QColor(128, 128, 128, 128) );
   setBackgroundBrush(backgroundBrush);
 
@@ -50,23 +52,62 @@ NetworkView::NetworkView(QWidget *parent)
   show();
 }
 
-void NetworkView::newHostAdded(netviz::HostSP host)
+bool NetworkView::_isSpaceOccupiedByHost(const QRect &position)
 {
-  QRect position;
-  _determineCandidatePositionFor(host, position, _scene->width(), _scene->height());
-  HostGraphicsItem *item = new HostGraphicsItem(position, host);
-  
   // Check if there is already a host within this host position?
   QRect exclusionSpace(position);
   exclusionSpace.adjust(-25, -25, 25, 25);
-  QGraphicsItem *existingItem = _scene->itemAt(position.center(), QTransform());
-  if(existingItem)
+  QList<QGraphicsItem *> itemsAtLocation = _scene->items(position.center());
+  std::cout << "Num Items: " << itemsAtLocation.count() << std::endl;
+  return itemsAtLocation.count() > 1;
+}
+
+// The new map size strategy will allow us to resize the map using different
+// 'strategies' in future, like using a fib sequence or something.
+void NetworkView::_newMapSizeStrategy(int &newWidth, int &newHeight)
+{
+  newWidth = _scene->width() * 2;
+  newHeight = _scene->height() * 2;
+}
+
+void NetworkView::newHostAdded(netviz::HostSP host)
+{
+  QRect position;
+  int currentMapWidth = _scene->width();
+  int currentMapHeight = _scene->height();
+  _determineCandidatePositionFor(host, position, currentMapWidth, currentMapHeight);
+  
+  while(_isSpaceOccupiedByHost(position))
   {
-    std::cout << host->hostName() << " clash!" << std::endl;
+    // Pick a new host world size
+    _newMapSizeStrategy(currentMapWidth, currentMapHeight);
+    _scene->setSceneRect(0, 0, currentMapWidth, currentMapHeight);
+
+    // Move all the existing hosts to new positions in the new world.
+    for(std::map<HostGraphicsItem*, netviz::HostSP>::iterator it = _hostMap.begin();
+        it != _hostMap.end();
+        ++it)
+    {
+      HostGraphicsItem *hostGraphics = (*it).first;
+      netviz::HostSP existingHost = (*it).second;
+
+      QRect newHostPosition;
+      _determineCandidatePositionFor(existingHost, newHostPosition, currentMapWidth, currentMapHeight);
+      hostGraphics->setPos(newHostPosition.center());
+    }
+
+//    ensureVisible(_scene->itemsBoundingRect());
+    _scene->update();
+
+    std::cout << host->hostName() << " clashed so resized to " << currentMapWidth << ", " << currentMapHeight << std::endl;
+
+    // Then try add this host.
+    _determineCandidatePositionFor(host, position, currentMapWidth, currentMapHeight);
   }
   
+  HostGraphicsItem *item = new HostGraphicsItem(position, host);
   _scene->addItem(item);
-  _hostMap.insert(std::pair<QGraphicsItem*, netviz::HostSP>(item, host));
+  _hostMap.insert(std::pair<HostGraphicsItem*, netviz::HostSP>(item, host));
 }
 
 void NetworkView::_offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const
@@ -107,9 +148,10 @@ void NetworkView::_determineCandidatePositionFor(const netviz::HostSP host, QRec
   
   int thirdOctet = netviz::getIPv4Octet(netviz::Three, host->ip());
   int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
-  
-  qreal row = (thirdOctet / 4) % 4;
-  qreal col = (fourthOctet / 4) % 4;
+
+  int finalQuad = initialWidth / 4;
+  qreal row = (thirdOctet / finalQuad) % finalQuad;
+  qreal col = (fourthOctet / finalQuad) % finalQuad;
 
   where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
 }
