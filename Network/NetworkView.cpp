@@ -102,7 +102,7 @@ void NetworkView::newHostAdded(netviz::HostSP host)
       hostGraphics->setPos(newHostPosition.center());
     }
 
-    ensureVisible(_scene->itemsBoundingRect());
+//    ensureVisible(_scene->itemsBoundingRect());
     _scene->update();
 
     std::cout << host->hostName() << " clashed so resized to " << currentMapWidth << ", " << currentMapHeight << std::endl;
@@ -163,8 +163,8 @@ void NetworkView::_determineCandidatePositionFor(const netviz::HostSP host, QRec
   int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
 
   int finalQuad = (initialWidth / 4) / CELL_WIDTH;
-  qreal row = (thirdOctet / finalQuad); //% finalQuad;
-  qreal col = (fourthOctet / finalQuad); //% finalQuad;
+  qreal row = (thirdOctet % finalQuad); //% finalQuad;
+  qreal col = (fourthOctet % finalQuad); //% finalQuad;
 
   std::cout << "Placing " << host->hostIP() << " at ( " << row << ", " << col << ")" << std::endl;
   where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
