@@ -29,6 +29,12 @@ public:
   
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+  void setNewGridSize(const QRectF &newGridSize)
+  {
+    prepareGeometryChange();
+    _drawAt = newGridSize;
+  }
+  
 private:
   QRectF _drawAt;
 };
