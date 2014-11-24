@@ -21,12 +21,14 @@
 #define QUAD_BOUNDS_3 192
 #define QUAD_BOUNDS_4 256
 
+#define MAX_RESIZE_ATTEMPTS 2
 
 NetworkView::NetworkView(QWidget *parent)
 : QGraphicsView(parent)
 , _scene(NULL)
 , _grid(NULL)
 , _hostMap()
+, _unplacedHosts()
 {
   _scene = new QGraphicsScene(0, 0, INITIAL_WORLD_WIDTH, INITIAL_WORLD_HEIGHT, this);
   
@@ -58,7 +60,6 @@ bool NetworkView::_isSpaceOccupiedByHost(const QRect &position)
   QRect exclusionSpace(position);
   exclusionSpace.adjust(-25, -25, 25, 25);
   QList<QGraphicsItem *> itemsAtLocation = _scene->items(exclusionSpace);
-//  std::cout << "Num Items: " << itemsAtLocation.count() << std::endl;
   return itemsAtLocation.count() > 1;
 }
 
@@ -109,10 +110,13 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 
     // Then try add this host.
     _determineCandidatePositionFor(host, position, currentMapWidth, currentMapHeight);
-    if(++numAttempts > 3)
+    if(++numAttempts > MAX_RESIZE_ATTEMPTS)
     {
-      std::cout << "Couldn't fit " << host->hostName() << " after 3 resize attempts at location (" << position.x() << ", " << position.y() << ")" << std::endl;
-      assert("HASH COLLISION: Could not fit to map");
+      std::cout << "Couldn't place " << host->hostName()
+                << " after " << MAX_RESIZE_ATTEMPTS
+                << " resize attempts at location ("
+                << position.x() << ", " << position.y() << ")" << std::endl;
+      _unplacedHosts.push_back(host);
       return;
     }
       
@@ -163,10 +167,10 @@ void NetworkView::_determineCandidatePositionFor(const netviz::HostSP host, QRec
   int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
 
   int finalQuad = (initialWidth / 4) / CELL_WIDTH;
-  qreal row = (thirdOctet % finalQuad); //% finalQuad;
-  qreal col = (fourthOctet % finalQuad); //% finalQuad;
+  qreal row = (thirdOctet % finalQuad);
+  qreal col = (fourthOctet % finalQuad);
 
-  std::cout << "Placing " << host->hostIP() << " at ( " << row << ", " << col << ")" << std::endl;
+  std::cout << "Placing " << host->hostIP() << " at (" << row << ", " << col << ")" << std::endl;
   where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
 }
 

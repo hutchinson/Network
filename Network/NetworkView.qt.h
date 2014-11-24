@@ -48,6 +48,7 @@ private:
   QGraphicsScene *_scene;
   GridGraphicsItem *_grid;
   std::map<HostGraphicsItem*, netviz::HostSP> _hostMap;
+  std::list<netviz::HostSP> _unplacedHosts;
 };
 
 #endif
