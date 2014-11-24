@@ -47,10 +47,9 @@ void HostGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
   painter->setBrush(_brush);
   painter->setOpacity(opacity());
 
-  qreal padding = 2.0f;
-  QPointF centre((CELL_WIDTH / 2) - (padding * 2), (CELL_WIDTH / 2) - (padding * 2));
-  
-  QRect ellipseBounds(0, 0, CELL_WIDTH * scale(), CELL_HEIGHT * scale());
+  QPointF centre((CELL_WIDTH / 2), (CELL_WIDTH / 2));
+
+  QRect ellipseBounds(centre.x(), centre.y(), CELL_WIDTH * scale(), CELL_HEIGHT * scale());
   painter->drawEllipse(ellipseBounds);
 
   if(_hasHover)

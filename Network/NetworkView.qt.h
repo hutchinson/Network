@@ -42,7 +42,7 @@ public:
   void _determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const;
 
   bool _isSpaceOccupiedByHost(const QRect &position);
-  void _newMapSizeStrategy(int &newWidth, int &newHeight);
+  void _newMapSizeStrategy(double &newWidth, double &newHeight);
   
 private:
   QGraphicsScene *_scene;
