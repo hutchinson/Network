@@ -19,6 +19,9 @@ namespace netviz
   ////////////////////////////////////////////////////////////////////////////////
   // Types
   ////////////////////////////////////////////////////////////////////////////////
+  const int TCP = 0;
+  const int UDP = 1;
+  const int ICMP = 2;
   
   const int ETHERNET_MAC_ADDRESS_LEN = 6;
 
@@ -48,6 +51,8 @@ namespace netviz
 #define IP_HL(ip)		(((ip)->ip_vhl) & 0x0f)
 #define IP_V(ip)		(((ip)->ip_vhl) >> 4)
   
+  //////////////////////////////////////////////////////////////////////////////
+  
   struct BasicPacketInfo
   {
     uint16_t ethernetFrameType;
@@ -60,6 +65,8 @@ namespace netviz
     uint32_t destinationIP;
     char sourceIPAddress[16];
     uint32_t sourceIP;
+    
+    int ipProtocolType;
   };
   
   ////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +111,13 @@ namespace netviz
     
     std::string destIPStr = ss.str();
     memcpy(bpi.destinationIPAddress, destIPStr.c_str(), destIPStr.length());
+    
+    if(ipv4Header->ip_p == 0x01)
+      bpi.ipProtocolType = ICMP;
+    else if(ipv4Header->ip_p == 0x06)
+      bpi.ipProtocolType = TCP;
+    else if(ipv4Header->ip_p == 0x11)
+      bpi.ipProtocolType = UDP;
   }
   
   inline void fillPacketInfoEthernet(const EthernetHeader *ethernetHeader, BasicPacketInfo &bpi)

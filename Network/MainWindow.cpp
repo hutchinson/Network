@@ -29,6 +29,7 @@ MainWindow::MainWindow(zmq::context_t &context)
 , _interfaceComboBox(NULL)
 , _startListeningButton(NULL)
 , _stopListeningButton(NULL)
+, _networkStatsDock(NULL)
 , _controller()
 , _networkView(NULL)
 , _zmqContext(context)
@@ -38,6 +39,7 @@ MainWindow::MainWindow(zmq::context_t &context)
   _createActions();
   _createToolBar();
   _createNetworkView();
+  _createNetworkStatsBar();
 
   _readSettings();
 
@@ -49,7 +51,7 @@ MainWindow::MainWindow(zmq::context_t &context)
   listeningStatusChanged();
 
   setUnifiedTitleAndToolBarOnMac(true);
-//  showMaximized();
+  showMaximized();
 }
 
 void MainWindow::listeningStatusChanged()
@@ -87,7 +89,6 @@ void MainWindow::hostAdded(netviz::HostSP newHost)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
   _controller->stopListening();
-//  _animationTimer->stop();
 }
 
 void MainWindow::startListening()
@@ -99,6 +100,12 @@ void MainWindow::startListening()
 void MainWindow::stopListening()
 {
   _controller->stopListening();
+}
+
+void MainWindow::_createNetworkStatsBar()
+{
+  _networkStatsDock = new NetworkStatsDock(this);
+  addDockWidget(Qt::RightDockWidgetArea, _networkStatsDock);
 }
 
 void MainWindow::_createActions()
