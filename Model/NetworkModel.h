@@ -19,25 +19,35 @@
 
 namespace netviz
 {
-  class NewHostListener
+
+  class NetworkModelDelegate
   {
   public:
-    virtual ~NewHostListener() {}
+    virtual ~NetworkModelDelegate() {}
+
+    // Called each time a previously unseen host is added to the model
     virtual void newHostAdded(HostSP newHost) = 0;
+
+    // Called each time the overall packet statistics changes (quite freqeuently)
+    // e.g. % TCP/%UDP packets.
+    virtual void packetStatisticsChanged(const std::vector<double> &newStats) = 0;
   };
-  typedef std::shared_ptr<NewHostListener> NewHostListenerSP;
+  typedef std::shared_ptr<NetworkModelDelegate> NetworkModelDelegateSP;
+  
+  //////////////////////////////////////////////////////////////////////////////
   
   class NetworkModel
   {
+    typedef std::map<uint32_t, HostSP> HostMap;
+    
   public:
     NetworkModel();
 
     // Methods for the PacketController to commuicate with
     void newCommunication(HostSP from, HostSP to);
-    
+
     // Methods for the UI controller to commuicate with.
-    void addNewHostListener(NewHostListenerSP listener);
-    void removeNewHostListener(NewHostListenerSP listener);
+    void setDelegate(NetworkModelDelegateSP delegate);
 
   private:
     NetworkModel(const NetworkModel &rhs);
@@ -47,21 +57,14 @@ namespace netviz
     
     void _emitNewHostAdded(HostSP host)
     {
-      for(std::vector<NewHostListenerSP>::iterator it = _newHostListeners.begin();
-          it != _newHostListeners.end();
-          ++it)
-      {
-        (*it)->newHostAdded(host);
-      }
+      if(_delegate)
+        _delegate->newHostAdded(host);
     }
 
     // TODO: when netviz::Host is fleshed out we can probably just use a set
     // here.
-    typedef std::map<uint32_t, HostSP> HostMap;
     HostMap _hosts;
-
-    std::vector<NewHostListenerSP> _newHostListeners;
-
+    NetworkModelDelegateSP _delegate;
     std::mutex _objectMutex;
   };
   

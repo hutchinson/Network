@@ -10,17 +10,22 @@
 #include "MainWindow.qt.h"
 
 namespace {
-  class NewHostListenerImpl : public netviz::NewHostListener
+  class NetworkModelDelegateImpl : public netviz::NetworkModelDelegate
   {
   public:
-    NewHostListenerImpl(Controller *controller)
+    NetworkModelDelegateImpl(Controller *controller)
     : _controller(controller) { }
 
-    virtual ~NewHostListenerImpl() { _controller = NULL; }
+    virtual ~NetworkModelDelegateImpl() { _controller = NULL; }
 
     virtual void newHostAdded(netviz::HostSP newHost)
     {
       _controller->signalNewHostAdded(newHost);
+    }
+    
+    virtual void packetStatisticsChanged(const std::vector<double> &newStats)
+    {
+      
     }
 
   private:
@@ -52,13 +57,13 @@ void Controller::startListening(const std::string &interface)
   if(isListening())
     stopListening();
   
-  _newHostListner.reset(new NewHostListenerImpl(this));
+  _delegate.reset(new NetworkModelDelegateImpl(this));
   _model.reset(new netviz::NetworkModel());
   _packetListner.reset(new netviz::PacketListener(_context));
   _packetDecoder.reset(new netviz::PacketDecoder(_context));
   _modelInputQueueProcessor.reset(new netviz::ModelInputQueueProcessor(_context, *_model));
 
-  _model->addNewHostListener(_newHostListner);
+  _model->setDelegate(_delegate);
   _packetListner->startListening(interface);
   _packetDecoder->startDecoding();
   _modelInputQueueProcessor->startProcessing();
@@ -73,7 +78,7 @@ void Controller::stopListening()
   _packetDecoder.reset();
   _packetListner.reset();
   _model.reset();
-  _newHostListner.reset();  
+  _delegate.reset();
 
   _listening = false;
   emit(listeningStatusChanged());  

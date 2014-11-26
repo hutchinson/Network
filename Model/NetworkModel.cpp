@@ -12,6 +12,7 @@
 namespace netviz {
   NetworkModel::NetworkModel()
   : _hosts()
+  , _delegate()
   , _objectMutex()
   {
     
@@ -25,24 +26,10 @@ namespace netviz {
     _recordHost(to);
   }
 
-  void NetworkModel::addNewHostListener(NewHostListenerSP listener)
+  void NetworkModel::setDelegate(NetworkModelDelegateSP delegate)
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
-    _newHostListeners.push_back(listener);
-  }
-
-  void NetworkModel::removeNewHostListener(NewHostListenerSP listener)
-  {
-    std::lock_guard<std::mutex> lock(_objectMutex);
-
-    for(std::vector<NewHostListenerSP>::iterator it = _newHostListeners.begin();
-        it != _newHostListeners.end();)
-    {
-      if((*it) == listener)
-        it = _newHostListeners.erase(it);
-      else
-        ++it;
-    }
+    _delegate = delegate;
   }
 
   // Record the new host we've just been told about

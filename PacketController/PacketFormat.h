@@ -22,6 +22,7 @@ namespace netviz
   const int TCP = 0;
   const int UDP = 1;
   const int ICMP = 2;
+  const int OTHER = -1;
   
   const int ETHERNET_MAC_ADDRESS_LEN = 6;
 
@@ -118,6 +119,8 @@ namespace netviz
       bpi.ipProtocolType = TCP;
     else if(ipv4Header->ip_p == 0x11)
       bpi.ipProtocolType = UDP;
+    else
+      bpi.ipProtocolType = OTHER;
   }
   
   inline void fillPacketInfoEthernet(const EthernetHeader *ethernetHeader, BasicPacketInfo &bpi)

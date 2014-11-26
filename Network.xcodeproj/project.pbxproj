@@ -410,9 +410,9 @@
 			isa = PBXGroup;
 			children = (
 				B8AB226C1A0179F40022C5DC /* Network */,
+				B038B30819E0399B00DB14AE /* Model */,
 				B0B88BA519BC9491008A1B0E /* Logging */,
 				B0B88B6319B7A1C4008A1B0E /* PacketController */,
-				B038B30819E0399B00DB14AE /* Model */,
 				B0B88B7119B7A387008A1B0E /* PacketControllerDriver */,
 				B07C2E9419D89983007D4939 /* TextureDrawTest */,
 				B0CF7FFE19D34DFB00C27161 /* CircleDrawTest */,

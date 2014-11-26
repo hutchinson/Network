@@ -12,5 +12,4 @@ NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
 : QDockWidget(parent, flags)
 {
   setFeatures(QDockWidget::NoDockWidgetFeatures);
-
 }

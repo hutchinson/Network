@@ -55,7 +55,7 @@ private:
   
   bool _listening;
 
-  netviz::NewHostListenerSP _newHostListner;
+  netviz::NetworkModelDelegateSP _delegate;
   netviz::NetworkModelSP _model;
   
   netviz::PacketDecoderSP _packetDecoder;
