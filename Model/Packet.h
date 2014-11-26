@@ -15,7 +15,14 @@ namespace netviz
 {
   class Packet
   {
+  public:
+    Packet(int packetType)
+    : _packetType(packetType) {}
     
+    int packetType() const { return _packetType; }
+
+  private:
+    int _packetType;
   };
   
   typedef std::shared_ptr<Packet> PacketSP;

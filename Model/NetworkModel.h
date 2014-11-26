@@ -10,6 +10,7 @@
 #define __Network__NetworkModel__
 
 #include "Host.h"
+#include "Packet.h"
 
 #include <string>
 #include <memory>
@@ -30,7 +31,7 @@ namespace netviz
 
     // Called each time the overall packet statistics changes (quite freqeuently)
     // e.g. % TCP/%UDP packets.
-    virtual void packetStatisticsChanged(const std::vector<double> &newStats) = 0;
+    virtual void packetStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown) = 0;
   };
   typedef std::shared_ptr<NetworkModelDelegate> NetworkModelDelegateSP;
   
@@ -44,7 +45,7 @@ namespace netviz
     NetworkModel();
 
     // Methods for the PacketController to commuicate with
-    void newCommunication(HostSP from, HostSP to);
+    void newCommunication(HostSP from, PacketSP packet, HostSP to);
 
     // Methods for the UI controller to commuicate with.
     void setDelegate(NetworkModelDelegateSP delegate);
@@ -54,7 +55,8 @@ namespace netviz
     NetworkModel &operator=(const NetworkModel &rhs);
 
     bool _recordHost(HostSP host);
-    
+    void _updatePacketStats(PacketSP packet);
+
     void _emitNewHostAdded(HostSP host)
     {
       if(_delegate)
@@ -65,6 +67,10 @@ namespace netviz
     // here.
     HostMap _hosts;
     NetworkModelDelegateSP _delegate;
+    
+    uint64_t _totalPackets;
+    std::vector<uint64_t> _packetTypeBreakDown;
+
     std::mutex _objectMutex;
   };
   

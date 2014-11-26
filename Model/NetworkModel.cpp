@@ -7,23 +7,32 @@
 //
 
 #include "NetworkModel.h"
+#include "PacketFormat.h"
 #include <iostream>
 
 namespace netviz {
   NetworkModel::NetworkModel()
   : _hosts()
   , _delegate()
+  , _totalPackets(0)
+  , _packetTypeBreakDown()
   , _objectMutex()
   {
-    
+    _packetTypeBreakDown.reserve(NUM_PACKET_TYPES);
+    _packetTypeBreakDown[TCP] = 0;
+    _packetTypeBreakDown[UDP] = 0;
+    _packetTypeBreakDown[ICMP] = 0;
+    _packetTypeBreakDown[OTHER] = 0;
   }
 
-  void NetworkModel::newCommunication(HostSP from, HostSP to)
+  void NetworkModel::newCommunication(HostSP from, PacketSP packet, HostSP to)
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
-
+    
     _recordHost(from);
     _recordHost(to);
+    
+    _updatePacketStats(packet);
   }
 
   void NetworkModel::setDelegate(NetworkModelDelegateSP delegate)
@@ -43,5 +52,14 @@ namespace netviz {
     _hosts[host->ip()] = host;
     _emitNewHostAdded(host);
     return true;
+  }
+  
+  void NetworkModel::_updatePacketStats(PacketSP packet)
+  {
+    ++_totalPackets;
+    _packetTypeBreakDown[packet->packetType()]++;
+    
+    if(_delegate)
+      _delegate->packetStatisticsChanged(_totalPackets, _packetTypeBreakDown);
   }
 }

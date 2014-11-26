@@ -120,9 +120,10 @@ namespace netviz
         if(bpi.isIPv4)
         {
           HostSP sourceHost(new Host(bpi.sourceIP, bpi.sourceIPAddress));
+          PacketSP packet(new Packet(bpi.ipProtocolType));
           HostSP destHost(new Host(bpi.destinationIP, bpi.destinationIPAddress));
           
-          _model.newCommunication(sourceHost, destHost);
+          _model.newCommunication(sourceHost, packet, destHost);
         }
       }
 

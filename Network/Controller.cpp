@@ -23,9 +23,11 @@ namespace {
       _controller->signalNewHostAdded(newHost);
     }
     
-    virtual void packetStatisticsChanged(const std::vector<double> &newStats)
+    virtual void packetStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown)
     {
-      
+      double percentageTCP = 100.0f * (1.0f * packetTypeBreakdown[netviz::TCP] / totalPackets);
+      double percentageUDP = 100.0f * (1.0f * packetTypeBreakdown[netviz::UDP] / totalPackets);
+      std::cout << "Total: " << totalPackets << " TCP % " << percentageTCP << " UDP % " << percentageUDP << std::endl;
     }
 
   private:

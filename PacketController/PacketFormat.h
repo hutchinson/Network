@@ -19,11 +19,12 @@ namespace netviz
   ////////////////////////////////////////////////////////////////////////////////
   // Types
   ////////////////////////////////////////////////////////////////////////////////
-  const int TCP = 0;
-  const int UDP = 1;
-  const int ICMP = 2;
-  const int OTHER = -1;
-  
+  const int OTHER = 0;
+  const int TCP = 1;
+  const int UDP = 2;
+  const int ICMP = 3;
+  const int NUM_PACKET_TYPES = (ICMP + 1);
+
   const int ETHERNET_MAC_ADDRESS_LEN = 6;
 
   struct EthernetHeader
