@@ -10,6 +10,7 @@
 
 #include <QScrollArea>
 #include <QVBoxLayout>
+#include <QToolBox>
 
 NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
 : QDockWidget(parent, flags)
@@ -17,26 +18,33 @@ NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
 , _globalStats()
 {
   setFeatures(QDockWidget::NoDockWidgetFeatures);
-  
+
   // Set up the tool box.
   _rootFrame = new QWidget(this);
   
-  QWidget *globalPacketStats = new QWidget(this);
+  QToolBox *networkStatsToolBox = new QToolBox(this);
 
-  QVBoxLayout *layout = new QVBoxLayout();
+  QWidget *networkByPacketType = new QWidget(this);
+  QVBoxLayout *networkByPacketTypeLayout = new QVBoxLayout();
+
   _globalStats.reserve(netviz::NUM_PACKET_TYPES);
   _globalStats[netviz::TCP] = new PercentageBar(tr("TCP"));
-  layout->addWidget(_globalStats[netviz::TCP]);
+  networkByPacketTypeLayout->addWidget( _globalStats[netviz::TCP]);
+
   _globalStats[netviz::UDP] = new PercentageBar(tr("UDP"));
-  layout->addWidget(_globalStats[netviz::UDP]);
-  _globalStats[netviz::ICMP] = new PercentageBar(tr("ICMP"));
-  layout->addWidget(_globalStats[netviz::ICMP]);
-  _globalStats[netviz::OTHER] = new PercentageBar(tr("Other"));
-  layout->addWidget(_globalStats[netviz::OTHER]);
-  globalPacketStats->setLayout(layout);
+  networkByPacketTypeLayout->addWidget(_globalStats[netviz::UDP]);
   
+  _globalStats[netviz::ICMP] = new PercentageBar(tr("ICMP"));
+  networkByPacketTypeLayout->addWidget(_globalStats[netviz::ICMP]);
+  
+  _globalStats[netviz::OTHER] = new PercentageBar(tr("Other"));
+  networkByPacketTypeLayout->addWidget(_globalStats[netviz::OTHER]);
+
+  networkByPacketType->setLayout(networkByPacketTypeLayout);
+  networkStatsToolBox->addItem(networkByPacketType, tr("Packet Type Breakdown"));
+
   QVBoxLayout *rootLayout = new QVBoxLayout();
-  rootLayout->addWidget(globalPacketStats);
+  rootLayout->addWidget(networkStatsToolBox);
   _rootFrame->setLayout(rootLayout);
 
   QScrollArea *scrollArea = new QScrollArea(this);
