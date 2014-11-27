@@ -69,7 +69,9 @@ void HostGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     painter->drawLine(line2);
 
     QPointF textPos(_mouseHoverPosition.x() + 20.0f, _mouseHoverPosition.y() - 27.0f);
-    painter->drawText(textPos, QString(_host->hostName().c_str()) );
+    QString hostText("%1 ( %2 )");
+    hostText = hostText.arg(_host->hostIP().c_str()).arg(_host->hostName().c_str());
+    painter->drawText(textPos, hostText );
   }
 
   painter->restore();
