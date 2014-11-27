@@ -10,11 +10,13 @@
 #define Network_MetaTypeExtensions_qt_h
 
 #include "Model/Host.h"
+#include <vector>
 
 #include <QtGlobal>
 #include <QMetaType>
 
 Q_DECLARE_METATYPE(netviz::HostSP);
+Q_DECLARE_METATYPE(uint64_t);
 
 void declareQtMetaTypeExtensions();
 

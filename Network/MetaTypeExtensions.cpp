@@ -11,4 +11,5 @@
 void declareQtMetaTypeExtensions()
 {
   qRegisterMetaType<netviz::HostSP>("netviz::HostSP");
+  qRegisterMetaType<uint64_t>("uint64_t");
 }

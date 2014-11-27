@@ -32,10 +32,11 @@ class MainWindow : public QMainWindow
 
 public:
   MainWindow(zmq::context_t &context);
-
+  
 public slots:
   void listeningStatusChanged();
   void hostAdded(netviz::HostSP newHost);
+  void globalPacketStatsChanged(uint64_t totalPackets, const uint64_t* packetTypeBreakdown);
   
 protected:
   void closeEvent(QCloseEvent *event);

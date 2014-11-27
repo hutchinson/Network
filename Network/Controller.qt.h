@@ -37,6 +37,11 @@ public:
   void startListening(const std::string &interface);
   void stopListening();
 
+  void signalPacketStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown)
+  {
+    emit(globalPacketStatsChanged(totalPackets, &packetTypeBreakdown[0]));
+  }
+  
   void signalNewHostAdded(netviz::HostSP host)
   {
     emit(newHostAdded(host));
@@ -45,7 +50,8 @@ public:
 signals:
   void listeningStatusChanged();
   void newHostAdded(netviz::HostSP host);
-  
+  void globalPacketStatsChanged(uint64_t totalPackets, const uint64_t *packetTypeBreakdown);
+
 private:
   Controller(const Controller &rhs);
   Controller &operator=(const Controller &rhs);

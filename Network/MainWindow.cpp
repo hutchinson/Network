@@ -76,6 +76,11 @@ void MainWindow::listeningStatusChanged()
   }
 }
 
+void MainWindow::globalPacketStatsChanged(uint64_t totalPackets, const uint64_t* packetTypeBreakdown)
+{
+  _networkStatsDock->updatePacketStats(totalPackets, packetTypeBreakdown);
+}
+
 void MainWindow::hostAdded(netviz::HostSP newHost)
 {
   // Add to a quadrant in the view!

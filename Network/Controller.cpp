@@ -25,9 +25,7 @@ namespace {
     
     virtual void packetStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown)
     {
-      double percentageTCP = 100.0f * (1.0f * packetTypeBreakdown[netviz::TCP] / totalPackets);
-      double percentageUDP = 100.0f * (1.0f * packetTypeBreakdown[netviz::UDP] / totalPackets);
-      std::cout << "Total: " << totalPackets << " TCP % " << percentageTCP << " UDP % " << percentageUDP << std::endl;
+      _controller->signalPacketStatisticsChanged(totalPackets, packetTypeBreakdown);
     }
 
   private:
@@ -46,6 +44,8 @@ Controller::Controller(zmq::context_t &context, MainWindow *mainWindow)
 {
   connect(this, SIGNAL(listeningStatusChanged()), _mainWindow, SLOT(listeningStatusChanged()));
   connect(this, SIGNAL(newHostAdded(netviz::HostSP)), _mainWindow, SLOT(hostAdded(netviz::HostSP)));
+  connect(this, SIGNAL(globalPacketStatsChanged(uint64_t, const uint64_t*)),
+                       _mainWindow, SLOT(globalPacketStatsChanged(uint64_t, const uint64_t*)));
 }
 
 Controller::~Controller()
