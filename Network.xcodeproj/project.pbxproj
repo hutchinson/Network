@@ -84,6 +84,8 @@
 		B8AB22651A0179A00022C5DC /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B038B30119E022AF00DB14AE /* QtOpenGL.framework */; };
 		B8AB226E1A017A100022C5DC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AB226D1A017A100022C5DC /* main.cpp */; };
 		B8AB22711A017B490022C5DC /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AB22701A017B490022C5DC /* MainWindow.cpp */; };
+		B8CA39611A27D30A006C189B /* DrawOptionsDock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8CA39601A27D30A006C189B /* DrawOptionsDock.cpp */; };
+		B8CA39621A27D39E006C189B /* DrawOptionsDock.qt.h in Sources */ = {isa = PBXBuildFile; fileRef = B8CA395E1A27D26B006C189B /* DrawOptionsDock.qt.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -276,6 +278,8 @@
 		B8AB226D1A017A100022C5DC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B8AB226F1A017B0A0022C5DC /* MainWindow.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.qt.h; sourceTree = "<group>"; };
 		B8AB22701A017B490022C5DC /* MainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainWindow.cpp; sourceTree = "<group>"; };
+		B8CA395E1A27D26B006C189B /* DrawOptionsDock.qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawOptionsDock.qt.h; sourceTree = "<group>"; };
+		B8CA39601A27D30A006C189B /* DrawOptionsDock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawOptionsDock.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,6 +527,8 @@
 				B85A40641A1D3DD300F4505D /* Grid.cpp */,
 				B82BB55A1A23DAC8005B6D28 /* NetworkStatsDock.qt.h */,
 				B82BB55D1A23DC42005B6D28 /* NetworkStatsDock.cpp */,
+				B8CA395E1A27D26B006C189B /* DrawOptionsDock.qt.h */,
+				B8CA39601A27D30A006C189B /* DrawOptionsDock.cpp */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -831,6 +837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8CA39621A27D39E006C189B /* DrawOptionsDock.qt.h in Sources */,
 				B82BB55C1A23DB36005B6D28 /* NetworkStatsDock.qt.h in Sources */,
 				B86305031A1A9D9C00024355 /* HostGraphicsItem.qt.h in Sources */,
 				B880FBD11A02D9E00066BE90 /* NetworkView.qt.h in Sources */,
@@ -846,6 +853,7 @@
 				B8244D881A037049001FD836 /* MetaTypeExtensions.cpp in Sources */,
 				B880FBCD1A0186730066BE90 /* PcapHelpers.cpp in Sources */,
 				B86305021A1A9D2200024355 /* HostGraphicsItem.cpp in Sources */,
+				B8CA39611A27D30A006C189B /* DrawOptionsDock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

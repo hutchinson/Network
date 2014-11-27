@@ -78,6 +78,11 @@ void NetworkView::_newMapSizeStrategy(double &newWidth, double &newHeight)
     newHeight = _scene->height() * 2;
 }
 
+void NetworkView::settingsDidChange()
+{
+  _scene->update();
+}
+
 void NetworkView::newHostAdded(netviz::HostSP host)
 {
   QRect position;

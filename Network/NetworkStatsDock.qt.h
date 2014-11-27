@@ -11,6 +11,8 @@
 
 #include "PacketFormat.h"
 
+#include "GlobalThings.h"
+
 #include <QDockWidget>
 #include <QWidget>
 #include <QProgressBar>
@@ -21,7 +23,6 @@
 #include <vector>
 
 #define BAR_BORDER 2.0f
-#define MINIMUM_DOCK_WIDTH 300
 
 class PercentageBar : public QProgressBar
 {

@@ -10,6 +10,8 @@
 #define Network_MainWindow_qt_h
 
 #include "Controller.qt.h"
+
+#include "DrawOptionsDock.qt.h"
 #include "NetworkStatsDock.qt.h"
 
 #include <zmq.hpp>
@@ -48,6 +50,7 @@ private slots:
 private:
   void _createActions();
   void _createToolBar();
+  void _createDrawOptionsBar();
   void _createNetworkStatsBar();
   void _createNetworkView();
   void _readSettings();
@@ -62,6 +65,7 @@ private:
   QPushButton *_startListeningButton;
   QPushButton *_stopListeningButton;
   
+  DrawOptionsDock *_drawOptionsDock;
   NetworkStatsDock *_networkStatsDock;
 
   ControllerSP _controller;

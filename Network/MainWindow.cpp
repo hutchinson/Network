@@ -29,6 +29,7 @@ MainWindow::MainWindow(zmq::context_t &context)
 , _interfaceComboBox(NULL)
 , _startListeningButton(NULL)
 , _stopListeningButton(NULL)
+, _drawOptionsDock(NULL)
 , _networkStatsDock(NULL)
 , _controller()
 , _networkView(NULL)
@@ -40,6 +41,7 @@ MainWindow::MainWindow(zmq::context_t &context)
   _createToolBar();
   _createNetworkView();
   _createNetworkStatsBar();
+  _createDrawOptionsBar();
 
   _readSettings();
 
@@ -105,6 +107,13 @@ void MainWindow::startListening()
 void MainWindow::stopListening()
 {
   _controller->stopListening();
+}
+
+void MainWindow::_createDrawOptionsBar()
+{
+  _drawOptionsDock = new DrawOptionsDock(this);
+  connect(_drawOptionsDock, SIGNAL(settingsDidChange()), _networkView, SLOT(settingsDidChange()));
+  addDockWidget(Qt::LeftDockWidgetArea, _drawOptionsDock);
 }
 
 void MainWindow::_createNetworkStatsBar()

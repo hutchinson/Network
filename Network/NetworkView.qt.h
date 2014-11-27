@@ -44,6 +44,9 @@ public:
   bool _isSpaceOccupiedByHost(const QRect &position);
   void _newMapSizeStrategy(double &newWidth, double &newHeight);
   
+public slots:
+  void settingsDidChange();
+
 protected:
   virtual void wheelEvent(QWheelEvent* event);
 

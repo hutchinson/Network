@@ -11,4 +11,6 @@
 
 #define ORG_NAME "dan.hutchinson"
 
+#define MINIMUM_DOCK_WIDTH 300
+
 #endif

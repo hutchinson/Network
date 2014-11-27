@@ -7,6 +7,9 @@
 //
 
 #include "Grid.qt.h"
+#include "GlobalThings.h"
+
+#include <QSettings>
 
 GridGraphicsItem::GridGraphicsItem(const QRectF &rect, QGraphicsItem *parent)
 : QGraphicsObject(parent)
@@ -17,6 +20,10 @@ GridGraphicsItem::GridGraphicsItem(const QRectF &rect, QGraphicsItem *parent)
 
 void GridGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+  QSettings settings(ORG_NAME, "Network");
+  if(!settings.value("drawOptions/showgrid", true).toBool())
+    return;
+
   painter->save();
   painter->setOpacity(0.85f);
   
