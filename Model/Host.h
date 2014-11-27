@@ -28,6 +28,7 @@ namespace netviz
 
     const std::string &hostName() const { return _hostName; }
 
+    // TODO: This method is NOT threadsafe
     static std::string hostNameFromIP(uint32_t ip);
 
   private:
