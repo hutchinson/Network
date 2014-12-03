@@ -7,6 +7,7 @@
 //
 
 #include "NetworkView.qt.h"
+#include "GlobalThings.h"
 
 #include <QGLWidget>
 #include <QPaintEvent>
@@ -31,6 +32,7 @@ NetworkView::NetworkView(QWidget *parent)
 , _grid(NULL)
 , _hostMap()
 , _unplacedHosts()
+, _placementStrategy(QuadrantPlacementStrategy::create())
 {
   _scene = new QGraphicsScene(0, 0, (1.0f * INITIAL_WORLD_WIDTH), (1.0f * INITIAL_WORLD_HEIGHT), this);
   
@@ -56,10 +58,10 @@ NetworkView::NetworkView(QWidget *parent)
   show();
 }
 
-bool NetworkView::_isSpaceOccupiedByHost(const QRect &position)
+bool NetworkView::isSpaceOccupiedByHost(const QRectF &position)
 {
   // Check if there is already a host within this host position?
-  QRect exclusionSpace(position);
+  QRectF exclusionSpace(position);
   exclusionSpace.adjust(-25, -25, 25, 25);
   QList<QGraphicsItem *> itemsAtLocation = _scene->items(exclusionSpace);
   return itemsAtLocation.count() > 1;
@@ -85,14 +87,15 @@ void NetworkView::settingsDidChange()
 
 void NetworkView::newHostAdded(netviz::HostSP host)
 {
-  QRect position;
+  QRectF position;
   double currentMapWidth = _scene->width();
   double currentMapHeight = _scene->height();
-  _determineCandidatePositionFor(host, position, currentMapWidth, currentMapHeight);
-  
+
+  _placementStrategy->positionForHost(*this, host, position);
+
   // Only attempt to resize 2 times otherwise drop.
   int numAttempts = 0;
-  while(_isSpaceOccupiedByHost(position))
+  while(isSpaceOccupiedByHost(position))
   {
     std::cout << "Attempting to re-position " << host->hostName()
               << " at (" << position.x() << ", " << position.y() << ")" << std::endl;
@@ -110,8 +113,8 @@ void NetworkView::newHostAdded(netviz::HostSP host)
       HostGraphicsItem *hostGraphics = (*it).first;
       netviz::HostSP existingHost = (*it).second;
 
-      QRect newHostPosition;
-      _determineCandidatePositionFor(existingHost, newHostPosition, currentMapWidth, currentMapHeight);
+      QRectF newHostPosition;
+      _placementStrategy->positionForHost(*this, existingHost, newHostPosition);
       hostGraphics->setPos(newHostPosition.center());
     }
     
@@ -124,7 +127,7 @@ void NetworkView::newHostAdded(netviz::HostSP host)
               << currentMapWidth << ", " << currentMapHeight << std::endl;
 
     // Then try add this host.
-    _determineCandidatePositionFor(host, position, currentMapWidth, currentMapHeight);
+    _placementStrategy->positionForHost(*this, host, position);
     if(++numAttempts > MAX_RESIZE_ATTEMPTS)
     {
       std::cout << "Couldn't place " << host->hostName()
@@ -140,56 +143,6 @@ void NetworkView::newHostAdded(netviz::HostSP host)
   _scene->addItem(item);
   _hostMap.insert(std::pair<HostGraphicsItem*, netviz::HostSP>(item, host));
 }
-
-void NetworkView::_offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const
-{
-  if(octet < QUAD_BOUNDS_1)
-  {
-    // Doesn't need to move any where, its the top left quadrant
-    // TOP LEFT
-    box.moveTo(box.x(), box.y());
-  }
-  else if(octet >= QUAD_BOUNDS_1 && octet < QUAD_BOUNDS_2)
-    // TOP RIGHT
-    box.moveTo(box.x() + currentXOffset, box.y());
-  else if(octet >= QUAD_BOUNDS_2 && octet < QUAD_BOUNDS_3)
-    // BOTTOM RIGHT
-    box.moveTo(box.x() + currentXOffset, box.y() + currentYOffset);
-  else
-    // BOTTOM LEFT
-    box.moveTo(box.x(), box.y() + currentYOffset);
-}
-
-void NetworkView::_determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const
-{
-  where.setX(0);
-  where.setY(0);
-  where.setWidth(CELL_WIDTH);
-  where.setHeight(CELL_HEIGHT);
-
-  qreal width = initialWidth / 2;
-  qreal height = initialHeight / 2;
-  
-  // Determine the top level quadrant to add it to.
-  uint32_t firstOctet = getIPv4Octet(netviz::One, host->ip());
-  _offsetBox(where, firstOctet, width, height);
-  
-  // Get a little smaller and go again.
-  width = width / 2;
-  height = height / 2;
-  uint32_t secondOctet = getIPv4Octet(netviz::Two, host->ip());
-  _offsetBox(where, secondOctet, width, height);
-  
-  int thirdOctet = netviz::getIPv4Octet(netviz::Three, host->ip());
-  int fourthOctet = netviz::getIPv4Octet(netviz::Four, host->ip());
-
-  int finalQuad = (initialWidth / 4) / CELL_WIDTH;
-  qreal row = ( (thirdOctet + fourthOctet) * firstOctet % finalQuad);
-  qreal col = ( (fourthOctet + thirdOctet) * secondOctet % finalQuad);
-
-  where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
-}
-
 
 // Code taken from:
 // http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming

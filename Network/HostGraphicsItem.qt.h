@@ -16,9 +16,7 @@
 #include <QRect>
 
 #include "Model/Host.h"
-
-#define CELL_WIDTH 25
-#define CELL_HEIGHT 25
+#include "GlobalThings.h"
 
 class HostGraphicsItem : public QGraphicsObject
 {

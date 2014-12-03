@@ -13,4 +13,7 @@
 
 #define MINIMUM_DOCK_WIDTH 300
 
+#define CELL_WIDTH 25
+#define CELL_HEIGHT 25
+
 #endif

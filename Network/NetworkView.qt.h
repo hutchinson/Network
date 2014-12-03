@@ -18,6 +18,8 @@
 #include "Grid.qt.h"
 #include "PacketController/PacketFormat.h"
 
+#include "Map/HostPlacementStrategy.h"
+
 #include <iostream>
 #include <memory>
 #include <list>
@@ -25,7 +27,7 @@
 
 #include <assert.h>
 
-class QRect;
+class QRectF;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,12 +40,10 @@ public:
   
   void newHostAdded(netviz::HostSP host);
 
-  void _offsetBox(QRect &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const;
-  void _determineCandidatePositionFor(const netviz::HostSP host, QRect &where, qreal initialWidth, qreal initialHeight) const;
+  bool isSpaceOccupiedByHost(const QRectF &position);
 
-  bool _isSpaceOccupiedByHost(const QRect &position);
   void _newMapSizeStrategy(double &newWidth, double &newHeight);
-  
+
 public slots:
   void settingsDidChange();
 
@@ -55,6 +55,9 @@ private:
   GridGraphicsItem *_grid;
   std::map<HostGraphicsItem*, netviz::HostSP> _hostMap;
   std::list<netviz::HostSP> _unplacedHosts;
+
+  // This will be moved to a singelton
+  HostPlacementStrategySP _placementStrategy;
 };
 
 #endif
