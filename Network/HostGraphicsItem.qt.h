@@ -41,6 +41,8 @@ public:
 
   bool hasHover() const { return _hasHover; }
 
+  void moveHostTo(const QPointF &pos, bool animated = true);
+  
 protected:
   virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);

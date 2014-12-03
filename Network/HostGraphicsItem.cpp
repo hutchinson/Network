@@ -22,7 +22,7 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 , _hasHover(false)
 , _mouseHoverPosition()
 {
-  setPos(_drawAt.center());
+  moveHostTo(_drawAt.center());
   setOpacity(0.0f);
   setScale(1.0f);
 
@@ -75,6 +75,23 @@ void HostGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
   }
 
   painter->restore();
+}
+
+void HostGraphicsItem::moveHostTo(const QPointF &pos, bool animated)
+{
+  if(animated)
+  {
+    QPropertyAnimation *positionAnimation = new QPropertyAnimation(this, "pos");
+    positionAnimation->setDuration(1000);
+    positionAnimation->setStartValue(this->pos());
+    positionAnimation->setEndValue(pos);
+    positionAnimation->setEasingCurve(QEasingCurve::OutBounce);
+    positionAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+  }
+  else
+  {
+    setPos(pos);
+  }
 }
 
 void HostGraphicsItem::_updateMouseHover(const QPointF &with)

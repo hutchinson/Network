@@ -115,7 +115,7 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 
       QRectF newHostPosition;
       _placementStrategy->positionForHost(*this, existingHost, newHostPosition);
-      hostGraphics->setPos(newHostPosition.center());
+      hostGraphics->moveHostTo(newHostPosition.center());
     }
     
     // Always zoom out to the extents of the world (we'll have this animate
