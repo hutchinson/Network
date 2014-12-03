@@ -44,6 +44,11 @@ typedef std::shared_ptr<HostPlacementStrategy> HostPlacementStrategySP;
 
 //////////////////////////////////////////////////////////////////////////////
 
+// This strategy uses the 4 octets of the IPv4 address to determine an initial
+// set of 'weights' to drag the host into particular quadrants of the screen.
+//
+// It then iterates by shunting the host space by space until it's found an
+// empty location.
 class QuadrantPlacementStrategy : public HostPlacementStrategy
 {
 public:

@@ -40,7 +40,7 @@ public:
   
   void newHostAdded(netviz::HostSP host);
 
-  bool isSpaceOccupiedByHost(const QRectF &position);
+  bool isSpaceOccupiedByHost(const QRectF &position) const;
 
   void _newMapSizeStrategy(double &newWidth, double &newHeight);
 

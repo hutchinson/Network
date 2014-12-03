@@ -19,13 +19,6 @@
 #define INITIAL_WORLD_WIDTH 500
 #define INITIAL_WORLD_HEIGHT 500
 
-#define QUAD_BOUNDS_1 64
-#define QUAD_BOUNDS_2 128
-#define QUAD_BOUNDS_3 192
-#define QUAD_BOUNDS_4 256
-
-#define MAX_RESIZE_ATTEMPTS 1
-
 NetworkView::NetworkView(QWidget *parent)
 : QGraphicsView(parent)
 , _scene(NULL)
@@ -58,7 +51,7 @@ NetworkView::NetworkView(QWidget *parent)
   show();
 }
 
-bool NetworkView::isSpaceOccupiedByHost(const QRectF &position)
+bool NetworkView::isSpaceOccupiedByHost(const QRectF &position) const
 {
   // Check if there is already a host within this host position?
   QRectF exclusionSpace(position);
@@ -105,9 +98,10 @@ void NetworkView::newHostAdded(netviz::HostSP host)
   double currentMapHeight = _scene->height();
 
   // Should we re-size the map i.e. are things getting a little crowded?
-  int totalHostSpaces = (_scene->width() / CELL_WIDTH) *  (_scene->width() / CELL_WIDTH);
-  size_t currentHostsTotal = _hostMap.size();
-  if( (100.0f * (currentHostsTotal / totalHostSpaces)) > 50.0f)
+  qreal totalHostSpaces = 1.0f * ((_scene->width() / CELL_WIDTH) *  (_scene->width() / CELL_WIDTH));
+  qreal currentHostsTotal = 1.0f * _hostMap.size();
+  qreal mapToSpaceRatio = (currentHostsTotal / totalHostSpaces);
+  if(mapToSpaceRatio > 0.05)
   {
     // Resize the map...
     // Pick a new host world size
@@ -144,7 +138,8 @@ void NetworkView::newHostAdded(netviz::HostSP host)
   _scene->addItem(item);
   _hostMap.insert(std::pair<HostGraphicsItem*, netviz::HostSP>(item, host));
 
-  fitInView(_scene->itemsBoundingRect(), Qt::KeepAspectRatioByExpanding	);
+  // TODO: Scope this in a setting.
+//  fitInView(_scene->itemsBoundingRect(), Qt::KeepAspectRatioByExpanding	);
   _scene->update();
 }
 

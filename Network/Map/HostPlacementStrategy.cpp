@@ -45,12 +45,12 @@ const QString QuadrantPlacementStrategy::strategyName()
 
 void QuadrantPlacementStrategy::positionForHost(const NetworkView &theMap, const netviz::HostSP host, QRectF &where)
 {
-
+  // Determine an initial position.
   where.setX(0);
   where.setY(0);
   where.setWidth(CELL_WIDTH);
   where.setHeight(CELL_HEIGHT);
-
+  
   QGraphicsScene *scene = theMap.scene();
   assert(scene);
   qreal width = scene->width() / 2;
@@ -74,6 +74,38 @@ void QuadrantPlacementStrategy::positionForHost(const NetworkView &theMap, const
   qreal col = ( (fourthOctet + thirdOctet) * secondOctet % finalQuad);
   
   where.moveTo(where.x() + (CELL_WIDTH * row), where.y() + (CELL_HEIGHT * col));
+
+  // Cap the max spaces we can move by
+  int maxSpaces = (scene->width() / CELL_WIDTH) * (scene->width() / CELL_WIDTH);
+  
+  while(theMap.isSpaceOccupiedByHost(where))
+  {
+    // Keep shunting till we find an empty space.
+    
+    QPointF moveBy(0.0f, 0.0f);
+    bool goAgain = false;
+    do
+    {
+      // Pick a random number of spaces to move in the x and y direction
+      int numSpacesX = rand() % maxSpaces;
+      int numSpacesY = rand() % maxSpaces;
+
+      moveBy = QPointF(numSpacesX * CELL_WIDTH, numSpacesY * CELL_HEIGHT);
+
+      QRectF candidatePosition = where;
+      candidatePosition.moveTo(where.topLeft() + moveBy);
+
+      if((candidatePosition.bottomRight().x() > scene->width()) ||
+         (candidatePosition.bottomRight().y() > scene->height()) ||
+         theMap.isSpaceOccupiedByHost(candidatePosition))
+        goAgain = true;
+      else
+        goAgain = false;
+
+    }while( goAgain );
+
+    where.moveTo(where.topLeft() + moveBy);
+  }
 }
 
 void QuadrantPlacementStrategy::_offsetBox(QRectF &box, uint32_t octet, qreal currentXOffset, qreal currentYOffset) const
