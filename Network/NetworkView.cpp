@@ -87,24 +87,34 @@ void NetworkView::settingsDidChange()
 
 void NetworkView::newHostAdded(netviz::HostSP host)
 {
+  // There are two approaches I've considered so far to how we should place hosts
+  // in the scene.
+  //
+  // 1). We try to place the host, if we can't, we resize the map until we find
+  // a unique location for it. i.e. the placement algorithm says 'no' room in the
+  // place I want to put this host, make the map bigger and i'll try again, but
+  // eventually give up.
+  //
+  // 2). We decide how full the map should get, and we force every placement
+  // algorithm to determine a unique place for the host based on the current
+  // map's bounds - in this approach, we enfore order on our unruly networked
+  // world :)
+  
   QRectF position;
   double currentMapWidth = _scene->width();
   double currentMapHeight = _scene->height();
 
-  _placementStrategy->positionForHost(*this, host, position);
-
-  // Only attempt to resize 2 times otherwise drop.
-  int numAttempts = 0;
-  while(isSpaceOccupiedByHost(position))
+  // Should we re-size the map i.e. are things getting a little crowded?
+  int totalHostSpaces = (_scene->width() / CELL_WIDTH) *  (_scene->width() / CELL_WIDTH);
+  size_t currentHostsTotal = _hostMap.size();
+  if( (100.0f * (currentHostsTotal / totalHostSpaces)) > 50.0f)
   {
-    std::cout << "Attempting to re-position " << host->hostName()
-              << " at (" << position.x() << ", " << position.y() << ")" << std::endl;
-    
+    // Resize the map...
     // Pick a new host world size
     _newMapSizeStrategy(currentMapWidth, currentMapHeight);
     _scene->setSceneRect(0, 0, currentMapWidth, currentMapHeight);
     _grid->setNewGridSize(QRectF(0.0f, 0.0f, currentMapWidth, currentMapHeight));
-
+    
     // Move all the existing hosts to new positions in the new world.
     for(std::map<HostGraphicsItem*, netviz::HostSP>::iterator it = _hostMap.begin();
         it != _hostMap.end();
@@ -112,36 +122,30 @@ void NetworkView::newHostAdded(netviz::HostSP host)
     {
       HostGraphicsItem *hostGraphics = (*it).first;
       netviz::HostSP existingHost = (*it).second;
-
+      
       QRectF newHostPosition;
       _placementStrategy->positionForHost(*this, existingHost, newHostPosition);
       hostGraphics->moveHostTo(newHostPosition.center());
     }
-    
-    // Always zoom out to the extents of the world (we'll have this animate
-    // outwards soon.
-    fitInView(_scene->itemsBoundingRect(), Qt::KeepAspectRatioByExpanding	);
-    _scene->update();
-
-    std::cout << host->hostIP() << " clashed so resized to "
-              << currentMapWidth << ", " << currentMapHeight << std::endl;
-
-    // Then try add this host.
-    _placementStrategy->positionForHost(*this, host, position);
-    if(++numAttempts > MAX_RESIZE_ATTEMPTS)
-    {
-      std::cout << "Couldn't place " << host->hostName()
-                << " after " << MAX_RESIZE_ATTEMPTS
-                << " resize attempts at location ("
-                << position.x() << ", " << position.y() << ")" << std::endl;
-      _unplacedHosts.push_back(host);
-      return;
-    }
   }
-  
+
+  _placementStrategy->positionForHost(*this, host, position);
+  if(isSpaceOccupiedByHost(position))
+  {
+    // Tut tut... we told you we'd crash your app but no, we're too kind,
+    // we'll save the un-placed host.
+    std::cout << "WARNING: Couldn't place " << host->hostName() << " using "
+              << _placementStrategy->strategyName().toStdString()
+              << " fix your app." << std::endl;
+    _unplacedHosts.push_back(host);
+  }
+
   HostGraphicsItem *item = new HostGraphicsItem(position, host);
   _scene->addItem(item);
   _hostMap.insert(std::pair<HostGraphicsItem*, netviz::HostSP>(item, host));
+
+  fitInView(_scene->itemsBoundingRect(), Qt::KeepAspectRatioByExpanding	);
+  _scene->update();
 }
 
 // Code taken from:

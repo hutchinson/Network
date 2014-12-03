@@ -13,6 +13,8 @@
 
 #include "NetworkView.qt.h"
 
+#include <QApplication>
+
 #define QUAD_BOUNDS_1 64
 #define QUAD_BOUNDS_2 128
 #define QUAD_BOUNDS_3 192
@@ -36,9 +38,14 @@ HostPlacementStrategySP QuadrantPlacementStrategy::create()
   return HostPlacementStrategySP(new QuadrantPlacementStrategy());
 }
 
+const QString QuadrantPlacementStrategy::strategyName()
+{
+  return qApp->tr("QuadrantPlacementStrategy");
+}
 
 void QuadrantPlacementStrategy::positionForHost(const NetworkView &theMap, const netviz::HostSP host, QRectF &where)
 {
+
   where.setX(0);
   where.setY(0);
   where.setWidth(CELL_WIDTH);
