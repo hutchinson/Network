@@ -47,9 +47,15 @@ public:
     emit(newHostAdded(host));
   }
 
+  void signalNewPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
+  {
+    emit(newPacket(from, packet, to));
+  }
+
 signals:
   void listeningStatusChanged();
   void newHostAdded(netviz::HostSP host);
+  void newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to);
   void globalPacketStatsChanged(uint64_t totalPackets, const uint64_t *packetTypeBreakdown);
 
 private:

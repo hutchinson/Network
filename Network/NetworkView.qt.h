@@ -14,6 +14,8 @@
 #include <QGraphicsScene>
 
 #include "Model/Host.h"
+#include "Model/Packet.h"
+
 #include "HostGraphicsItem.qt.h"
 #include "Grid.qt.h"
 #include "PacketController/PacketFormat.h"
@@ -39,6 +41,8 @@ public:
   NetworkView(QWidget *parent = 0);
   
   void newHostAdded(netviz::HostSP host);
+  
+  void newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to);
 
   bool isSpaceOccupiedByHost(const QRectF &position) const;
 
@@ -53,6 +57,7 @@ protected:
 private:
   QGraphicsScene *_scene;
   GridGraphicsItem *_grid;
+  
   std::map<HostGraphicsItem*, netviz::HostSP> _hostMap;
   std::list<netviz::HostSP> _unplacedHosts;
 

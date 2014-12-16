@@ -29,6 +29,8 @@ namespace netviz
     // Called each time a previously unseen host is added to the model
     virtual void newHostAdded(HostSP newHost) = 0;
 
+    virtual void newPacket(HostSP from, PacketSP packet, HostSP to) = 0;
+    
     // Called each time the overall packet statistics changes (quite freqeuently)
     // e.g. % TCP/%UDP packets.
     virtual void packetStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown) = 0;

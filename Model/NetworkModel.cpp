@@ -29,8 +29,14 @@ namespace netviz {
   {
     std::lock_guard<std::mutex> lock(_objectMutex);
     
+    // Record the hosts if we haven't seen them before and tell the view we've
+    // got new hosts.
     _recordHost(from);
     _recordHost(to);
+    
+    // Let the view know we've got an new packet.
+    if(_delegate)
+      _delegate->newPacket(from, packet, to);
     
     _updatePacketStats(packet);
   }

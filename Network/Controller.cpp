@@ -22,6 +22,11 @@ namespace {
     {
       _controller->signalNewHostAdded(newHost);
     }
+
+    virtual void newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
+    {
+      _controller->newPacket(from, packet, to);
+    }
     
     virtual void packetStatisticsChanged(uint64_t totalPackets, const std::vector<uint64_t> &packetTypeBreakdown)
     {
@@ -46,6 +51,8 @@ Controller::Controller(zmq::context_t &context, MainWindow *mainWindow)
   connect(this, SIGNAL(newHostAdded(netviz::HostSP)), _mainWindow, SLOT(hostAdded(netviz::HostSP)));
   connect(this, SIGNAL(globalPacketStatsChanged(uint64_t, const uint64_t*)),
                        _mainWindow, SLOT(globalPacketStatsChanged(uint64_t, const uint64_t*)));
+  connect(this, SIGNAL(newPacket(netviz::HostSP, netviz::PacketSP, netviz::HostSP)),
+                       _mainWindow, SLOT(newPacket(netviz::HostSP, netviz::PacketSP, netviz::HostSP)));
 }
 
 Controller::~Controller()

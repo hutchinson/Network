@@ -143,6 +143,12 @@ void NetworkView::newHostAdded(netviz::HostSP host)
   _scene->update();
 }
 
+
+void NetworkView::newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
+{
+  
+}
+
 // Code taken from:
 // http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming
 void NetworkView::wheelEvent(QWheelEvent* event)

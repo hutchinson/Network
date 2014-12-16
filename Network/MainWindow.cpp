@@ -93,6 +93,11 @@ void MainWindow::hostAdded(netviz::HostSP newHost)
   listeningStatusChanged();
 }
 
+void MainWindow::newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
+{
+  _networkView->newPacket(from, packet, to);
+}
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
   _controller->stopListening();
