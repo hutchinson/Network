@@ -64,9 +64,8 @@ void HostGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
   if(_hasHover)
   {
-    QColor gray(QColor(127, 127, 127, 255));
     QPen pen;
-    pen.setColor(gray);
+    pen.setColor(Qt::white);
     pen.setWidth(1);
     pen.setStyle(Qt::SolidLine);
     painter->setPen(pen);
@@ -106,11 +105,9 @@ void HostGraphicsItem::moveHostTo(const QPointF &pos, bool animated)
 
 void HostGraphicsItem::animateActivityAtHost(qreal delay)
 {
+  _hostActivityAnimationGroup->stop();
   if(_hostActivityAnimationGroup->animationCount())
-  {
-    _hostActivityAnimationGroup->stop();
     _hostActivityAnimationGroup->clear();
-  }
 
   _hostActivityAnimationGroup->addPause(delay);
   

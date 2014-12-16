@@ -41,7 +41,8 @@ NetworkView::NetworkView(QWidget *parent)
   
   setDragMode(QGraphicsView::ScrollHandDrag);
 
-  QBrush backgroundBrush( QColor(128, 128, 128, 128) );
+  // 'Jet' gray
+  QBrush backgroundBrush( QColor(52, 52, 52, 190) );
   setBackgroundBrush(backgroundBrush);
 
   // Set up the grid.
@@ -147,6 +148,8 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 void NetworkView::newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
 {
   HostGraphicsItem *fromHost = _hostMap[from->hostIP()];
+  // TODO: it would be nice to have a little wave like animation radiate from the sending host
+  // to give some visual indication as to what is happening.
   fromHost->animateActivityAtHost(0.0);
   HostGraphicsItem *toHost = _hostMap[to->hostIP()];
   // TODO: Base the 'toHost' delay on actual latency rather than hard coded.s
