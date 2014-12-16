@@ -8,6 +8,8 @@
 
 #include "HostGraphicsItem.qt.h"
 
+#include "PacketController/PacketFormat.h"
+
 #include <QGraphicsSceneHoverEvent>
 #include <QString>
 
@@ -29,8 +31,15 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 
   setAcceptHoverEvents(true);
 
-  _brush.setColor(Qt::red);
-  _pen.setColor(Qt::red);
+  // TODO: Refactor this so it's similar to the HostPlacementStrategy i.e.
+  // a HostColorStrategy.
+  QColor hostColor(netviz::getIPv4Octet(netviz::One, host->ip()),
+                   netviz::getIPv4Octet(netviz::Two, host->ip()),
+                   netviz::getIPv4Octet(netviz::Four, host->ip()),
+                   190);
+
+  _brush.setColor(hostColor);
+  _pen.setColor(hostColor);
 
   _hostActivityAnimationGroup = new QSequentialAnimationGroup();
   
