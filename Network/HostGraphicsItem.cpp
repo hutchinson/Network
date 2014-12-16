@@ -19,6 +19,7 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 , _drawAt(rect)
 , _brush(Qt::SolidPattern)
 , _pen(Qt::SolidLine)
+, _hostActivityAnimationGroup(NULL)
 , _hasHover(false)
 , _mouseHoverPosition()
 {
@@ -30,6 +31,8 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 
   _brush.setColor(Qt::red);
   _pen.setColor(Qt::red);
+
+  _hostActivityAnimationGroup = new QSequentialAnimationGroup();
   
   QPropertyAnimation *_opacityAnimation = new QPropertyAnimation(this, "opacity");
   _opacityAnimation->setDuration(500);
@@ -94,6 +97,37 @@ void HostGraphicsItem::moveHostTo(const QPointF &pos, bool animated)
   }
 }
 
+void HostGraphicsItem::animateActivityAtHost(qreal delay)
+{
+  if(_hostActivityAnimationGroup->animationCount())
+  {
+    _hostActivityAnimationGroup->stop();
+    _hostActivityAnimationGroup->clear();
+  }
+
+  _hostActivityAnimationGroup->addPause(delay);
+  
+  QPropertyAnimation *scaleUp = new QPropertyAnimation(this, "scale");
+  scaleUp->setDuration(500.0f);
+  scaleUp->setStartValue(1.0f);
+  scaleUp->setEndValue(1.25f);
+  scaleUp->setEasingCurve(QEasingCurve::OutBounce);
+  scaleUp->start(QPropertyAnimation::DeleteWhenStopped);
+
+  QPropertyAnimation *scaleDown = new QPropertyAnimation(this, "scale");
+  scaleDown->setDuration(500.0f);
+  scaleDown->setStartValue(1.25f);
+  scaleDown->setEndValue(1.0f);
+  scaleDown->setEasingCurve(QEasingCurve::OutBounce);
+  scaleDown->start(QPropertyAnimation::DeleteWhenStopped);
+  
+  _hostActivityAnimationGroup->addAnimation(scaleUp);
+  _hostActivityAnimationGroup->addPause(300.0f);
+  _hostActivityAnimationGroup->addAnimation(scaleDown);
+  
+  _hostActivityAnimationGroup->start();
+}
+
 void HostGraphicsItem::_updateMouseHover(const QPointF &with)
 {
   prepareGeometryChange();
@@ -118,4 +152,3 @@ void HostGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
   QGraphicsObject::hoverLeaveEvent(event);
   _hasHover = false;
 }
-

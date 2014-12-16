@@ -12,6 +12,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
 #include <QPainter>
 #include <QRect>
 
@@ -28,6 +29,8 @@ class HostGraphicsItem : public QGraphicsObject
 public:
   HostGraphicsItem(const QRectF &rect, netviz::HostSP host, QGraphicsItem *parent = 0);
 
+  netviz::HostSP host() const { return _host; };
+  
   QRectF boundingRect() const
   {
     QPointF centre((CELL_WIDTH / 2), (CELL_WIDTH / 2));
@@ -40,6 +43,8 @@ public:
   const QPen &pen() const { return _pen; }
 
   bool hasHover() const { return _hasHover; }
+
+  void animateActivityAtHost(qreal delay);
 
   void moveHostTo(const QPointF &pos, bool animated = true);
   
@@ -54,6 +59,8 @@ private:
   QBrush _brush;
   QPen _pen;
 
+  QSequentialAnimationGroup *_hostActivityAnimationGroup;
+  
   bool _hasHover;
   QPointF _mouseHoverPosition;
 

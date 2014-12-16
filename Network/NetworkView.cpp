@@ -110,12 +110,12 @@ void NetworkView::newHostAdded(netviz::HostSP host)
     _grid->setNewGridSize(QRectF(0.0f, 0.0f, currentMapWidth, currentMapHeight));
     
     // Move all the existing hosts to new positions in the new world.
-    for(std::map<HostGraphicsItem*, netviz::HostSP>::iterator it = _hostMap.begin();
+    for(std::map<std::string, HostGraphicsItem*>::iterator it = _hostMap.begin();
         it != _hostMap.end();
         ++it)
     {
-      HostGraphicsItem *hostGraphics = (*it).first;
-      netviz::HostSP existingHost = (*it).second;
+      HostGraphicsItem *hostGraphics = (*it).second;
+      netviz::HostSP existingHost = hostGraphics->host();
       
       QRectF newHostPosition;
       _placementStrategy->positionForHost(*this, existingHost, newHostPosition);
@@ -136,7 +136,7 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 
   HostGraphicsItem *item = new HostGraphicsItem(position, host);
   _scene->addItem(item);
-  _hostMap.insert(std::pair<HostGraphicsItem*, netviz::HostSP>(item, host));
+  _hostMap.insert(std::pair<std::string, HostGraphicsItem*>(host->hostIP(), item));
 
   // TODO: Scope this in a setting.
 //  fitInView(_scene->itemsBoundingRect(), Qt::KeepAspectRatioByExpanding	);
@@ -146,7 +146,11 @@ void NetworkView::newHostAdded(netviz::HostSP host)
 
 void NetworkView::newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to)
 {
-  
+  HostGraphicsItem *fromHost = _hostMap[from->hostIP()];
+  fromHost->animateActivityAtHost(0.0);
+  HostGraphicsItem *toHost = _hostMap[to->hostIP()];
+  // TODO: Base the 'toHost' delay on actual latency rather than hard coded.s
+  toHost->animateActivityAtHost(500.0f);
 }
 
 // Code taken from:
