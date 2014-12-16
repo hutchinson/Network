@@ -33,8 +33,9 @@ public:
   
   QRectF boundingRect() const
   {
-    QPointF centre((CELL_WIDTH / 2), (CELL_WIDTH / 2));
-    return QRectF(centre.x(), centre.y(), CELL_WIDTH, CELL_HEIGHT);
+    QPointF topLeft(-CELL_WIDTH * 0.5, CELL_WIDTH * 0.5);
+    QPointF bottomRight(CELL_WIDTH * 0.5, -CELL_WIDTH * 0.5);
+    return QRectF(topLeft, bottomRight);
   }
 
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
