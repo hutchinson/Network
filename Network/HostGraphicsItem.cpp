@@ -26,6 +26,9 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 , _mouseHoverPosition()
 {
   moveHostTo(_drawAt.center());
+
+  setFlag(QGraphicsItem::ItemIsSelectable, true);
+
   setOpacity(0.0f);
   setScale(1.0f);
 
