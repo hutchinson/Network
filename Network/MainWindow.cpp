@@ -41,7 +41,7 @@ MainWindow::MainWindow(zmq::context_t &context)
   _createToolBar();
   _createNetworkView();
   _createNetworkStatsBar();
-  _createDrawOptionsBar();
+//  _createDrawOptionsBar();
 
   _readSettings();
 
