@@ -116,17 +116,15 @@ void HostGraphicsItem::animateActivityAtHost(qreal delay)
   scaleUp->setStartValue(1.0f);
   scaleUp->setEndValue(1.25f);
   scaleUp->setEasingCurve(QEasingCurve::OutBounce);
-  scaleUp->start(QPropertyAnimation::DeleteWhenStopped);
 
   QPropertyAnimation *scaleDown = new QPropertyAnimation(this, "scale");
   scaleDown->setDuration(500.0f);
   scaleDown->setStartValue(1.25f);
   scaleDown->setEndValue(1.0f);
   scaleDown->setEasingCurve(QEasingCurve::OutBounce);
-  scaleDown->start(QPropertyAnimation::DeleteWhenStopped);
   
   _hostActivityAnimationGroup->addAnimation(scaleUp);
-  _hostActivityAnimationGroup->addPause(300.0f);
+  _hostActivityAnimationGroup->addPause(150.0f);
   _hostActivityAnimationGroup->addAnimation(scaleDown);
   
   _hostActivityAnimationGroup->start();

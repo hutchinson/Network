@@ -23,9 +23,6 @@ class HostGraphicsItem : public QGraphicsObject
 {
   Q_OBJECT
   
-  Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
-  Q_PROPERTY(qreal scale READ scale WRITE setScale)
-  
 public:
   HostGraphicsItem(const QRectF &rect, netviz::HostSP host, QGraphicsItem *parent = 0);
 
@@ -33,8 +30,8 @@ public:
   
   QRectF boundingRect() const
   {
-    QPointF topLeft(-CELL_WIDTH * 0.5, CELL_WIDTH * 0.5);
-    QPointF bottomRight(CELL_WIDTH * 0.5, -CELL_WIDTH * 0.5);
+    QPointF topLeft(CELL_WIDTH * -0.5f, CELL_WIDTH * -0.5f);
+    QPointF bottomRight(CELL_WIDTH * 0.5, CELL_WIDTH * 0.5);
     return QRectF(topLeft, bottomRight);
   }
 
