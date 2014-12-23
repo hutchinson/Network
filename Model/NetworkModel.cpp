@@ -31,12 +31,15 @@ namespace netviz {
     
     // Record the hosts if we haven't seen them before and tell the view we've
     // got new hosts.
-    _recordHost(from);
-    _recordHost(to);
+    HostSP fromHost = _recordHost(from);
+    fromHost->packetSent();
+
+    HostSP toHost = _recordHost(to);
+    toHost->packetReceived();
     
     // Let the view know we've got an new packet.
     if(_delegate)
-      _delegate->newPacket(from, packet, to);
+      _delegate->newPacket(fromHost, packet, toHost);
     
     _updatePacketStats(packet);
   }
@@ -48,16 +51,15 @@ namespace netviz {
   }
 
   // Record the new host we've just been told about
-  // Return true if we've never seen it before.
-  bool NetworkModel::_recordHost(HostSP host)
+  HostSP NetworkModel::_recordHost(HostSP host)
   {
     HostMap::iterator foundHost = _hosts.find(host->ip());
     if(foundHost != _hosts.end())
-       return false;
+       return foundHost->second;
 
     _hosts[host->ip()] = host;
     _emitNewHostAdded(host);
-    return true;
+    return host;
   }
   
   void NetworkModel::_updatePacketStats(PacketSP packet)

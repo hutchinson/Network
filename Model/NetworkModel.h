@@ -56,7 +56,7 @@ namespace netviz
     NetworkModel(const NetworkModel &rhs);
     NetworkModel &operator=(const NetworkModel &rhs);
 
-    bool _recordHost(HostSP host);
+    HostSP _recordHost(HostSP host);
     void _updatePacketStats(PacketSP packet);
 
     void _emitNewHostAdded(HostSP host)

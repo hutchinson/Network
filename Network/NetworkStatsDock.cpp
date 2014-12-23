@@ -12,12 +12,17 @@
 #include <QVBoxLayout>
 #include <QFormLayout>
 
+#include <QDateTime>
+
 NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
 : QDockWidget(parent, flags)
 , _rootFrame(NULL)
 , _networkStatsToolBox(NULL)
 , _selectedHostName(NULL)
 , _selectedHostIPv4Address(NULL)
+, _packetsSent(NULL)
+, _packetsReceived(NULL)
+, _firstSeen(NULL)
 , _globalStats()
 {
   setFeatures(QDockWidget::NoDockWidgetFeatures);
@@ -49,6 +54,8 @@ NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
   //////////////////////////////////////////////////////////////////////////////
   
   QWidget *selectedHostDetails = new QWidget(this);
+  selectedHostDetails->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
   QFormLayout *selectedHostDetailsLayout = new QFormLayout();
   
   _selectedHostName = new QLabel(tr("-"));
@@ -58,8 +65,20 @@ NetworkStatsDock::NetworkStatsDock(QWidget *parent, Qt::WindowFlags flags)
   
   _selectedHostIPv4Address = new QLabel(tr("-"));
   
+  _packetsSent = new QLabel(tr("-"));
+  _packetsReceived = new QLabel(tr("-"));
+
+  _firstSeen = new QLabel(tr("-"));
+  
   selectedHostDetailsLayout->addRow(new QLabel(tr("Host Name")), _selectedHostName);
   selectedHostDetailsLayout->addRow(new QLabel(tr("IPv4")), _selectedHostIPv4Address);
+  selectedHostDetailsLayout->addRow(new QWidget());
+  
+  selectedHostDetailsLayout->addRow(new QLabel(tr("Packets Sent")), _packetsSent);
+  selectedHostDetailsLayout->addRow(new QLabel(tr("Packets Received")), _packetsReceived);
+  selectedHostDetailsLayout->addRow(new QWidget());
+  
+  selectedHostDetailsLayout->addRow(new QLabel(tr("First Seen")), _firstSeen);
   
   selectedHostDetails->setLayout(selectedHostDetailsLayout);
   _networkStatsToolBox->addItem(selectedHostDetails, tr("Host Detail"));
@@ -98,12 +117,17 @@ void NetworkStatsDock::selectedHostChanged(netviz::HostSP selectedHost)
   {
     _selectedHostName->setText(QString("<a href=\"http://www.whois.com/whois/%1\">%1</a>").arg(selectedHost->hostName().c_str()));
     _selectedHostIPv4Address->setText(QString(selectedHost->hostIP().c_str()));
-
-    _networkStatsToolBox->setCurrentIndex(1);
+    _packetsSent->setText(QString("%1").arg(selectedHost->packetsSent()));
+    _packetsReceived->setText(QString("%1").arg(selectedHost->packetsReceived()));
+    _firstSeen->setText(QString("%1").arg(QDateTime::fromTime_t(static_cast<uint>(selectedHost->firstSeen())).toString()));
+//    _networkStatsToolBox->setCurrentIndex(1);
   }
   else
   {
     _selectedHostName->setText(tr("-"));
     _selectedHostIPv4Address->setText(tr("-"));
+    _packetsSent->setText(tr("-"));
+    _packetsReceived->setText(tr("-"));
+    _firstSeen->setText(tr("-"));
   }
 }

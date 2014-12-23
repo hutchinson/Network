@@ -127,6 +127,11 @@ private:
   QLabel *_selectedHostName;
   QLabel *_selectedHostIPv4Address;
   
+  QLabel *_packetsSent;
+  QLabel *_packetsReceived;
+  
+  QLabel *_firstSeen;
+  
   std::vector<PercentageBar*> _globalStats;
 
 };

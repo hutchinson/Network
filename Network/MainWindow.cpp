@@ -97,6 +97,8 @@ void MainWindow::listeningStatusChanged()
 void MainWindow::globalPacketStatsChanged(uint64_t totalPackets, const uint64_t* packetTypeBreakdown)
 {
   _networkStatsDock->updatePacketStats(totalPackets, packetTypeBreakdown);
+  // The sent/received packets will also have changed.
+  this->selectedItemChanged();
 }
 
 void MainWindow::hostAdded(netviz::HostSP newHost)
