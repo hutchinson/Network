@@ -13,7 +13,7 @@
 #include <QGraphicsSceneHoverEvent>
 #include <QString>
 
-#include <iostream>
+#define SELECTION_HALO_WIDTH 2.0f
 
 HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGraphicsItem *parent)
 : QGraphicsObject(parent)
@@ -57,12 +57,20 @@ HostGraphicsItem::HostGraphicsItem(const QRectF &rect,  netviz::HostSP host, QGr
 void HostGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
   painter->save();
-
-  painter->setPen(_pen);
-  painter->setBrush(_brush);
   painter->setOpacity(opacity());
 
   QPointF centre(0.0f, 0.0f);
+
+  if(isSelected())
+  {
+    painter->setPen(Qt::white);
+    painter->setBrush(Qt::white);
+    painter->drawEllipse(centre, (CELL_WIDTH * scale() * 0.5) + SELECTION_HALO_WIDTH,
+                                 (CELL_HEIGHT * scale() * 0.5) + SELECTION_HALO_WIDTH);
+  }
+
+  painter->setPen(_pen);
+  painter->setBrush(_brush);
   painter->drawEllipse(centre, (CELL_WIDTH * scale() * 0.5), (CELL_HEIGHT * scale() * 0.5));
 
   if(_hasHover)
