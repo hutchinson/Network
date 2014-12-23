@@ -40,7 +40,8 @@ public slots:
   void hostAdded(netviz::HostSP newHost);
   void newPacket(netviz::HostSP from, netviz::PacketSP packet, netviz::HostSP to);
   void globalPacketStatsChanged(uint64_t totalPackets, const uint64_t* packetTypeBreakdown);
-  
+  void selectedItemChanged();
+
 protected:
   void closeEvent(QCloseEvent *event);
 

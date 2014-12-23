@@ -43,6 +43,8 @@ MainWindow::MainWindow(zmq::context_t &context)
   _createNetworkStatsBar();
 //  _createDrawOptionsBar();
 
+  connect(_networkView->scene(), SIGNAL(selectionChanged()), this, SLOT(selectedItemChanged()));
+  
   _readSettings();
 
   setCentralWidget(_networkView);
@@ -54,6 +56,20 @@ MainWindow::MainWindow(zmq::context_t &context)
 
   setUnifiedTitleAndToolBarOnMac(true);
   showMaximized();
+}
+
+void MainWindow::selectedItemChanged()
+{
+  QGraphicsScene *scene = _networkView->scene();
+  QList<QGraphicsItem*> selectedItems = scene->selectedItems();
+  if(selectedItems.empty())
+  {
+    _networkStatsDock->selectedHostChanged(netviz::HostSP());
+    return;
+  }
+
+  HostGraphicsItem *hostGraphicsItem = static_cast<HostGraphicsItem*>(selectedItems[0]);
+  _networkStatsDock->selectedHostChanged(hostGraphicsItem->host());
 }
 
 void MainWindow::listeningStatusChanged()
