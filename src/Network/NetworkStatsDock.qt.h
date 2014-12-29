@@ -9,7 +9,7 @@
 #ifndef Network_NetworkStatsDock_qt_h
 #define Network_NetworkStatsDock_qt_h
 
-#include "PacketFormat.h"
+#include "PacketController/PacketFormat.h"
 
 #include "Model/Host.h"
 

@@ -19,8 +19,11 @@ SET(THIRDPARTY_ROOT ${PROJECT_SOURCE_DIR}/../thirdparty/)
 
 SET(THIRDPARTY_ZMQ_INCLUDE ${THIRDPARTY_ROOT}/cppzmq
                            ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/include)
-
 SET(THIRDPARTY_ZMQ_LIB_DIR ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/lib)
+
+SET(Qt5_DIR ${THIRDPARTY_ROOT}/Qt/5.3/clang_64/lib/cmake/Qt5)
+SET(Qt5Widgets_DIR ${THIRDPARTY_ROOT}/Qt/5.3/clang_64/lib/cmake/Qt5Widgets)
+SET(Qt5OpenGL_DIR ${THIRDPARTY_ROOT}/Qt/5.3/clang_64/lib/cmake/Qt5OpenGL)
 
 # Project wide-includes
 INCLUDE_DIRECTORIES(src)

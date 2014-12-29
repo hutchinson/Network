@@ -5,3 +5,4 @@ ADD_SUBDIRECTORY(Model)
 ADD_SUBDIRECTORY(PacketController)
 
 ADD_SUBDIRECTORY(PacketControllerDriver)
+ADD_SUBDIRECTORY(Network)
