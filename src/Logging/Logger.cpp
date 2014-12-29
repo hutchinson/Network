@@ -1,6 +1,6 @@
 #include "Logger.h"
 
-#ifdef DEBUG
+#ifdef NDEBUG
 #include <mutex>
 #include <iomanip>
 #include <ctime>
