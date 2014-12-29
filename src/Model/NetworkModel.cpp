@@ -7,7 +7,8 @@
 //
 
 #include "NetworkModel.h"
-#include "PacketFormat.h"
+
+#include "PacketController/PacketFormat.h"
 #include <iostream>
 
 namespace netviz {

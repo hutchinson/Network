@@ -7,9 +7,9 @@
 //
 
 #include "ModelInputQueueProcessor.h"
-#include "ZmqQueueNames.h"
-#include "IDGenerator.h"
 
+#include "PacketController/ZmqQueueNames.h"
+#include "PacketController/IDGenerator.h"
 #include "PacketController/PacketFormat.h"
 
 #include <iostream>

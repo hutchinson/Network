@@ -14,6 +14,15 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 
 SET(CMAKE_VERBOSE_MAKEFILE ON)
 
+# Third-party dependencies
+SET(THIRDPARTY_ROOT ${PROJECT_SOURCE_DIR}/../thirdparty/)
+
+SET(THIRDPARTY_ZMQ_INCLUDE "${THIRDPARTY_ROOT}/cppzmq"
+                           "${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/include")
+
+# Project wide-includes
+INCLUDE_DIRECTORIES("src")
+
 # Build Settings
 SET(NETWORK_CXX_FLAGS "-Wall -Werror -pedantic -std=gnu++11 -stdlib=libc++")
 SET(CMAKE_CXX_FLAGS ${NETWORK_CXX_FLAGS})
