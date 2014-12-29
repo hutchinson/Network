@@ -17,6 +17,8 @@ SET(CMAKE_VERBOSE_MAKEFILE ON)
 # Third-party dependencies
 # TODO: ZMQ should be re-factored to make use of the CMAKE package system
 # Should also look to remove the THIRDPARTY_ROOT requirement.
+SET(THIRDPARTY_ROOT ${PROJECT_SOURCE_DIR}/../thirdparty/)
+
 SET(THIRDPARTY_ZMQ_INCLUDE ${THIRDPARTY_ROOT}/cppzmq
                            ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/include)
 SET(THIRDPARTY_ZMQ_LIB_DIR ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/lib)
