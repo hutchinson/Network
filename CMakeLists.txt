@@ -1,7 +1,7 @@
 # This is the top level CMakeLists.txt file - it can be used to store
 # project wide settings.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.1.0)
 PROJECT(Network)
 
 SET(PROJECT_MAJOR_VERSION 0)
@@ -15,8 +15,8 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 SET(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Third-party dependencies
-SET(THIRDPARTY_ROOT ${PROJECT_SOURCE_DIR}/../thirdparty/)
-
+# TODO: ZMQ should be re-factored to make use of the CMAKE package system
+# Should also look to remove the THIRDPARTY_ROOT requirement.
 SET(THIRDPARTY_ZMQ_INCLUDE ${THIRDPARTY_ROOT}/cppzmq
                            ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/include)
 SET(THIRDPARTY_ZMQ_LIB_DIR ${THIRDPARTY_ROOT}/ZeroMQ-4.0.4/build/lib)
