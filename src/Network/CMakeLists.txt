@@ -1,13 +1,13 @@
 SET(NETWORK_HEADERS Map/HostPlacementStrategy.h
-                    Controller.qt.h
-                    DrawOptionsDock.qt.h
+                    Controller.h
+                    DrawOptionsDock.h
                     GlobalThings.h
-                    Grid.qt.h
-                    HostGraphicsItem.qt.h
-                    MainWindow.qt.h
+                    Grid.h
+                    HostGraphicsItem.h
+                    MainWindow.h
                     MetaTypeExtensions.h
-                    NetworkStatsDock.qt.h
-                    NetworkView.qt.h
+                    NetworkStatsDock.h
+                    NetworkView.h
                     PcapHelpers.h
                     )
 

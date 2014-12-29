@@ -16,8 +16,8 @@
 #include "Model/Host.h"
 #include "Model/Packet.h"
 
-#include "HostGraphicsItem.qt.h"
-#include "Grid.qt.h"
+#include "HostGraphicsItem.h"
+#include "Grid.h"
 #include "PacketController/PacketFormat.h"
 
 #include "Map/HostPlacementStrategy.h"

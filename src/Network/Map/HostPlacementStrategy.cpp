@@ -11,7 +11,7 @@
 #include "GlobalThings.h"
 #include "PacketController/PacketFormat.h"
 
-#include "NetworkView.qt.h"
+#include "NetworkView.h"
 
 #include <QApplication>
 

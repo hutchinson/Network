@@ -6,7 +6,7 @@
 //
 //
 
-#include "DrawOptionsDock.qt.h"
+#include "DrawOptionsDock.h"
 
 #include "GlobalThings.h"
 

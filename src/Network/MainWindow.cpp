@@ -6,8 +6,8 @@
 //
 //
 
-#include "MainWindow.qt.h"
-#include "NetworkView.qt.h"
+#include "MainWindow.h"
+#include "NetworkView.h"
 
 #include "PcapHelpers.h"
 #include "GlobalThings.h"

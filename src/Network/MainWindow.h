@@ -9,10 +9,10 @@
 #ifndef Network_MainWindow_qt_h
 #define Network_MainWindow_qt_h
 
-#include "Controller.qt.h"
+#include "Controller.h"
 
-#include "DrawOptionsDock.qt.h"
-#include "NetworkStatsDock.qt.h"
+#include "DrawOptionsDock.h"
+#include "NetworkStatsDock.h"
 
 #include <zmq.hpp>
 

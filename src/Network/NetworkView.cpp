@@ -6,7 +6,7 @@
 //
 //
 
-#include "NetworkView.qt.h"
+#include "NetworkView.h"
 #include "GlobalThings.h"
 
 #include <QGLWidget>

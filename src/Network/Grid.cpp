@@ -6,7 +6,7 @@
 //
 //
 
-#include "Grid.qt.h"
+#include "Grid.h"
 #include "GlobalThings.h"
 
 #include <QSettings>

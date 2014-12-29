@@ -6,7 +6,7 @@
 //
 //
 
-#include "HostGraphicsItem.qt.h"
+#include "HostGraphicsItem.h"
 
 #include "PacketController/PacketFormat.h"
 

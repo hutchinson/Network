@@ -6,7 +6,7 @@
 //
 //
 
-#include "NetworkStatsDock.qt.h"
+#include "NetworkStatsDock.h"
 
 #include <QScrollArea>
 #include <QVBoxLayout>

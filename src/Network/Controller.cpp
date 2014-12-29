@@ -6,8 +6,8 @@
 //
 //
 
-#include "Controller.qt.h"
-#include "MainWindow.qt.h"
+#include "Controller.h"
+#include "MainWindow.h"
 
 namespace {
   class NetworkModelDelegateImpl : public netviz::NetworkModelDelegate

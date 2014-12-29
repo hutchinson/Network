@@ -9,7 +9,7 @@
 #include "MetaTypeExtensions.h"
 
 #include "GlobalThings.h"
-#include "MainWindow.qt.h"
+#include "MainWindow.h"
 
 #include <zmq.hpp>
 #include <QApplication>
