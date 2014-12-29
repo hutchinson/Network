@@ -1,0 +1,12 @@
+SET(PACKET_CONTROLLER_DRIVER_SOURCE main.cpp)
+
+INCLUDE_DIRECTORIES(${THIRDPARTY_ZMQ_INCLUDE})
+
+ADD_EXECUTABLE(PacketControllerDriver ${PACKET_CONTROLLER_DRIVER_SOURCE})
+
+# Link against
+TARGET_LINK_LIBRARIES(PacketControllerDriver Model)
+TARGET_LINK_LIBRARIES(PacketControllerDriver PacketController)
+TARGET_LINK_LIBRARIES(PacketControllerDriver pcap)
+TARGET_LINK_LIBRARIES(PacketControllerDriver ${THIRDPARTY_ZMQ_LIB_DIR}/libzmq.a)
+

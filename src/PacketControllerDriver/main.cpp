@@ -22,7 +22,7 @@ int main(int argc, const char * argv[])
   packetDecoder.startDecoding();
   modelInputQueueProcessor.startProcessing();
   
-  char stop;
+  char stop = 'n';
   std::cout << "Stop listening? (y/n) \n";
   while(stop != 'y')
     std::cin >> stop;
